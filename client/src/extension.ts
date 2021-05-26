@@ -12,8 +12,8 @@ let client: LanguageClient
 
 export function activate(context: ExtensionContext) {
 	client = new LanguageClient(
-		'fume-server',
-		'Fume',
+		'sway-server',
+		'Sway',
 		getServerOptions(context),
 		getClientOptions()
 	)
@@ -37,7 +37,7 @@ export function deactivate(): Thenable<void> | undefined {
 
 function getServerOptions(context: ExtensionContext): ServerOptions {
 	const serverExecutable: Executable = {
-		command: 'fume-server',
+		command: 'sway-server',
 		options: {
 			shell: true,
 		}
@@ -65,14 +65,14 @@ function getClientOptions(): LanguageClientOptions {
 	const clientOptions: LanguageClientOptions = {
 		// Register the server for plain text documents
 		documentSelector: [
-			{ scheme: 'file', language: 'fume' },
-			{ scheme: 'untitled', language: 'fume' },
+			{ scheme: 'file', language: 'sway' },
+			{ scheme: 'untitled', language: 'sway' },
 		],
 		synchronize: {
-			// Notify the server about file changes to '.fm files contained in the workspace
+			// Notify the server about file changes to *.sw files contained in the workspace
 			fileEvents: [
-				workspace.createFileSystemWatcher('**/.fm'),
-				workspace.createFileSystemWatcher("**/*.fm"),
+				workspace.createFileSystemWatcher('**/.sw'),
+				workspace.createFileSystemWatcher("**/*.sw"),
 			]
 		}
 	}
