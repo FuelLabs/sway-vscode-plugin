@@ -36,17 +36,14 @@ export function deactivate(): Thenable<void> | undefined {
 
 
 function getServerOptions(context: ExtensionContext): ServerOptions {
-	const serverPath = context.asAbsolutePath('../fume-server')
-
 	const serverExecutable: Executable = {
-		command: 'cargo run',
+		command: 'fume-server',
 		options: {
-			cwd: serverPath,
 			shell: true,
 		}
 	}
 
-	const serverOptions: ServerOptions = {
+	const devServerOptions: ServerOptions = {
 		run: serverExecutable,
 		debug: serverExecutable,
 		transport: TransportKind.stdio,
@@ -55,10 +52,11 @@ function getServerOptions(context: ExtensionContext): ServerOptions {
 	switch (context.extensionMode) {
 		case ExtensionMode.Development:
 		case ExtensionMode.Test:
-			return serverOptions
+			return devServerOptions
 	
 		default:
-			throw new Error("Production Mode not available at the moment!")
+			// TODO: for production we need to be able to install the Language Server
+			return devServerOptions
 	}
 }
 
