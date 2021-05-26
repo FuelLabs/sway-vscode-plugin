@@ -23,4 +23,4 @@ Prior to testing make sure you have `sway-server` command exported as well.
 - (This is only needed if you are developing the Server.)
 - Install this extension -> [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb)
 - Repeat the steps outlined in "Testing in Debug mode", then go back `Run and Debug` Tab, from the dropdown menu
-choose "Fume Server" which will attach the server in the debug mode as well.
+choose "Sway Server" which will attach the server in the debug mode as well.
