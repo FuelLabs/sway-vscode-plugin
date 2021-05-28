@@ -1,7 +1,7 @@
 {
-    "name": "vscode-fume",
-    "displayName": "vscode-fume",
-    "description": "Fume language VSCode extension",
+    "name": "sway-vscode-plugin",
+    "displayName": "sway-vscode-plugin",
+    "description": "Sway Language Extension",
     "version": "0.0.1",
     "scripts": {
         "vscode:prepublish": "npm run compile",
@@ -20,33 +20,33 @@
     ],
     "main": "./client/out/extension",
     "activationEvents": [
-		"onLanguage:fume"
+		"onLanguage:sway"
 	],
     "contributes": {
         "languages": [
             {
-                "id": "fume",
+                "id": "sway",
                 "aliases": [
-                    "Fume",
-                    "fume"
+                    "Sway",
+                    "sway"
                 ],
                 "extensions": [
-                    ".fm"
+                    ".sw"
                 ],
                 "configuration": "./language-configuration.json"
             }
         ],
         "snippets": [
             {
-                "language": "fume",
-                "path": "./snippets/fume.json"
+                "language": "sway",
+                "path": "./snippets/sway.json"
             }
         ],
         "grammars": [
             {
-                "language": "fume",
-                "scopeName": "source.fume",
-                "path": "./syntaxes/fume.tmLanguage.json"
+                "language": "sway",
+                "scopeName": "source.sway",
+                "path": "./syntaxes/sway.tmLanguage.json"
             }
         ]
     },

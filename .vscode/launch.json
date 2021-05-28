@@ -4,8 +4,8 @@
 		{
 			"type": "lldb",
 			"request": "attach",
-			"name": "Fume Server",
-			"program": "fume-server",
+			"name": "Sway Server",
+			"program": "sway-server",
 		},
 		{
 			"type": "extensionHost",
@@ -29,7 +29,7 @@
 			"name": "Client + Server",
 			"configurations": [
 				"Launch Client",
-				"Fume Server"
+				"Sway Server"
 			]
 		}
 	]

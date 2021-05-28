@@ -1,6 +1,6 @@
 {
-	"name": "fume",
-	"scopeName": "source.fume",
+	"name": "sway",
+	"scopeName": "source.sway",
 	"patterns": [
 		{
 			"comment": "Implementation",
@@ -8,7 +8,7 @@
 			"end": "\\{",
 			"beginCaptures": {
 				"1": {
-					"name": "storage.type.fume"
+					"name": "storage.type.sway"
 				}
 			},
 			"patterns": [
@@ -34,7 +34,7 @@
 					"include": "#where"
 				},
 				{
-					"name": "storage.type.fume",
+					"name": "storage.type.sway",
 					"match": "\\bfor\\b"
 				},
 				{
@@ -56,32 +56,32 @@
 		},
 		{
 			"comment": "Integer literal (decimal)",
-			"name": "constant.numeric.integer.fume",
+			"name": "constant.numeric.integer.sway",
 			"match": "\\b[0-9][0-9_]*([u](8|16|32|64|128))?\\b"
 		},
 		{
 			"comment": "Integer literal (hexadecimal)",
-			"name": "constant.numeric.integer.hexadecimal.fume",
+			"name": "constant.numeric.integer.hexadecimal.sway",
 			"match": "\\b0x[a-fA-F0-9_]+([u](8|16|32|64|128))?\\b"
 		},
 		{
 			"comment": "Integer literal (binary)",
-			"name": "constant.numeric.integer.binary.fume",
+			"name": "constant.numeric.integer.binary.sway",
 			"match": "\\b0b[01_]+([u](8|16|32|64|128))?\\b"
 		},
 		{
 			"comment": "Boolean constant",
-			"name": "constant.language.boolean.fume",
+			"name": "constant.language.boolean.sway",
 			"match": "\\b(true|false)\\b"
 		},
 		{
 			"comment": "Control keyword",
-			"name": "keyword.control.fume",
+			"name": "keyword.control.sway",
 			"match": "\\b(else|if|for|match|return|while)\\b"
 		},
 		{
 			"comment": "Keyword",
-			"name": "keyword.other.fume",
+			"name": "keyword.other.sway",
 			"match": "\\b(deref|let|ref|use|asm)\\b"
 		},
 		{
@@ -101,27 +101,27 @@
 		},
 		{
 			"comment": "Miscellaneous operator",
-			"name": "keyword.operator.misc.fume",
+			"name": "keyword.operator.misc.sway",
 			"match": "(=>|::|->\\?)"
 		},
 		{
 			"comment": "Comparison operator",
-			"name": "keyword.operator.comparison.fume",
+			"name": "keyword.operator.comparison.sway",
 			"match": "(&&|\\|\\||==|!=)"
 		},
 		{
 			"comment": "Assignment operator",
-			"name": "keyword.operator.assignment.fume",
+			"name": "keyword.operator.assignment.sway",
 			"match": "(\\+=|-=|/=|\\*=|%=|\\^=|&=|\\|=|<<=|>>=|=)"
 		},
 		{
 			"comment": "Arithmetic operator",
-			"name": "keyword.operator.arithmetic.fume",
+			"name": "keyword.operator.arithmetic.sway",
 			"match": "(!|\\+|-|/|\\*|%|\\^|&|\\||<<|>>)"
 		},
 		{
 			"comment": "Comparison operator (second group because of regex precedence)",
-			"name": "keyword.operator.comparison.fume",
+			"name": "keyword.operator.comparison.sway",
 			"match": "(<=|>=|<|>)"
 		},
 		{
@@ -132,7 +132,7 @@
 			"match": "\\b([A-Za-z][A-Za-z0-9_]*|_[A-Za-z0-9_]+)\\s*\\(",
 			"captures": {
 				"1": {
-					"name": "entity.name.function.fume"
+					"name": "entity.name.function.sway"
 				}
 			}
 		},
@@ -142,10 +142,10 @@
 			"end": "\\(",
 			"captures": {
 				"1": {
-					"name": "entity.name.function.fume"
+					"name": "entity.name.function.sway"
 				},
 				"2": {
-					"name": "keyword.operator.misc.fume"
+					"name": "keyword.operator.misc.sway"
 				}
 			},
 			"patterns": [
@@ -160,10 +160,10 @@
 			"end": "[\\{;]",
 			"beginCaptures": {
 				"1": {
-					"name": "keyword.other.fn.fume"
+					"name": "keyword.other.fn.sway"
 				},
 				"2": {
-					"name": "entity.name.function.fume"
+					"name": "entity.name.function.sway"
 				}
 			},
 			"patterns": [
@@ -197,7 +197,7 @@
 				{
 					"comment": "Function arguments",
 					"match": "\bfn\b",
-					"name": "keyword.other.fn.fume"
+					"name": "keyword.other.fn.sway"
 				}
 			]
 		},
@@ -207,10 +207,10 @@
 			"end": "[\\{\\(;]",
 			"beginCaptures": {
 				"1": {
-					"name": "storage.type.fume"
+					"name": "storage.type.sway"
 				},
 				"2": {
-					"name": "entity.name.type.fume"
+					"name": "entity.name.type.sway"
 				}
 			},
 			"patterns": [
@@ -243,10 +243,10 @@
 			"end": "[\\{\\(;]",
 			"beginCaptures": {
 				"1": {
-					"name": "storage.type.fume"
+					"name": "storage.type.sway"
 				},
 				"2": {
-					"name": "entity.name.type.fume"
+					"name": "entity.name.type.sway"
 				}
 			},
 			"patterns": [
@@ -274,7 +274,7 @@
 	"repository": {
 		"block_doc_comment": {
 			"comment": "Block documentation comment",
-			"name": "comment.block.documentation.fume",
+			"name": "comment.block.documentation.sway",
 			"begin": "/\\*[\\*!](?![\\*/])",
 			"end": "\\*/",
 			"patterns": [
@@ -288,7 +288,7 @@
 		},
 		"block_comment": {
 			"comment": "Block comment",
-			"name": "comment.block.fume",
+			"name": "comment.block.sway",
 			"begin": "/\\*",
 			"end": "\\*/",
 			"patterns": [
@@ -302,23 +302,23 @@
 		},
 		"line_doc_comment": {
 			"comment": "Single-line documentation comment",
-			"name": "comment.line.documentation.fume",
+			"name": "comment.line.documentation.sway",
 			"begin": "//[!/](?=[^/])",
 			"end": "$"
 		},
 		"line_comment": {
 			"comment": "Single-line comment",
-			"name": "comment.line.double-slash.fume",
+			"name": "comment.line.double-slash.sway",
 			"begin": "//",
 			"end": "$"
 		},
 		"escaped_character": {
-			"name": "constant.character.escape.fume",
+			"name": "constant.character.escape.sway",
 			"match": "\\\\(x[0-9A-Fa-f]{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)"
 		},
 		"string_literal": {
 			"comment": "Double-quote string literal",
-			"name": "string.quoted.double.fume",
+			"name": "string.quoted.double.sway",
 			"begin": "b?\"",
 			"end": "\"",
 			"patterns": [
@@ -329,47 +329,47 @@
 		},
 		"sigils": {
 			"comment": "Sigil",
-			"name": "keyword.operator.sigil.fume",
+			"name": "keyword.operator.sigil.sway",
 			"match": "[&*](?=[a-zA-Z0-9_\\(\\[\\|\\\"]+)"
 		},
 		"self": {
 			"comment": "Self variable",
-			"name": "variable.language.fume",
+			"name": "variable.language.sway",
 			"match": "\\bself\\b"
 		},
 		"mut": {
 			"comment": "Mutable storage modifier",
-			"name": "storage.modifier.mut.fume",
+			"name": "storage.modifier.mut.sway",
 			"match": "\\bmut\\b"
 		},
 		"impl": {
 			"comment": "Existential type modifier",
-			"name": "storage.modifier.impl.fume",
+			"name": "storage.modifier.impl.sway",
 			"match": "\\bimpl\\b"
 		},
 		"pub": {
 			"comment": "Visibility modifier",
-			"name": "storage.modifier.visibility.fume",
+			"name": "storage.modifier.visibility.sway",
 			"match": "\\bpub\\b"
 		},
 		"where": {
 			"comment": "Generic where clause",
-			"name": "keyword.other.where.fume",
+			"name": "keyword.other.where.sway",
 			"match": "\\bwhere\\b"
 		},
 		"core_types": {
 			"comment": "Built-in/core type",
-			"name": "support.type.primitive.fume",
+			"name": "support.type.primitive.sway",
 			"match": "\\b(bool|char|u8|u16|u32|u64|u128|string|Self)\\b"
 		},
 		"type": {
 			"comment": "A type",
-			"name": "entity.name.type.fume",
+			"name": "entity.name.type.sway",
 			"match": "\\b([A-Za-z][_A-Za-z0-9]*|_[_A-Za-z0-9]+)\\b"
 		},
 		"type_params": {
 			"comment": "Type parameters",
-			"name": "meta.type_params.fume",
+			"name": "meta.type_params.sway",
 			"begin": "<(?![=<])",
 			"end": "(?<![-])>",
 			"patterns": [
