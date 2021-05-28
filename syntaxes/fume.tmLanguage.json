@@ -202,8 +202,44 @@
 			]
 		},
 		{
-			"comment": "Top level declaration",
-			"begin": "\\b(library|contract|script|predicate)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+			"comment": "Top level library and contract declaration",
+			"begin": "\\b(library)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+			"end": "[\\{\\(;]",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type.fume"
+				},
+				"2": {
+					"name": "entity.name.type.fume"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#block_comment"
+				},
+				{
+					"include": "#line_comment"
+				},
+				{
+					"include": "#impl"
+				},
+				{
+					"include": "#type_params"
+				},
+				{
+					"include": "#core_types"
+				},
+				{
+					"include": "#pub"
+				},
+				{
+					"include": "#where"
+				}
+			]
+		},
+		{
+			"comment": "Top level declaration without name",
+			"begin": "\\b(script|predicate|contract)",
 			"end": "[\\{\\(;]",
 			"beginCaptures": {
 				"1": {
