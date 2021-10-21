@@ -3,11 +3,17 @@
     "displayName": "sway-vscode-plugin",
     "description": "Sway Language Extension",
     "version": "0.0.1",
+    "publisher": "FuelLabs",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/FuelLabs/sway-vscode-plugin.git"
+    },
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -b",
         "watch": "tsc -b -w",
-        "test": "sh ./scripts/e2e.sh"
+        "test": "sh ./scripts/e2e.sh",
+        "install-extension": "npx vsce package -o sway-vscode-plugin.vsix && code --install-extension sway-vscode-plugin.vsix"
     },
     "engines": {
         "vscode": "^1.55.0"

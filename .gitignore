@@ -106,3 +106,4 @@ dist
 # Ignore Typescript files
 out
 .vscode-test
+sway-vscode-plugin.vsix
