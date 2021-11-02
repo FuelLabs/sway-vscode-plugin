@@ -10,7 +10,12 @@ Prior to testing make sure you have `sway-server` command exported as well.
 
 ## Testing as a real installed extension
 
-- To start using your extension with Visual Studio Code copy vscode-plugin into the `<user home>/.vscode/extensions` directory and restart Code.
+```sh
+git clone git@github.com:FuelLabs/sway-vscode-plugin.git
+cd sway-vscode-plugin
+npm i
+npm run install-extension
+```
 
 ## Testing in Debug mode
 
