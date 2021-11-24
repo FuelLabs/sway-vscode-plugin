@@ -91,6 +91,9 @@
 			"include": "#self"
 		},
 		{
+			"include": "#string_literal"
+		},
+		{
 			"include": "#mut"
 		},
 		{
