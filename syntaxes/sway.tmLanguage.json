@@ -396,7 +396,7 @@
 		"core_types": {
 			"comment": "Built-in/core type",
 			"name": "support.type.primitive.sway",
-			"match": "\\b(bool|char|u8|u16|u32|u64|u128|string|Self)\\b"
+			"match": "\\b(bool|char|u8|u16|u32|u64|u128|string|b256|b512|str|Self)\\b"
 		},
 		"type": {
 			"comment": "A type",
