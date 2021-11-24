@@ -355,7 +355,7 @@
 		"string_literal": {
 			"comment": "Double-quote string literal",
 			"name": "string.quoted.double.sway",
-			"begin": "b?\"",
+			"begin": "\"",
 			"end": "\"",
 			"patterns": [
 				{
