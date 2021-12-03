@@ -91,6 +91,9 @@
 			"include": "#self"
 		},
 		{
+			"include": "#string_literal"
+		},
+		{
 			"include": "#mut"
 		},
 		{
@@ -272,7 +275,7 @@
 		},
 		{
 			"comment": "Type declaration",
-			"begin": "\\b(enum|struct|trait)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+			"begin": "\\b(enum|struct|trait|abi)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
 			"end": "[\\{\\(;]",
 			"beginCaptures": {
 				"1": {
@@ -352,7 +355,7 @@
 		"string_literal": {
 			"comment": "Double-quote string literal",
 			"name": "string.quoted.double.sway",
-			"begin": "b?\"",
+			"begin": "\"",
 			"end": "\"",
 			"patterns": [
 				{
@@ -393,7 +396,7 @@
 		"core_types": {
 			"comment": "Built-in/core type",
 			"name": "support.type.primitive.sway",
-			"match": "\\b(bool|char|u8|u16|u32|u64|u128|string|Self)\\b"
+			"match": "\\b(bool|char|u8|u16|u32|u64|string|b256|str|Self)\\b"
 		},
 		"type": {
 			"comment": "A type",
