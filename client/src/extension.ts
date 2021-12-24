@@ -12,7 +12,7 @@ let client: LanguageClient
 
 export function activate(context: ExtensionContext) {
 	client = new LanguageClient(
-		'sway-server',
+		'forc',
 		'Sway',
 		getServerOptions(context),
 		getClientOptions()
@@ -37,7 +37,8 @@ export function deactivate(): Thenable<void> | undefined {
 
 function getServerOptions(context: ExtensionContext): ServerOptions {
 	const serverExecutable: Executable = {
-		command: 'sway-server',
+		command: 'forc',
+		args: ['lsp'],
 		options: {
 			shell: true,
 		}
