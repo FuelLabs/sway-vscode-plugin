@@ -6,7 +6,7 @@ Currently it gets activated once you open a file with `.sw` extension.
 
 ## Testing
 
-Prior to testing make sure you have `sway-server` command exported as well.
+Prior to testing make sure you have [`forc`](https://github.com/FuelLabs/sway/tree/master/forc) command exported as well.
 
 ## Testing as a real installed extension
 
@@ -21,7 +21,7 @@ npm run install-extension
 
 - In order to start the Debug mode, open `vscode-plugin` in Visual Studio Code, make sure that it is opened as root/main workspace - in order to avoid any problems.
 - Make sure that in `Run and Debug` Tab that "Launch Client" is selected - press F5 and new Visual Studio Code Debug Window will be opened.
-- Within that Window open a `.sw` file like `main.sw` - which will activate `sway-server`.
+- Within that Window open a `.sw` file like `main.sw` - which will activate `forc lsp`.
 
 ## Testing in Debug mode with the attached Server
 
