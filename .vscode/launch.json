@@ -5,7 +5,8 @@
 			"type": "lldb",
 			"request": "attach",
 			"name": "Sway Server",
-			"program": "sway-server",
+			"program": "forc",
+			"args": ["lsp"],
 		},
 		{
 			"type": "extensionHost",
