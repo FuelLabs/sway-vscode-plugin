@@ -26,8 +26,8 @@
     ],
     "main": "./client/out/extension",
     "activationEvents": [
-		"onLanguage:sway"
-	],
+        "onLanguage:sway"
+    ],
     "contributes": {
         "languages": [
             {
