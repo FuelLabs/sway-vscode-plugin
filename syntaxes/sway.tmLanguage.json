@@ -242,36 +242,12 @@
 		},
 		{
 			"comment": "Top level declaration without name",
-			"begin": "\\b(contract|script|predicate)",
-			"end": "[;]",
-			"beginCaptures": {
+			"match": "(contract|script|predicate);",
+			"captures": {
 				"1": {
 					"name": "storage.type.sway"
 				}
-			},
-			"patterns": [
-				{
-					"include": "#block_comment"
-				},
-				{
-					"include": "#line_comment"
-				},
-				{
-					"include": "#impl"
-				},
-				{
-					"include": "#type_params"
-				},
-				{
-					"include": "#core_types"
-				},
-				{
-					"include": "#pub"
-				},
-				{
-					"include": "#where"
-				}
-			]
+			}
 		},
 		{
 			"comment": "Type declaration",
