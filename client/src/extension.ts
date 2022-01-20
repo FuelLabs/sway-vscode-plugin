@@ -1,4 +1,4 @@
-import { workspace, ExtensionContext, ExtensionMode } from 'vscode'
+import { workspace, ExtensionContext, ExtensionMode, WorkspaceConfiguration } from 'vscode'
 
 import {
 	Executable,
@@ -21,7 +21,7 @@ export function activate(context: ExtensionContext) {
 	// Start the client. This will also launch the server
 	console.log("Starting Client and Server")
 	client.start()
-	
+
 	client.onReady().then(_ => {
 		console.log("Client has Connected to the Server successfully!")
 	})
@@ -54,7 +54,7 @@ function getServerOptions(context: ExtensionContext): ServerOptions {
 		case ExtensionMode.Development:
 		case ExtensionMode.Test:
 			return devServerOptions
-	
+
 		default:
 			// TODO: for production we need to be able to install the Language Server
 			return devServerOptions
@@ -75,8 +75,51 @@ function getClientOptions(): LanguageClientOptions {
 				workspace.createFileSystemWatcher('**/.sw'),
 				workspace.createFileSystemWatcher("**/*.sw"),
 			]
+		},
+		initializationOptions: {
+			...getSwayConfigOptions()
 		}
 	}
 
 	return clientOptions
+}
+
+function getSwayConfigOptions(): SwayConfig {
+	const swayFormatOptions = getSwayFormattingOptions().format;
+
+	const defaultSwayConfig: SwayConfig = {
+		alignFields: true,
+		tabSize: 4
+	};
+
+	if (swayFormatOptions) {
+		return {
+			alignFields: swayFormatOptions.hasOwnProperty('alignFields') ? swayFormatOptions.alignFields : defaultSwayConfig.alignFields,
+			tabSize: swayFormatOptions.hasOwnProperty('tabSize') ? swayFormatOptions.tabSize : defaultSwayConfig.tabSize,
+		}
+	} else {
+		return defaultSwayConfig
+	}
+
+}
+
+function getSwayFormattingOptions(): WorkspaceConfiguration | null {
+	const swayOptions = workspace.getConfiguration("sway");
+	const swayOptionsBracket = workspace.getConfiguration("[sway]");
+
+	if (swayOptions && swayOptions.format) {
+		if (swayOptionsBracket && swayOptionsBracket.format) {
+			return Object.assign({}, swayOptions, swayOptionsBracket);
+		}
+		return swayOptions
+	} else if (swayOptionsBracket && swayOptionsBracket.format) {
+		return swayOptionsBracket
+	} else {
+		return null
+	}
+}
+
+type SwayConfig = {
+	alignFields: boolean,
+	tabSize: number,
 }
