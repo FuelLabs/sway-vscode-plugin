@@ -20,4 +20,4 @@ jobs:
       - name: Check code formatter
         uses: creyD/prettier_action@v4.2
         with:
-          dry: True
+          prettier_options: --check 'client/src' 'snippets' 'syntaxes'
