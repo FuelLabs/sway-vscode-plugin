@@ -1,0 +1,23 @@
+name: Format
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+          persist-credentials: false
+
+      - name: Check code formatter
+        uses: creyD/prettier_action@v4.2
+        with:
+          dry: True
