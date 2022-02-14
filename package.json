@@ -14,8 +14,8 @@
     "watch": "tsc -b -w",
     "test": "sh ./scripts/e2e.sh",
     "install-extension": "npx vsce package -o sway-vscode-plugin.vsix && code --install-extension sway-vscode-plugin.vsix --force",
-    "format:check": "npx prettier --check .",
-    "format:fix": "npx prettier --write ."
+    "format:check": "npx prettier --check 'client/src' 'snippets' 'syntaxes'",
+    "format:fix": "npx prettier --write 'client/src' 'snippets' 'syntaxes'"
   },
   "engines": {
     "vscode": "^1.55.0"
