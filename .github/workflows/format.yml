@@ -1,4 +1,4 @@
-name: Format
+name: CI
 
 on:
   pull_request:
