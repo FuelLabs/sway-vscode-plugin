@@ -89,22 +89,27 @@ function getClientOptions(): LanguageClientOptions {
 }
 
 function getSwayConfigOptions(): SwayConfig {
-  const swayFormatOptions = getSwayFormattingOptions().format;
+  const swayOptions = getSwayFormattingOptions();
 
   const defaultSwayConfig: SwayConfig = {
     alignFields: true,
     tabSize: 4,
   };
 
-  if (swayFormatOptions) {
-    return {
-      alignFields: swayFormatOptions.hasOwnProperty("alignFields")
-        ? swayFormatOptions.alignFields
-        : defaultSwayConfig.alignFields,
-      tabSize: swayFormatOptions.hasOwnProperty("tabSize")
-        ? swayFormatOptions.tabSize
-        : defaultSwayConfig.tabSize,
-    };
+  if (swayOptions) {
+    const swayFormatOptions = getSwayFormattingOptions().format;
+    if (swayFormatOptions) {
+      return {
+        alignFields: swayFormatOptions.hasOwnProperty("alignFields")
+          ? swayFormatOptions.alignFields
+          : defaultSwayConfig.alignFields,
+        tabSize: swayFormatOptions.hasOwnProperty("tabSize")
+          ? swayFormatOptions.tabSize
+          : defaultSwayConfig.tabSize,
+      };
+    } else {
+      return defaultSwayConfig;
+    }
   } else {
     return defaultSwayConfig;
   }
