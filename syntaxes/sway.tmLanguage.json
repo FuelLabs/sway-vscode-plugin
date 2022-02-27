@@ -1,412 +1,412 @@
 {
-	"name": "sway",
-	"scopeName": "source.sway",
-	"patterns": [
-		{
-			"comment": "Implementation",
-			"begin": "\\b(impl)\\b",
-			"end": "\\{",
-			"beginCaptures": {
-				"1": {
-					"name": "storage.type.sway"
-				}
-			},
-			"patterns": [
-				{
-					"include": "#block_comment"
-				},
-				{
-					"include": "#line_comment"
-				},
-				{
-					"include": "#sigils"
-				},
-				{
-					"include": "#mut"
-				},
-				{
-					"include": "#core_types"
-				},
-				{
-					"include": "#type_params"
-				},
-				{
-					"include": "#where"
-				},
-				{
-					"name": "storage.type.sway",
-					"match": "\\bfor\\b"
-				},
-				{
-					"include": "#type"
-				}
-			]
-		},
-		{
-			"include": "#block_doc_comment"
-		},
-		{
-			"include": "#block_comment"
-		},
-		{
-			"include": "#line_doc_comment"
-		},
-		{
-			"include": "#line_comment"
-		},
-		{
-			"comment": "Integer literal (decimal)",
-			"name": "constant.numeric.integer.sway",
-			"match": "\\b[0-9][0-9_]*([u](8|16|32|64|128))?\\b"
-		},
-		{
-			"comment": "Integer literal (hexadecimal)",
-			"name": "constant.numeric.integer.hexadecimal.sway",
-			"match": "\\b0x[a-fA-F0-9_]+([u](8|16|32|64|128))?\\b"
-		},
-		{
-			"comment": "Integer literal (binary)",
-			"name": "constant.numeric.integer.binary.sway",
-			"match": "\\b0b[01_]+([u](8|16|32|64|128))?\\b"
-		},
-		{
-			"comment": "Boolean constant",
-			"name": "constant.language.boolean.sway",
-			"match": "\\b(true|false)\\b"
-		},
-		{
-			"comment": "Control keyword",
-			"name": "keyword.control.sway",
-			"match": "\\b(else|if|for|match|return|while)\\b"
-		},
-		{
-			"comment": "Keyword",
-			"name": "keyword.other.sway",
-			"match": "\\b(deref|let|ref|use|asm)\\b"
-		},
-		{
-			"include": "#sigils"
-		},
-		{
-			"include": "#self"
-		},
-		{
-			"include": "#string_literal"
-		},
-		{
-			"include": "#mut"
-		},
-		{
-			"include": "#impl"
-		},
-		{
-			"include": "#pub"
-		},
-		{
-			"comment": "Miscellaneous operator",
-			"name": "keyword.operator.misc.sway",
-			"match": "(=>|::|->\\?)"
-		},
-		{
-			"comment": "Comparison operator",
-			"name": "keyword.operator.comparison.sway",
-			"match": "(&&|\\|\\||==|!=)"
-		},
-		{
-			"comment": "Assignment operator",
-			"name": "keyword.operator.assignment.sway",
-			"match": "(\\+=|-=|/=|\\*=|%=|\\^=|&=|\\|=|<<=|>>=|=)"
-		},
-		{
-			"comment": "Arithmetic operator",
-			"name": "keyword.operator.arithmetic.sway",
-			"match": "(!|\\+|-|/|\\*|%|\\^|&|\\||<<|>>)"
-		},
-		{
-			"comment": "Comparison operator (second group because of regex precedence)",
-			"name": "keyword.operator.comparison.sway",
-			"match": "(<=|>=|<|>)"
-		},
-		{
-			"include": "#core_types"
-		},
-		{
-			"comment": "Function call",
-			"match": "\\b([A-Za-z][A-Za-z0-9_]*|_[A-Za-z0-9_]+)\\s*\\(",
-			"captures": {
-				"1": {
-					"name": "entity.name.function.sway"
-				}
-			}
-		},
-		{
-			"comment": "Function call with type parameters",
-			"begin": "\\b([A-Za-z][A-Za-z0-9_]*|_[A-Za-z0-9_]+)\\s*(::)(?=\\s*<.*>\\s*\\()",
-			"end": "\\(",
-			"captures": {
-				"1": {
-					"name": "entity.name.function.sway"
-				},
-				"2": {
-					"name": "keyword.operator.misc.sway"
-				}
-			},
-			"patterns": [
-				{
-					"include": "#type_params"
-				}
-			]
-		},
-		{
-			"comment": "Function definition",
-			"begin": "\\b(fn)\\s+([A-Za-z][A-Za-z0-9_]*|_[A-Za-z0-9_]+)",
-			"end": "[\\{;]",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.other.fn.sway"
-				},
-				"2": {
-					"name": "entity.name.function.sway"
-				}
-			},
-			"patterns": [
-				{
-					"include": "#block_comment"
-				},
-				{
-					"include": "#line_comment"
-				},
-				{
-					"include": "#sigils"
-				},
-				{
-					"include": "#self"
-				},
-				{
-					"include": "#mut"
-				},
-				{
-					"include": "#impl"
-				},
-				{
-					"include": "#core_types"
-				},
-				{
-					"include": "#type_params"
-				},
-				{
-					"include": "#where"
-				},
-				{
-					"comment": "Function arguments",
-					"match": "\bfn\b",
-					"name": "keyword.other.fn.sway"
-				}
-			]
-		},
-		{
-			"comment": "Top level declaration",
-			"begin": "\\b(library)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
-			"end": "[\\{\\(;]",
-			"beginCaptures": {
-				"1": {
-					"name": "storage.type.sway"
-				},
-				"2": {
-					"name": "entity.name.type.sway"
-				}
-			},
-			"patterns": [
-				{
-					"include": "#block_comment"
-				},
-				{
-					"include": "#line_comment"
-				},
-				{
-					"include": "#impl"
-				},
-				{
-					"include": "#type_params"
-				},
-				{
-					"include": "#core_types"
-				},
-				{
-					"include": "#pub"
-				},
-				{
-					"include": "#where"
-				}
-			]
-		},
-		{
-			"comment": "Top level declaration without name",
-			"match": "(contract|script|predicate);",
-			"captures": {
-				"1": {
-					"name": "storage.type.sway"
-				}
-			}
-		},
-		{
-			"comment": "Type declaration",
-			"begin": "\\b(enum|struct|trait|abi)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
-			"end": "[\\{\\(;]",
-			"beginCaptures": {
-				"1": {
-					"name": "storage.type.sway"
-				},
-				"2": {
-					"name": "entity.name.type.sway"
-				}
-			},
-			"patterns": [
-				{
-					"include": "#block_comment"
-				},
-				{
-					"include": "#line_comment"
-				},
-				{
-					"include": "#type_params"
-				},
-				{
-					"include": "#core_types"
-				},
-				{
-					"include": "#pub"
-				},
-				{
-					"include": "#where"
-				}
-			]
-		}
-	],
-	"repository": {
-		"block_doc_comment": {
-			"comment": "Block documentation comment",
-			"name": "comment.block.documentation.sway",
-			"begin": "/\\*[\\*!](?![\\*/])",
-			"end": "\\*/",
-			"patterns": [
-				{
-					"include": "#block_doc_comment"
-				},
-				{
-					"include": "#block_comment"
-				}
-			]
-		},
-		"block_comment": {
-			"comment": "Block comment",
-			"name": "comment.block.sway",
-			"begin": "/\\*",
-			"end": "\\*/",
-			"patterns": [
-				{
-					"include": "#block_doc_comment"
-				},
-				{
-					"include": "#block_comment"
-				}
-			]
-		},
-		"line_doc_comment": {
-			"comment": "Single-line documentation comment",
-			"name": "comment.line.documentation.sway",
-			"begin": "//[!/](?=[^/])",
-			"end": "$"
-		},
-		"line_comment": {
-			"comment": "Single-line comment",
-			"name": "comment.line.double-slash.sway",
-			"begin": "//",
-			"end": "$"
-		},
-		"escaped_character": {
-			"name": "constant.character.escape.sway",
-			"match": "\\\\(x[0-9A-Fa-f]{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)"
-		},
-		"string_literal": {
-			"comment": "Double-quote string literal",
-			"name": "string.quoted.double.sway",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
-				{
-					"include": "#escaped_character"
-				}
-			]
-		},
-		"sigils": {
-			"comment": "Sigil",
-			"name": "keyword.operator.sigil.sway",
-			"match": "[&*](?=[a-zA-Z0-9_\\(\\[\\|\\\"]+)"
-		},
-		"self": {
-			"comment": "Self variable",
-			"name": "variable.language.sway",
-			"match": "\\bself\\b"
-		},
-		"mut": {
-			"comment": "Mutable storage modifier",
-			"name": "storage.modifier.mut.sway",
-			"match": "\\bmut\\b"
-		},
-		"impl": {
-			"comment": "Existential type modifier",
-			"name": "storage.modifier.impl.sway",
-			"match": "\\bimpl\\b"
-		},
-		"pub": {
-			"comment": "Visibility modifier",
-			"name": "storage.modifier.visibility.sway",
-			"match": "\\bpub\\b"
-		},
-		"where": {
-			"comment": "Generic where clause",
-			"name": "keyword.other.where.sway",
-			"match": "\\bwhere\\b"
-		},
-		"core_types": {
-			"comment": "Built-in/core type",
-			"name": "support.type.primitive.sway",
-			"match": "\\b(bool|char|u8|u16|u32|u64|string|b256|str|Self)\\b"
-		},
-		"type": {
-			"comment": "A type",
-			"name": "entity.name.type.sway",
-			"match": "\\b([A-Za-z][_A-Za-z0-9]*|_[_A-Za-z0-9]+)\\b"
-		},
-		"type_params": {
-			"comment": "Type parameters",
-			"name": "meta.type_params.sway",
-			"begin": "<(?![=<])",
-			"end": "(?<![-])>",
-			"patterns": [
-				{
-					"include": "#block_comment"
-				},
-				{
-					"include": "#line_comment"
-				},
-				{
-					"include": "#sigils"
-				},
-				{
-					"include": "#mut"
-				},
-				{
-					"include": "#impl"
-				},
-				{
-					"include": "#core_types"
-				},
-				{
-					"include": "#type_params"
-				}
-			]
-		}
-	}
+  "name": "sway",
+  "scopeName": "source.sway",
+  "patterns": [
+    {
+      "comment": "Implementation",
+      "begin": "\\b(impl)\\b",
+      "end": "\\{",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.sway"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#block_comment"
+        },
+        {
+          "include": "#line_comment"
+        },
+        {
+          "include": "#sigils"
+        },
+        {
+          "include": "#mut"
+        },
+        {
+          "include": "#core_types"
+        },
+        {
+          "include": "#type_params"
+        },
+        {
+          "include": "#where"
+        },
+        {
+          "name": "storage.type.sway",
+          "match": "\\bfor\\b"
+        },
+        {
+          "include": "#type"
+        }
+      ]
+    },
+    {
+      "include": "#block_doc_comment"
+    },
+    {
+      "include": "#block_comment"
+    },
+    {
+      "include": "#line_doc_comment"
+    },
+    {
+      "include": "#line_comment"
+    },
+    {
+      "comment": "Integer literal (decimal)",
+      "name": "constant.numeric.integer.sway",
+      "match": "\\b[0-9][0-9_]*([u](8|16|32|64|128))?\\b"
+    },
+    {
+      "comment": "Integer literal (hexadecimal)",
+      "name": "constant.numeric.integer.hexadecimal.sway",
+      "match": "\\b0x[a-fA-F0-9_]+([u](8|16|32|64|128))?\\b"
+    },
+    {
+      "comment": "Integer literal (binary)",
+      "name": "constant.numeric.integer.binary.sway",
+      "match": "\\b0b[01_]+([u](8|16|32|64|128))?\\b"
+    },
+    {
+      "comment": "Boolean constant",
+      "name": "constant.language.boolean.sway",
+      "match": "\\b(true|false)\\b"
+    },
+    {
+      "comment": "Control keyword",
+      "name": "keyword.control.sway",
+      "match": "\\b(else|if|for|match|return|while)\\b"
+    },
+    {
+      "comment": "Keyword",
+      "name": "keyword.other.sway",
+      "match": "\\b(deref|let|ref|use|asm)\\b"
+    },
+    {
+      "include": "#sigils"
+    },
+    {
+      "include": "#self"
+    },
+    {
+      "include": "#string_literal"
+    },
+    {
+      "include": "#mut"
+    },
+    {
+      "include": "#impl"
+    },
+    {
+      "include": "#pub"
+    },
+    {
+      "comment": "Miscellaneous operator",
+      "name": "keyword.operator.misc.sway",
+      "match": "(=>|::|->\\?)"
+    },
+    {
+      "comment": "Comparison operator",
+      "name": "keyword.operator.comparison.sway",
+      "match": "(&&|\\|\\||==|!=)"
+    },
+    {
+      "comment": "Assignment operator",
+      "name": "keyword.operator.assignment.sway",
+      "match": "(\\+=|-=|/=|\\*=|%=|\\^=|&=|\\|=|<<=|>>=|=)"
+    },
+    {
+      "comment": "Arithmetic operator",
+      "name": "keyword.operator.arithmetic.sway",
+      "match": "(!|\\+|-|/|\\*|%|\\^|&|\\||<<|>>)"
+    },
+    {
+      "comment": "Comparison operator (second group because of regex precedence)",
+      "name": "keyword.operator.comparison.sway",
+      "match": "(<=|>=|<|>)"
+    },
+    {
+      "include": "#core_types"
+    },
+    {
+      "comment": "Function call",
+      "match": "\\b([A-Za-z][A-Za-z0-9_]*|_[A-Za-z0-9_]+)\\s*\\(",
+      "captures": {
+        "1": {
+          "name": "entity.name.function.sway"
+        }
+      }
+    },
+    {
+      "comment": "Function call with type parameters",
+      "begin": "\\b([A-Za-z][A-Za-z0-9_]*|_[A-Za-z0-9_]+)\\s*(::)(?=\\s*<.*>\\s*\\()",
+      "end": "\\(",
+      "captures": {
+        "1": {
+          "name": "entity.name.function.sway"
+        },
+        "2": {
+          "name": "keyword.operator.misc.sway"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#type_params"
+        }
+      ]
+    },
+    {
+      "comment": "Function definition",
+      "begin": "\\b(fn)\\s+([A-Za-z][A-Za-z0-9_]*|_[A-Za-z0-9_]+)",
+      "end": "[\\{;]",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.other.fn.sway"
+        },
+        "2": {
+          "name": "entity.name.function.sway"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#block_comment"
+        },
+        {
+          "include": "#line_comment"
+        },
+        {
+          "include": "#sigils"
+        },
+        {
+          "include": "#self"
+        },
+        {
+          "include": "#mut"
+        },
+        {
+          "include": "#impl"
+        },
+        {
+          "include": "#core_types"
+        },
+        {
+          "include": "#type_params"
+        },
+        {
+          "include": "#where"
+        },
+        {
+          "comment": "Function arguments",
+          "match": "\bfn\b",
+          "name": "keyword.other.fn.sway"
+        }
+      ]
+    },
+    {
+      "comment": "Top level declaration",
+      "begin": "\\b(library)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+      "end": "[\\{\\(;]",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.sway"
+        },
+        "2": {
+          "name": "entity.name.type.sway"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#block_comment"
+        },
+        {
+          "include": "#line_comment"
+        },
+        {
+          "include": "#impl"
+        },
+        {
+          "include": "#type_params"
+        },
+        {
+          "include": "#core_types"
+        },
+        {
+          "include": "#pub"
+        },
+        {
+          "include": "#where"
+        }
+      ]
+    },
+    {
+      "comment": "Top level declaration without name",
+      "match": "(contract|script|predicate);",
+      "captures": {
+        "1": {
+          "name": "storage.type.sway"
+        }
+      }
+    },
+    {
+      "comment": "Type declaration",
+      "begin": "\\b(enum|struct|trait|abi)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+      "end": "[\\{\\(;]",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.sway"
+        },
+        "2": {
+          "name": "entity.name.type.sway"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#block_comment"
+        },
+        {
+          "include": "#line_comment"
+        },
+        {
+          "include": "#type_params"
+        },
+        {
+          "include": "#core_types"
+        },
+        {
+          "include": "#pub"
+        },
+        {
+          "include": "#where"
+        }
+      ]
+    }
+  ],
+  "repository": {
+    "block_doc_comment": {
+      "comment": "Block documentation comment",
+      "name": "comment.block.documentation.sway",
+      "begin": "/\\*[\\*!](?![\\*/])",
+      "end": "\\*/",
+      "patterns": [
+        {
+          "include": "#block_doc_comment"
+        },
+        {
+          "include": "#block_comment"
+        }
+      ]
+    },
+    "block_comment": {
+      "comment": "Block comment",
+      "name": "comment.block.sway",
+      "begin": "/\\*",
+      "end": "\\*/",
+      "patterns": [
+        {
+          "include": "#block_doc_comment"
+        },
+        {
+          "include": "#block_comment"
+        }
+      ]
+    },
+    "line_doc_comment": {
+      "comment": "Single-line documentation comment",
+      "name": "comment.line.documentation.sway",
+      "begin": "//[!/](?=[^/])",
+      "end": "$"
+    },
+    "line_comment": {
+      "comment": "Single-line comment",
+      "name": "comment.line.double-slash.sway",
+      "begin": "//",
+      "end": "$"
+    },
+    "escaped_character": {
+      "name": "constant.character.escape.sway",
+      "match": "\\\\(x[0-9A-Fa-f]{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)"
+    },
+    "string_literal": {
+      "comment": "Double-quote string literal",
+      "name": "string.quoted.double.sway",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "include": "#escaped_character"
+        }
+      ]
+    },
+    "sigils": {
+      "comment": "Sigil",
+      "name": "keyword.operator.sigil.sway",
+      "match": "[&*](?=[a-zA-Z0-9_\\(\\[\\|\\\"]+)"
+    },
+    "self": {
+      "comment": "Self variable",
+      "name": "variable.language.sway",
+      "match": "\\bself\\b"
+    },
+    "mut": {
+      "comment": "Mutable storage modifier",
+      "name": "storage.modifier.mut.sway",
+      "match": "\\bmut\\b"
+    },
+    "impl": {
+      "comment": "Existential type modifier",
+      "name": "storage.modifier.impl.sway",
+      "match": "\\bimpl\\b"
+    },
+    "pub": {
+      "comment": "Visibility modifier",
+      "name": "storage.modifier.visibility.sway",
+      "match": "\\bpub\\b"
+    },
+    "where": {
+      "comment": "Generic where clause",
+      "name": "keyword.other.where.sway",
+      "match": "\\bwhere\\b"
+    },
+    "core_types": {
+      "comment": "Built-in/core type",
+      "name": "support.type.primitive.sway",
+      "match": "\\b(bool|char|u8|u16|u32|u64|string|b256|str|Self)\\b"
+    },
+    "type": {
+      "comment": "A type",
+      "name": "entity.name.type.sway",
+      "match": "\\b([A-Za-z][_A-Za-z0-9]*|_[_A-Za-z0-9]+)\\b"
+    },
+    "type_params": {
+      "comment": "Type parameters",
+      "name": "meta.type_params.sway",
+      "begin": "<(?![=<])",
+      "end": "(?<![-])>",
+      "patterns": [
+        {
+          "include": "#block_comment"
+        },
+        {
+          "include": "#line_comment"
+        },
+        {
+          "include": "#sigils"
+        },
+        {
+          "include": "#mut"
+        },
+        {
+          "include": "#impl"
+        },
+        {
+          "include": "#core_types"
+        },
+        {
+          "include": "#type_params"
+        }
+      ]
+    }
+  }
 }
