@@ -13,16 +13,6 @@ jobs:
         with:
           node-version: 16
       - run: npm ci
-      # - run: npm test
-
-  publish-marketplace-test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Dry run publish
-        uses: HaaLeo/publish-vscode-extension@v1
-        with:
-          dryRun: true
 
   publish-marketplace:
     needs: publish-marketplace-test
@@ -33,3 +23,4 @@ jobs:
         with:
           pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
           registryUrl: https://marketplace.visualstudio.com
+

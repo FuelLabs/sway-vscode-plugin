@@ -6,7 +6,7 @@ on:
     branches: [master]
 
 jobs:
-  prettier:
+  check-format:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,3 +21,15 @@ jobs:
         uses: creyD/prettier_action@v4.2
         with:
           prettier_options: --check client/src snippets syntaxes
+
+  publish-marketplace-test:
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Dry run publish
+        uses: HaaLeo/publish-vscode-extension@v1
+        with:
+          dryRun: true
+
