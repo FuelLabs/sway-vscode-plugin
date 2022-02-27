@@ -4,6 +4,7 @@
   "description": "Sway Language Extension",
   "version": "0.1.0",
   "publisher": "FuelLabs",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FuelLabs/sway-vscode-plugin.git"
