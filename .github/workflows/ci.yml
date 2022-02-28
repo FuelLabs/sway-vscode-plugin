@@ -18,10 +18,7 @@ jobs:
 
       - run: npm ci
 
-      - name: Check code format
-        uses: creyD/prettier_action@v4.2
-        with:
-          prettier_options: --check client/src snippets syntaxes
+      - run: npm run format:check
 
       - name: Dry run publish
         uses: HaaLeo/publish-vscode-extension@v1
