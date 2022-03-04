@@ -14,12 +14,12 @@
     "compile": "tsc -b",
     "watch": "tsc -b -w",
     "test": "sh ./scripts/e2e.sh",
-    "install-extension": "npx vsce package -o sway-vscode-plugin.vsix && code --install-extension sway-vscode-plugin.vsix --force",
-    "format:check": "npx prettier --check 'client/src' 'snippets' 'syntaxes'",
-    "format:fix": "npx prettier --write 'client/src' 'snippets' 'syntaxes'"
+    "install-extension": "vsce package -o sway-vscode-plugin.vsix && code --install-extension sway-vscode-plugin.vsix --force",
+    "format:check": "prettier --check 'client/src' 'snippets' 'syntaxes'",
+    "format:fix": "prettier --write 'client/src' 'snippets' 'syntaxes'"
   },
   "engines": {
-    "vscode": "^1.55.0"
+    "vscode": "^1.64.0"
   },
   "categories": [
     "Programming Languages",
@@ -71,7 +71,8 @@
     "@vscode/test-electron": "^1.6.1",
     "eslint": "^7.32.0",
     "mocha": "^8.4.0",
-    "prettier": "2.5.1",
-    "typescript": "^4.5.5"
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.5",
+    "vsce": "^2.5.3"
   }
 }
