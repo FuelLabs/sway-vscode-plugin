@@ -19,7 +19,7 @@
     "format:fix": "npx prettier --write 'client/src' 'snippets' 'syntaxes'"
   },
   "engines": {
-    "vscode": "^1.55.0"
+    "vscode": "^1.64.0"
   },
   "categories": [
     "Programming Languages",
