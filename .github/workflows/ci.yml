@@ -1,12 +1,14 @@
-name: Publish Extension
+name: CI
 
 on:
-  release:
-    types: [published]
+  pull_request:
+  push:
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
 
@@ -16,8 +18,10 @@ jobs:
 
       - run: npm ci
 
-      - name: Publish to Visual Studio Marketplace
+      - run: npm run format:check
+
+      - name: Dry run publish
         uses: HaaLeo/publish-vscode-extension@v1
         with:
-          pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
-          registryUrl: https://marketplace.visualstudio.com
+          pat: "quickbrownfox"
+          dryRun: true
