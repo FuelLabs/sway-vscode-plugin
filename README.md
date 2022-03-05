@@ -1,5 +1,8 @@
 # Sway Visual Studio Code Plugin
 
+[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/FuelLabs.sway-vscode-plugin)](https://marketplace.visualstudio.com/items?itemName=FuelLabs.sway-vscode-plugin)
+[![discord](https://img.shields.io/badge/chat%20on-discord-orange?&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/xfpK4Pe)
+
 ## When does the plugin get activated?
 
 Currently it gets activated once you open a file with `.sw` extension.
