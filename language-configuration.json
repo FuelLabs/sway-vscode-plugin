@@ -1,4 +1,19 @@
 {
+  "type": "object",
+  "title": "Sway LSP",
+  "properties": {
+    "sway-lsp.trace.server": {
+      "scope": "window",
+      "type": "string",
+      "enum": [
+        "off",
+        "messages",
+        "verbose"
+      ],
+      "default": "verbose",
+      "description": "Traces the communication between VS Code and the language server."
+    }
+  },
   "comments": {
     // symbol used for single line comment. Remove this entry if your language does not support line comments
     "lineComment": "//",
