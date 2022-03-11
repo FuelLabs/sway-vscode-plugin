@@ -17,8 +17,8 @@ let client: LanguageClient;
 
 export function activate(context: ExtensionContext) {
   client = new LanguageClient(
-    "forc",
-    "Sway",
+    "sway-lsp",
+    "Sway Language Server",
     getServerOptions(context),
     getClientOptions()
   );
