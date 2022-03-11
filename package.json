@@ -33,22 +33,22 @@
   ],
   "contributes": {
     "configuration": {
-			"type": "object",
-			"title": "Sway",
-			"properties": {
-				"sway-lsp.trace.server": {
-					"scope": "window",
-					"type": "string",
+      "type": "object",
+      "title": "Sway",
+      "properties": {
+        "sway-lsp.trace.server": {
+          "scope": "window",
+          "type": "string",
           "description": "Traces the communication between VS Code and the Sway language server.",
-					"enum": [
-						"off",
-						"messages",
-						"verbose"
-					],
-					"default": "off"
-				}
-			}
-		},
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off"
+        }
+      }
+    },
     "languages": [
       {
         "id": "sway",
