@@ -82,7 +82,7 @@
     {
       "comment": "Keyword",
       "name": "keyword.other.sway",
-      "match": "\\b(deref|let|ref|use|asm)\\b"
+      "match": "\\b(deref|let|ref|use|asm|dep)\\b"
     },
     {
       "include": "#sigils"
