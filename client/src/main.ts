@@ -1,34 +1,25 @@
-import {
-  workspace,
-  ExtensionContext,
-  ExtensionMode,
-  WorkspaceConfiguration,
-} from "vscode";
+import * as vscode from 'vscode';
+import * as lc from 'vscode-languageclient/node';
+import { Config } from './config';
+import { log } from "./util";
 
-import {
-  Executable,
-  LanguageClient,
-  LanguageClientOptions,
-  ServerOptions,
-  TransportKind,
-} from "vscode-languageclient/node";
+let client: lc.LanguageClient;
 
-let client: LanguageClient;
+export function activate(context: vscode.ExtensionContext) {
+  const config = new Config(context);
 
-export function activate(context: ExtensionContext) {
-  client = new LanguageClient(
+  client = new lc.LanguageClient(
     "sway-lsp",
     "Sway Language Server",
-    getServerOptions(context),
+    getServerOptions(context, config),
     getClientOptions()
   );
 
   // Start the client. This will also launch the server
-  console.log("Starting Client and Server");
   client.start();
 
   client.onReady().then((_) => {
-    console.log("Client has Connected to the Server successfully!");
+    log.info("Client has Connected to the Sway Language Server Successfully!");
   });
 }
 
@@ -39,24 +30,29 @@ export function deactivate(): Thenable<void> | undefined {
   return client.stop();
 }
 
-function getServerOptions(context: ExtensionContext): ServerOptions {
-  const serverExecutable: Executable = {
+function getServerOptions(context: vscode.ExtensionContext, config: Config): lc.ServerOptions {
+  let args = ["lsp"];
+  if (config.debug.showParsedTokensAsWarnings) {
+    args.push(" --parsed-tokens-as-warnings");
+  }
+
+  const serverExecutable: lc.Executable = {
     command: "forc",
-    args: ["lsp"],
+    args,
     options: {
       shell: true,
     },
   };
 
-  const devServerOptions: ServerOptions = {
+  const devServerOptions: lc.ServerOptions = {
     run: serverExecutable,
     debug: serverExecutable,
-    transport: TransportKind.stdio,
+    transport: lc.TransportKind.stdio,
   };
 
   switch (context.extensionMode) {
-    case ExtensionMode.Development:
-    case ExtensionMode.Test:
+    case vscode.ExtensionMode.Development:
+    case vscode.ExtensionMode.Test:
       return devServerOptions;
 
     default:
@@ -65,9 +61,9 @@ function getServerOptions(context: ExtensionContext): ServerOptions {
   }
 }
 
-function getClientOptions(): LanguageClientOptions {
+function getClientOptions(): lc.LanguageClientOptions {
   // Options to control the language client
-  const clientOptions: LanguageClientOptions = {
+  const clientOptions: lc.LanguageClientOptions = {
     // Register the server for plain text documents
     documentSelector: [
       { scheme: "file", language: "sway" },
@@ -76,8 +72,8 @@ function getClientOptions(): LanguageClientOptions {
     synchronize: {
       // Notify the server about file changes to *.sw files contained in the workspace
       fileEvents: [
-        workspace.createFileSystemWatcher("**/.sw"),
-        workspace.createFileSystemWatcher("**/*.sw"),
+        vscode.workspace.createFileSystemWatcher("**/.sw"),
+        vscode.workspace.createFileSystemWatcher("**/*.sw"),
       ],
     },
     initializationOptions: {
@@ -115,9 +111,9 @@ function getSwayConfigOptions(): SwayConfig {
   }
 }
 
-function getSwayFormattingOptions(): WorkspaceConfiguration | null {
-  const swayOptions = workspace.getConfiguration("sway");
-  const swayOptionsBracket = workspace.getConfiguration("[sway]");
+function getSwayFormattingOptions(): vscode.WorkspaceConfiguration | null {
+  const swayOptions = vscode.workspace.getConfiguration("sway");
+  const swayOptionsBracket = vscode.workspace.getConfiguration("[sway]");
 
   if (swayOptions && swayOptions.format) {
     if (swayOptionsBracket && swayOptionsBracket.format) {
