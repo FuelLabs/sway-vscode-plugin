@@ -27,7 +27,7 @@
     "Snippets",
     "Themes"
   ],
-  "main": "./client/out/extension",
+  "main": "./client/out/main",
   "activationEvents": [
     "onLanguage:sway"
   ],
@@ -45,7 +45,22 @@
             "messages",
             "verbose"
           ],
+          "enumDescriptions": [
+            "No traces",
+            "Error only",
+            "Full log"
+          ],
           "default": "off"
+        },
+        "sway-lsp.trace.extension": {
+          "description": "Enable logging of the Sway VS Code extension itself.",
+          "type": "boolean",
+          "default": false
+        },
+        "sway-lsp.debug.showParsedTokensAsWarnings": {
+          "markdownDescription": "Show successfully parsed tokens by the sway-lsp server as warnings. If set to false, sway-lsp will revert to only showing warnings and errors reported by the compiler.",
+          "default": false,
+          "type": "boolean"
         }
       }
     },
