@@ -1,6 +1,6 @@
-import * as vscode from 'vscode';
-import * as lc from 'vscode-languageclient/node';
-import { Config } from './config';
+import * as vscode from "vscode";
+import * as lc from "vscode-languageclient/node";
+import { Config } from "./config";
 import { log } from "./util";
 
 let client: lc.LanguageClient;
@@ -30,7 +30,10 @@ export function deactivate(): Thenable<void> | undefined {
   return client.stop();
 }
 
-function getServerOptions(context: vscode.ExtensionContext, config: Config): lc.ServerOptions {
+function getServerOptions(
+  context: vscode.ExtensionContext,
+  config: Config
+): lc.ServerOptions {
   let args = ["lsp"];
   if (config.debug.showParsedTokensAsWarnings) {
     args.push(" --parsed-tokens-as-warnings");
