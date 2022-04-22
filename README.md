@@ -9,7 +9,7 @@ Currently it gets activated once you open a file with `.sw` extension.
 
 ## Testing
 
-Prior to testing make sure you have [`forc`](https://github.com/FuelLabs/sway/tree/master/forc) command exported as well.
+Prior to testing make sure you have [`forc`](https://github.com/FuelLabs/sway/tree/master/forc) installed as well.
 
 ## Testing as a real installed extension
 
