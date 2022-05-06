@@ -26,9 +26,8 @@ npm run install-extension
 - Make sure that in `Run and Debug` Tab that "Launch Client" is selected - press F5 and new Visual Studio Code Debug Window will be opened.
 - Within that Window open a `.sw` file like `main.sw` - which will activate `forc lsp`.
 
-## Testing in Debug mode with the attached Server
+## Testing in Debug mode with the attached Server _(This is only needed if you are developing the Server.)_
 
-- (This is only needed if you are developing the Server.)
 - Install this extension -> [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb)
 - Repeat the steps outlined in "Testing in Debug mode", then go back `Run and Debug` Tab, from the dropdown menu
 choose "Sway Server" which will attach the server in the debug mode as well.
