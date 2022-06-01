@@ -31,3 +31,11 @@ npm run install-extension
 - Install this extension -> [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb)
 - Repeat the steps outlined in "Testing in Debug mode", then go back `Run and Debug` Tab, from the dropdown menu
 choose "Sway Server" which will attach the server in the debug mode as well.
+
+## Troubleshooting
+
+#### Error running `npm run install-extension`
+
+`The latest version of vsce is 2.9.1 and you have 2.5.3.`
+
+If you see this error but you already have vsce 2.9.1 installed, ensure that you have the `code` CLI tool installed by running `code --version`. If not, open the VSCode editor -> cmd + shift + p -> search `>Shell Command install` -> install.
