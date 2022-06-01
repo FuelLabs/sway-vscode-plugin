@@ -11,6 +11,8 @@ Currently it gets activated once you open a file with `.sw` extension.
 
 Prior to testing make sure you have [`forc`](https://github.com/FuelLabs/sway/tree/master/forc) installed as well.
 
+Ensure you have the `code` CLI tool installed by running `code --version`. If not, open the VSCode editor -> cmd + shift + p -> search `>Shell Command install` -> install.
+
 ## Testing as a real installed extension
 
 ```sh
