@@ -22,6 +22,23 @@ npm i
 npm run install-extension
 ```
 
+## Test your changes on your local install of VS Code
+
+Firstly, uninstall the official release of the extension and reload VS Code if you have it installed. You will need to do this step each time you want to re-install and test your local version.
+
+Install `vsce`:
+
+```sh
+npm install -g vsce
+```
+
+`checkout` your branch, if not already on it and run the following in the root of the project:
+
+```sh
+vsce package  # Generates a .vsix file
+code --install-extension sway-vscode-extension-{version}.vsix
+```
+
 ## Testing in Debug mode
 
 - In order to start the Debug mode, open `vscode-plugin` in Visual Studio Code, make sure that it is opened as root/main workspace - in order to avoid any problems.
@@ -32,4 +49,4 @@ npm run install-extension
 
 - Install this extension -> [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb)
 - Repeat the steps outlined in "Testing in Debug mode", then go back `Run and Debug` Tab, from the dropdown menu
-choose "Sway Server" which will attach the server in the debug mode as well.
+  choose "Sway Server" which will attach the server in the debug mode as well.
