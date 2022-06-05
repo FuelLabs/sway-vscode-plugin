@@ -30,8 +30,8 @@ Firstly, uninstall the official release of the extension and reload VS Code if y
 cd sway-vscode-plugin
 npm i
 git checkout <branch>
-vsce package  # Generates a .vsix file
-code --install-extension sway-vscode-extension-<version>.vsix
+vsce package  # Generates a .vsix file, the version will be included in the file name
+code --install-extension sway-vscode-extension-$VERSION.vsix
 ```
 
 ## Testing in Debug mode
