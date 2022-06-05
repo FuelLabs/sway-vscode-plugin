@@ -250,6 +250,36 @@
       }
     },
     {
+      "comment": "Type declaration without name",
+      "begin": "\\b(storage)",
+      "end": "[\\{\\(;]",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.sway"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#block_comment"
+        },
+        {
+          "include": "#line_comment"
+        },
+        {
+          "include": "#type_params"
+        },
+        {
+          "include": "#core_types"
+        },
+        {
+          "include": "#pub"
+        },
+        {
+          "include": "#where"
+        }
+      ]
+    },
+    {
       "comment": "Type declaration",
       "begin": "\\b(enum|struct|trait|abi)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
       "end": "[\\{\\(;]",
