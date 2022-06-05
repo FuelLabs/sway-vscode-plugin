@@ -26,17 +26,12 @@ npm run install-extension
 
 Firstly, uninstall the official release of the extension and reload VS Code if you have it installed. You will need to do this step each time you want to re-install and test your local version.
 
-Install `vsce`:
-
 ```sh
-npm install -g vsce
-```
-
-`checkout` your branch, if not already on it and run the following in the root of the project:
-
-```sh
+cd sway-vscode-plugin
+npm i
+git checkout <branch>
 vsce package  # Generates a .vsix file
-code --install-extension sway-vscode-extension-{version}.vsix
+code --install-extension sway-vscode-extension-<version>.vsix
 ```
 
 ## Testing in Debug mode
