@@ -30,7 +30,8 @@
   "main": "./client/out/main",
   "activationEvents": [
     "onLanguage:sway",
-    "onCommand:sway.runScript"
+    "onCommand:sway.runScript",
+    "onCommand:sway.startFuelCore"
   ],
   "contributes": {
     "configuration": {
@@ -62,12 +63,21 @@
           "markdownDescription": "Show successfully parsed tokens by the sway-lsp server as warnings. If set to false, sway-lsp will revert to only showing warnings and errors reported by the compiler.",
           "default": false,
           "type": "boolean"
+        },
+        "sway-lsp.trace.fuel-core.logfile": {
+          "description": "Set the file path for the Fuel core log output. Disabled if set to empty string.",
+          "type": "string",
+          "default": "/tmp/fuel-core.log"
         }
       },
       "commands": [
         {
           "command": "sway.runScript",
           "title": "Sway: Run script"
+        },
+        {
+          "command": "sway.startFuelCore",
+          "title": "Sway: Start Fuel Core"
         }
       ]
     },
@@ -88,8 +98,15 @@
       {
         "command": "sway.runScript",
         "title": "Sway: Run script"
+      },
+      {
+        "command": "sway.startFuelCore",
+        "title": "Sway: Start Fuel Core"
       }
     ],
+    "config": {
+      "logfile": "/tmp/fuel-core.log"
+    },
     "snippets": [
       {
         "language": "sway",
