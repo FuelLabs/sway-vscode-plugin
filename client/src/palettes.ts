@@ -11,7 +11,7 @@ interface CommandPalette {
 export class CommandPalettes {
   constructor(readonly config: Config) {}
 
-  get() {
+  get(): CommandPalette[] {
     const fuelCoreLogFile = this.config.traceFuelCoreLogFile;
     const runScript = {
       command: "sway.runScript",
