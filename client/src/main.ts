@@ -1,16 +1,41 @@
-import * as vscode from "vscode";
-import * as lc from "vscode-languageclient/node";
-import { Config } from "./config";
-import { log } from "./util";
+import * as vscode from 'vscode';
+import * as lc from 'vscode-languageclient/node';
+import { Config } from './config';
+import { log } from './util';
+import * as path from 'path';
+import { exec } from 'child_process';
 
 let client: lc.LanguageClient;
 
 export function activate(context: vscode.ExtensionContext) {
   const config = new Config(context);
 
+  context.subscriptions.push(
+    vscode.commands.registerCommand('sway.runScript', async () => {
+      var currentTabDirectory = path.dirname(
+        vscode.window.activeTextEditor.document.fileName
+      );
+
+      exec(
+        `cd ${currentTabDirectory} && forc run`,
+        (error, _stdout, _stderr) => {
+          if (error) {
+            vscode.window.showInformationMessage(
+              `Failed with error: ${error.message}`
+            );
+            return;
+          }
+          // forc has a bug where it returns sterr when run is successful
+          // TODO: handle stderr properly when fixed.
+          vscode.window.showInformationMessage(`Successfully ran script`);
+        }
+      );
+    })
+  );
+
   client = new lc.LanguageClient(
-    "sway-lsp",
-    "Sway Language Server",
+    'sway-lsp',
+    'Sway Language Server',
     getServerOptions(context, config),
     getClientOptions()
   );
@@ -18,8 +43,8 @@ export function activate(context: vscode.ExtensionContext) {
   // Start the client. This will also launch the server
   client.start();
 
-  client.onReady().then((_) => {
-    log.info("Client has Connected to the Sway Language Server Successfully!");
+  client.onReady().then(_ => {
+    log.info('Client has Connected to the Sway Language Server Successfully!');
   });
 }
 
@@ -34,13 +59,13 @@ function getServerOptions(
   context: vscode.ExtensionContext,
   config: Config
 ): lc.ServerOptions {
-  let args = ["lsp"];
+  let args = ['lsp'];
   if (config.debug.showParsedTokensAsWarnings) {
-    args.push(" --parsed-tokens-as-warnings");
+    args.push(' --parsed-tokens-as-warnings');
   }
 
   const serverExecutable: lc.Executable = {
-    command: "forc",
+    command: 'forc',
     args,
     options: {
       shell: true,
@@ -69,14 +94,14 @@ function getClientOptions(): lc.LanguageClientOptions {
   const clientOptions: lc.LanguageClientOptions = {
     // Register the server for plain text documents
     documentSelector: [
-      { scheme: "file", language: "sway" },
-      { scheme: "untitled", language: "sway" },
+      { scheme: 'file', language: 'sway' },
+      { scheme: 'untitled', language: 'sway' },
     ],
     synchronize: {
       // Notify the server about file changes to *.sw files contained in the workspace
       fileEvents: [
-        vscode.workspace.createFileSystemWatcher("**/.sw"),
-        vscode.workspace.createFileSystemWatcher("**/*.sw"),
+        vscode.workspace.createFileSystemWatcher('**/.sw'),
+        vscode.workspace.createFileSystemWatcher('**/*.sw'),
       ],
     },
     initializationOptions: {
@@ -99,10 +124,10 @@ function getSwayConfigOptions(): SwayConfig {
     const swayFormatOptions = getSwayFormattingOptions().format;
     if (swayFormatOptions) {
       return {
-        alignFields: swayFormatOptions.hasOwnProperty("alignFields")
+        alignFields: swayFormatOptions.hasOwnProperty('alignFields')
           ? swayFormatOptions.alignFields
           : defaultSwayConfig.alignFields,
-        tabSize: swayFormatOptions.hasOwnProperty("tabSize")
+        tabSize: swayFormatOptions.hasOwnProperty('tabSize')
           ? swayFormatOptions.tabSize
           : defaultSwayConfig.tabSize,
       };
@@ -115,8 +140,8 @@ function getSwayConfigOptions(): SwayConfig {
 }
 
 function getSwayFormattingOptions(): vscode.WorkspaceConfiguration | null {
-  const swayOptions = vscode.workspace.getConfiguration("sway");
-  const swayOptionsBracket = vscode.workspace.getConfiguration("[sway]");
+  const swayOptions = vscode.workspace.getConfiguration('sway');
+  const swayOptionsBracket = vscode.workspace.getConfiguration('[sway]');
 
   if (swayOptions && swayOptions.format) {
     if (swayOptionsBracket && swayOptionsBracket.format) {

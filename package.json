@@ -29,7 +29,8 @@
   ],
   "main": "./client/out/main",
   "activationEvents": [
-    "onLanguage:sway"
+    "onLanguage:sway",
+    "onCommand:sway.runScript"
   ],
   "contributes": {
     "configuration": {
@@ -62,7 +63,13 @@
           "default": false,
           "type": "boolean"
         }
-      }
+      },
+      "commands": [
+        {
+          "command": "sway.runScript",
+          "title": "Sway: Run script"
+        }
+      ]
     },
     "languages": [
       {
@@ -75,6 +82,12 @@
           ".sw"
         ],
         "configuration": "./language-configuration.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "sway.runScript",
+        "title": "Sway: Run script"
       }
     ],
     "snippets": [
@@ -92,6 +105,7 @@
     ]
   },
   "dependencies": {
+    "child_process": "^1.0.2",
     "vscode-languageclient": "^7.0.0"
   },
   "devDependencies": {
