@@ -1,7 +1,7 @@
-import * as vscode from "vscode";
-import * as path from "path";
-import { exec } from "child_process";
-import { Config } from "./config";
+import * as vscode from 'vscode';
+import * as path from 'path';
+import { exec } from 'child_process';
+import { Config } from './config';
 
 interface CommandPalette {
   command: string;
@@ -14,7 +14,7 @@ export class CommandPalettes {
   get(): CommandPalette[] {
     const fuelCoreLogFile = this.config.traceFuelCoreLogFile;
     const runScript = {
-      command: "sway.runScript",
+      command: 'sway.runScript',
       callback: async () => {
         var currentTabDirectory = path.dirname(
           vscode.window.activeTextEditor.document.fileName
@@ -39,7 +39,7 @@ export class CommandPalettes {
       },
     };
     const startFuelCore = {
-      command: "sway.startFuelCore",
+      command: 'sway.startFuelCore',
       callback: async () => {
         exec(`fuel-core > ${fuelCoreLogFile} 2>&1 &`, () => {
           vscode.window.showInformationMessage(

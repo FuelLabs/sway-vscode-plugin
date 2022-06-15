@@ -65,9 +65,9 @@
           "type": "boolean"
         },
         "sway-lsp.trace.fuel-core.logfile": {
-          "description": "Set the file path for the Fuel core log output. Disabled if set to empty string.",
+          "description": "Set the file path for the Fuel core log output.",
           "type": "string",
-          "default": "/tmp/fuel-core.log"
+          "default": "/tmp/fuel-core_sway-vscode-plugin.log"
         }
       },
       "commands": [
@@ -104,9 +104,6 @@
         "title": "Sway: Start Fuel Core"
       }
     ],
-    "config": {
-      "logfile": "/tmp/fuel-core.log"
-    },
     "snippets": [
       {
         "language": "sway",

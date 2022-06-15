@@ -1,11 +1,11 @@
-import * as vscode from "vscode";
-import { log } from "./util";
+import * as vscode from 'vscode';
+import { log } from './util';
 
 export class Config {
-  readonly extensionId = "fuellabs.sway-vscode-plugin";
-  readonly rootSection = "sway-lsp";
-  private readonly requiresReloadOpts = ["debug"].map(
-    (opt) => `${this.rootSection}.${opt}`
+  readonly extensionId = 'fuellabs.sway-vscode-plugin';
+  readonly rootSection = 'sway-lsp';
+  private readonly requiresReloadOpts = ['debug'].map(
+    opt => `${this.rootSection}.${opt}`
   );
 
   readonly package: {
@@ -26,13 +26,13 @@ export class Config {
 
   private refreshLogging() {
     log.setEnabled(this.traceExtension);
-    log.info("Starting the Sway Language Client and Server");
-    log.info("Extension version:", this.package.version);
+    log.info('Starting the Sway Language Client and Server');
+    log.info('Extension version:', this.package.version);
 
     const cfg = Object.entries(this.cfg).filter(
       ([_, val]) => !(val instanceof Function)
     );
-    log.info("Using configuration", Object.fromEntries(cfg));
+    log.info('Using configuration', Object.fromEntries(cfg));
   }
 
   private async onDidChangeConfiguration(
@@ -40,7 +40,7 @@ export class Config {
   ) {
     this.refreshLogging();
 
-    const requiresReloadOpt = this.requiresReloadOpts.find((opt) =>
+    const requiresReloadOpt = this.requiresReloadOpts.find(opt =>
       event.affectsConfiguration(opt)
     );
 
@@ -48,11 +48,11 @@ export class Config {
 
     const userResponse = await vscode.window.showInformationMessage(
       `Changing "${requiresReloadOpt}" requires a reload`,
-      "Reload now"
+      'Reload now'
     );
 
-    if (userResponse === "Reload now") {
-      await vscode.commands.executeCommand("workbench.action.reloadWindow");
+    if (userResponse === 'Reload now') {
+      await vscode.commands.executeCommand('workbench.action.reloadWindow');
     }
   }
 
@@ -84,17 +84,17 @@ export class Config {
   }
 
   get traceExtension() {
-    return this.get<boolean>("trace.extension");
+    return this.get<boolean>('trace.extension');
   }
 
   get traceFuelCoreLogFile() {
-    return this.get<boolean>("trace.fuel-core.logfile");
+    return this.get<boolean>('trace.fuel-core.logfile');
   }
 
   get debug() {
     return {
       showParsedTokensAsWarnings: this.get<boolean>(
-        "debug.showParsedTokensAsWarnings"
+        'debug.showParsedTokensAsWarnings'
       ),
     };
   }
