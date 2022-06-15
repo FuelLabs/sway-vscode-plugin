@@ -1,7 +1,7 @@
 {
   "name": "sway-vscode-plugin",
   "displayName": "Sway",
-  "description": "Sway language extension for Visual Studio Code.",
+  "description": "Sway language extension for Visual Studio Code",
   "icon": "images/logo.png",
   "version": "0.2.2",
   "publisher": "FuelLabs",
