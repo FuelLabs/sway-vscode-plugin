@@ -87,6 +87,10 @@ export class Config {
     return this.get<boolean>('trace.extension');
   }
 
+  get traceFuelCoreLogFile() {
+    return this.get<boolean>('trace.fuel-core.logfile');
+  }
+
   get debug() {
     return {
       showParsedTokensAsWarnings: this.get<boolean>(
