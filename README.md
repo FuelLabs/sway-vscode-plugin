@@ -43,5 +43,4 @@ code --install-extension sway-vscode-plugin-dev.vsix
 ## Testing in Debug mode with the attached Server _(This is only needed if you are developing the Server.)_
 
 - Install this extension -> [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb)
-- Repeat the steps outlined in "Testing in Debug mode", then go back `Run and Debug` Tab, from the dropdown menu
-  choose "Sway Server" which will attach the server in the debug mode as well.
+- Repeat the steps outlined in "Testing in Debug mode", then go back `Run and Debug` Tab, from the dropdown menu choose "Sway Server" which will attach the server in the debug mode as well.
