@@ -2,35 +2,19 @@ import * as vscode from 'vscode';
 import * as lc from 'vscode-languageclient/node';
 import { Config } from './config';
 import { log } from './util';
-import * as path from 'path';
-import { exec } from 'child_process';
+import { CommandPalettes } from './palettes';
 
 let client: lc.LanguageClient;
 
 export function activate(context: vscode.ExtensionContext) {
   const config = new Config(context);
 
+  // Register all command palettes
+  const commandPalettes = new CommandPalettes(config).get();
   context.subscriptions.push(
-    vscode.commands.registerCommand('sway.runScript', async () => {
-      var currentTabDirectory = path.dirname(
-        vscode.window.activeTextEditor.document.fileName
-      );
-
-      exec(
-        `cd ${currentTabDirectory} && forc run`,
-        (error, _stdout, _stderr) => {
-          if (error) {
-            vscode.window.showInformationMessage(
-              `Failed with error: ${error.message}`
-            );
-            return;
-          }
-          // forc has a bug where it returns sterr when run is successful
-          // TODO: handle stderr properly when fixed.
-          vscode.window.showInformationMessage(`Successfully ran script`);
-        }
-      );
-    })
+    ...commandPalettes.map(({ command, callback }) =>
+      vscode.commands.registerCommand(command, callback)
+    )
   );
 
   client = new lc.LanguageClient(
