@@ -18,8 +18,7 @@ interface ParsedAbi {
   functions: ContractFunction;
 }
 
-export class ContractProvider
-  implements TreeDataProvider<Contract | ContractFunction>
+export class ContractProvider implements TreeDataProvider<ContractFunction | Contract>
 {
   private _onDidChangeTreeData: EventEmitter<Contract | undefined | void> =
     new EventEmitter<Contract | undefined | void>();
@@ -32,19 +31,19 @@ export class ContractProvider
     this._onDidChangeTreeData.fire();
   }
 
-  getTreeItem(element: Contract): TreeItem {
+  getTreeItem(element: TreeItem): TreeItem {
     return element;
   }
 
   getChildren(
-    contract?: Contract
-  ): ProviderResult<Contract[] | ContractFunction[]> {
+    contract?: ContractFunction | Contract
+  ): ProviderResult<Contract[]> {
     if (!this.workspaceRoot) {
       window.showInformationMessage('No contract in empty workspace');
       return Promise.resolve([]);
     }
 
-    return Promise.resolve(contract?.children ?? this.getContracts());
+    return contract ? Promise.resolve(contract['children']) : this.getContracts();
   }
 
   /**
@@ -56,30 +55,32 @@ export class ContractProvider
     return abiFilePaths
       .filter(filename => filename.endsWith('-abi.json'))
       .map(filename => {
-        let buffer = fs.readFileSync(`${abiDirectory}${filename}`);
+		const filetpath = `${abiDirectory}${filename}`;
+        let buffer = fs.readFileSync(filetpath);
         let abi: Object[] = JSON.parse(buffer.toString());
         const functions = abi
           .filter(obj => obj['type'] === 'function')
           .map(func => new ContractFunction(func['name']));
-		const contractName = path.parse(filename).name;
-        return new Contract(contractName, functions);
+        return new Contract(filetpath, functions);
       });
   }
 }
 
 export class Contract extends TreeItem {
   constructor(
-    public readonly label: string,
+    public readonly filepath: string,
     readonly children: ContractFunction[]
   ) {
+	const contractName = path.parse(filepath).name;
     super(
-      label,
+		contractName,
       children
         ? TreeItemCollapsibleState.Collapsed
         : TreeItemCollapsibleState.None
     );
 
-    this.tooltip = this.label;
+	this.label = contractName;
+    this.tooltip = contractName;
   }
 
   contextValue = 'contract';

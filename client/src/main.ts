@@ -16,15 +16,15 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.workspace.workspaceFolders.length > 0
       ? vscode.workspace.workspaceFolders[0].uri.fsPath
       : undefined;
-  const contractFunctionProvider = new ContractProvider(rootPath);
-  vscode.window.registerTreeDataProvider('contracts', contractFunctionProvider);
+  const contractProvider = new ContractProvider(rootPath);
+  vscode.window.registerTreeDataProvider('contracts', contractProvider);
   vscode.commands.registerCommand('contracts.refreshEntry', () =>
-    contractFunctionProvider.refresh()
+  contractProvider.refresh()
   );
-  vscode.commands.registerCommand('contracts.editEntry', (node: Contract) =>
-    vscode.window.showInformationMessage(
-      `Successfully called edit entry on ${node.label}.`
-    )
+  vscode.commands.registerCommand('contracts.editEntry', (contract: Contract) =>
+    vscode.workspace.openTextDocument(contract.filepath).then(doc => {
+      vscode.window.showTextDocument(doc);
+    })
   );
 
   // Register all command palettes
