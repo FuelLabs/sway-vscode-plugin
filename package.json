@@ -35,7 +35,8 @@
     "onCommand:sway.runScript",
     "onCommand:sway.startFuelCore",
     "onCommand:contracts.refreshEntry",
-    "onCommand:contracts.editEntry"
+    "onCommand:contracts.editEntry",
+    "onCommand:contracts.run"
   ],
   "contributes": {
     "viewsContainers": {
@@ -75,6 +76,11 @@
         {
           "command": "contracts.editEntry",
           "when": "view == contracts && viewItem == contract",
+          "group": "inline"
+        },
+        {
+          "command": "contracts.run",
+          "when": "view == contracts && viewItem == contractFunction",
           "group": "inline"
         }
       ]
@@ -154,6 +160,14 @@
         "icon": {
           "light": "images/light/edit.svg",
           "dark": "images/dark/edit.svg"
+        }
+      },
+      {
+        "command": "contracts.run",
+        "title": "Run",
+        "icon": {
+          "light": "images/light/play.svg",
+          "dark": "images/dark/play.svg"
         }
       },
       {

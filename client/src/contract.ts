@@ -13,10 +13,7 @@ import {
   window,
 } from 'vscode';
 
-interface ParsedAbi {
-  name: string;
-  functions: ContractFunction;
-}
+const ABI_FILE_SUFFIX = '-abi.json';
 
 export class ContractProvider implements TreeDataProvider<ContractFunction | Contract>
 {
@@ -54,20 +51,23 @@ export class ContractProvider implements TreeDataProvider<ContractFunction | Con
 	const allFiles = getAllFiles(this.workspaceRoot, []);
 	const swayFilePaths = allFiles.filter(file => file.endsWith('.sw'));
 	const forcTomlFilePaths = allFiles.filter(file => file.endsWith('Forc.toml'));
-	const abiFilePaths = allFiles.filter(file => file.endsWith('-abi.json'));
+	const abiFilePaths = allFiles.filter(file => file.endsWith(ABI_FILE_SUFFIX));
 	return abiFilePaths.map(filepath => {
-        const buffer = fs.readFileSync(filepath);
-        const abi: Object[] = JSON.parse(buffer.toString());
-        const functions = abi
-          .filter(obj => obj['type'] === 'function')
-          .map(func => new ContractFunction(func['name']));
-		const contractName = path.parse(filepath).base.replace('-abi.json', '');
+		const contractName = path.parse(filepath).base.replace(ABI_FILE_SUFFIX, '');
 
 		// This is assuming that there is only one sway contract in the same directory as a Forc.toml
 		const forcFilePath = forcTomlFilePaths.find(forcFilePath => fs.readFileSync(forcFilePath).toString().includes(contractName));
 		const swayFilePath = swayFilePaths.find(swayFilePath => {
 			return swayFilePath.startsWith(path.parse(forcFilePath).dir);
 		});
+
+		// Attach the source file path to each function node in addition to the contract node
+		const buffer = fs.readFileSync(filepath);
+        const abi: Object[] = JSON.parse(buffer.toString());
+        const functions = abi
+          .filter(obj => obj['type'] === 'function')
+          .map(func => new ContractFunction(func['name'], swayFilePath));
+
         return new Contract(contractName, swayFilePath, functions);
 	});
   }
@@ -118,7 +118,9 @@ export class Contract extends TreeItem {
 }
 
 export class ContractFunction extends TreeItem {
-  constructor(public readonly label: string) {
+  constructor(
+	public readonly label: string, 	
+	public readonly sourceFilePath: string) {
     super(label, TreeItemCollapsibleState.None);
 
     this.tooltip = this.label;

@@ -3,7 +3,9 @@ import * as lc from 'vscode-languageclient/node';
 import { Config } from './config';
 import { log } from './util';
 import { CommandPalettes } from './palettes';
-import { Contract, ContractProvider } from './contract';
+import { Contract, ContractFunction, ContractProvider } from './contract';
+import { exec } from 'child_process';
+import * as path from 'path';
 
 let client: lc.LanguageClient;
 
@@ -26,6 +28,26 @@ export function activate(context: vscode.ExtensionContext) {
       vscode.window.showTextDocument(doc);
     })
   );
+  vscode.commands.registerCommand('contracts.run', (contractFunction: ContractFunction) => {
+    const fuelCoreLogFile = config.traceFuelCoreLogFile;
+    vscode.window.showInformationMessage(`Running ${contractFunction.label}`);
+    exec(
+      `cd ${path.parse(contractFunction.sourceFilePath).dir} && forc run`,
+      (error, _stdout, _stderr) => {
+        if (error) {
+          vscode.window.showInformationMessage(
+            `Failed with error: ${error.message}. Logs at ${fuelCoreLogFile}`
+          );
+          return;
+        }
+        vscode.window.showInformationMessage(
+          `Successfully ran script. Logs at ${fuelCoreLogFile}`
+        );
+      }
+    );
+  }
+  );
+
 
   // Register all command palettes
   const commandPalettes = new CommandPalettes(config).get();
