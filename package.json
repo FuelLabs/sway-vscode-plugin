@@ -31,10 +31,54 @@
   "main": "./client/out/main",
   "activationEvents": [
     "onLanguage:sway",
+    "onView:sway",
     "onCommand:sway.runScript",
-    "onCommand:sway.startFuelCore"
+    "onCommand:sway.startFuelCore",
+    "onCommand:contracts.refreshEntry",
+    "onCommand:contracts.editEntry"
   ],
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "sway",
+          "title": "Sway",
+          "icon": "images/fuel.svg"
+        }
+      ]
+    },
+    "views": {
+      "sway": [
+        {
+          "id": "contracts",
+          "name": "Contracts",
+          "icon": "images/fuel.svg",
+          "contextualTitle": "Sway Contracts"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "contracts",
+        "contents": "No node contracts found."
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "contracts.refreshEntry",
+          "when": "view == contracts",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "contracts.editEntry",
+          "when": "view == contracts && viewItem == contract",
+          "group": "inline"
+        }
+      ]
+    },  
     "configuration": {
       "type": "object",
       "title": "Sway",
@@ -96,6 +140,22 @@
       }
     ],
     "commands": [
+      {
+        "command": "contracts.refreshEntry",
+        "title": "Refresh",
+        "icon": {
+          "light": "images/light/refresh.svg",
+          "dark": "images/dark/refresh.svg"
+        }
+      },
+      {
+        "command": "contracts.editEntry",
+        "title": "Edit",
+        "icon": {
+          "light": "images/light/edit.svg",
+          "dark": "images/dark/edit.svg"
+        }
+      },    
       {
         "command": "sway.runScript",
         "title": "Sway: Run script"

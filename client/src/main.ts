@@ -3,11 +3,22 @@ import * as lc from 'vscode-languageclient/node';
 import { Config } from './config';
 import { log } from './util';
 import { CommandPalettes } from './palettes';
+import { Contract, ContractProvider } from './contract';
 
 let client: lc.LanguageClient;
 
 export function activate(context: vscode.ExtensionContext) {
   const config = new Config(context);
+
+  // Register tree views
+  const rootPath = (vscode.workspace.workspaceFolders && (vscode.workspace.workspaceFolders.length > 0))
+  ? vscode.workspace.workspaceFolders[0].uri.fsPath : undefined;
+  const contractFunctionProvider = new ContractProvider(rootPath);
+	vscode.window.registerTreeDataProvider('contracts', contractFunctionProvider);
+	vscode.commands.registerCommand('contracts.refreshEntry', () => contractFunctionProvider.refresh());
+  vscode.commands.registerCommand('contracts.editEntry', (node: Contract) => vscode.window.showInformationMessage(`Successfully called edit entry on ${node.label}.`));
+
+
 
   // Register all command palettes
   const commandPalettes = new CommandPalettes(config).get();
