@@ -78,7 +78,7 @@
           "group": "inline"
         }
       ]
-    },  
+    },
     "configuration": {
       "type": "object",
       "title": "Sway",
@@ -155,7 +155,7 @@
           "light": "images/light/edit.svg",
           "dark": "images/dark/edit.svg"
         }
-      },    
+      },
       {
         "command": "sway.runScript",
         "title": "Sway: Run script"

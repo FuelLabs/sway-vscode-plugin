@@ -1,65 +1,96 @@
-// import * as fs from 'fs';
-// import * as path from 'path';
-import { Event, EventEmitter, ProviderResult, TreeDataProvider, TreeItem, TreeItemCollapsibleState, window } from 'vscode';
+import * as fs from 'fs';
+import * as path from 'path';
 
-export class ContractProvider implements TreeDataProvider<Contract | ContractFunction> {
+// import * as fuels from 'typechain-target-fuels';
 
-	private _onDidChangeTreeData: EventEmitter<Contract | undefined | void> = new EventEmitter<Contract | undefined | void>();
-	readonly onDidChangeTreeData: Event<Contract | undefined | void> = this._onDidChangeTreeData.event;
+import {
+  Event,
+  EventEmitter,
+  ProviderResult,
+  TreeDataProvider,
+  TreeItem,
+  TreeItemCollapsibleState,
+  window,
+} from 'vscode';
 
-	constructor(private workspaceRoot: string | undefined) {
-	}
+interface ParsedAbi {
+  name: string;
+  functions: ContractFunction;
+}
 
-	refresh(): void {
-		this._onDidChangeTreeData.fire();
-	}
+export class ContractProvider
+  implements TreeDataProvider<Contract | ContractFunction>
+{
+  private _onDidChangeTreeData: EventEmitter<Contract | undefined | void> =
+    new EventEmitter<Contract | undefined | void>();
+  readonly onDidChangeTreeData: Event<Contract | undefined | void> =
+    this._onDidChangeTreeData.event;
 
-	getTreeItem(element: Contract): TreeItem {
-		return element;
-	}
+  constructor(private workspaceRoot: string | undefined) {}
 
-	getChildren(contract?: Contract): ProviderResult<Contract[] | ContractFunction[]> {
-		if (!this.workspaceRoot) {
-			window.showInformationMessage('No contract in empty workspace');
-			return Promise.resolve([]);
-		}
+  refresh(): void {
+    this._onDidChangeTreeData.fire();
+  }
 
-        return Promise.resolve(contract?.children ?? this.getContracts())
+  getTreeItem(element: Contract): TreeItem {
+    return element;
+  }
+
+  getChildren(
+    contract?: Contract
+  ): ProviderResult<Contract[] | ContractFunction[]> {
+    if (!this.workspaceRoot) {
+      window.showInformationMessage('No contract in empty workspace');
+      return Promise.resolve([]);
     }
 
-	/**
-	 * Read all contracts from the ABI.
-	 */
-	private getContracts(): Contract[] {
-        const function1 = new ContractFunction('function 1');
-		const contracts = ['contract name 1', 'contract name 2'].map(name => new Contract(name, [function1]));
-		return contracts;
-	}
+    return Promise.resolve(contract?.children ?? this.getContracts());
+  }
+
+  /**
+   * Reads contracts from the ABI.
+   */
+  private async getContracts(): Promise<Contract[]> {
+    const abiDirectory = `${this.workspaceRoot}/out/debug/`;
+    const abiFilePaths = await fs.promises.readdir(abiDirectory);
+    return abiFilePaths
+      .filter(filename => filename.endsWith('-abi.json'))
+      .map(filename => {
+        let buffer = fs.readFileSync(`${abiDirectory}${filename}`);
+        let abi: Object[] = JSON.parse(buffer.toString());
+        const functions = abi
+          .filter(obj => obj['type'] === 'function')
+          .map(func => new ContractFunction(func['name']));
+		const contractName = path.parse(filename).name;
+        return new Contract(contractName, functions);
+      });
+  }
 }
 
 export class Contract extends TreeItem {
-	constructor(
-		public readonly label: string,
-        readonly children: ContractFunction[],
-	) {
-        super(
-            label,
-            children ? TreeItemCollapsibleState.Collapsed : TreeItemCollapsibleState.None);
-    
-		this.tooltip = this.label;
-	}
+  constructor(
+    public readonly label: string,
+    readonly children: ContractFunction[]
+  ) {
+    super(
+      label,
+      children
+        ? TreeItemCollapsibleState.Collapsed
+        : TreeItemCollapsibleState.None
+    );
 
-	contextValue = 'contract';
+    this.tooltip = this.label;
+  }
+
+  contextValue = 'contract';
 }
 
 export class ContractFunction extends TreeItem {
-	constructor(
-		public readonly label: string,
-	) {
-		super(label, TreeItemCollapsibleState.None);
+  constructor(public readonly label: string) {
+    super(label, TreeItemCollapsibleState.None);
 
-		this.tooltip = this.label;
-	}
+    this.tooltip = this.label;
+  }
 
-	contextValue = 'contractFunction';
+  contextValue = 'contractFunction';
 }
