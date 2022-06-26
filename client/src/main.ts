@@ -21,33 +21,34 @@ export function activate(context: vscode.ExtensionContext) {
   const contractProvider = new ContractProvider(rootPath);
   vscode.window.registerTreeDataProvider('contracts', contractProvider);
   vscode.commands.registerCommand('contracts.refreshEntry', () =>
-  contractProvider.refresh()
+    contractProvider.refresh()
   );
   vscode.commands.registerCommand('contracts.editEntry', (contract: Contract) =>
     vscode.workspace.openTextDocument(contract.sourceFilePath).then(doc => {
       vscode.window.showTextDocument(doc);
     })
   );
-  vscode.commands.registerCommand('contracts.run', (contractFunction: ContractFunction) => {
-    const fuelCoreLogFile = config.traceFuelCoreLogFile;
-    vscode.window.showInformationMessage(`Running ${contractFunction.label}`);
-    exec(
-      `cd ${path.parse(contractFunction.sourceFilePath).dir} && forc run`,
-      (error, _stdout, _stderr) => {
-        if (error) {
+  vscode.commands.registerCommand(
+    'contracts.run',
+    (contractFunction: ContractFunction) => {
+      const fuelCoreLogFile = config.traceFuelCoreLogFile;
+      vscode.window.showInformationMessage(`Running ${contractFunction.label}`);
+      exec(
+        `cd ${path.parse(contractFunction.sourceFilePath).dir} && forc run`,
+        (error, _stdout, _stderr) => {
+          if (error) {
+            vscode.window.showInformationMessage(
+              `Failed with error: ${error.message}. Logs at ${fuelCoreLogFile}`
+            );
+            return;
+          }
           vscode.window.showInformationMessage(
-            `Failed with error: ${error.message}. Logs at ${fuelCoreLogFile}`
+            `Successfully ran script. Logs at ${fuelCoreLogFile}`
           );
-          return;
         }
-        vscode.window.showInformationMessage(
-          `Successfully ran script. Logs at ${fuelCoreLogFile}`
-        );
-      }
-    );
-  }
+      );
+    }
   );
-
 
   // Register all command palettes
   const commandPalettes = new CommandPalettes(config).get();
