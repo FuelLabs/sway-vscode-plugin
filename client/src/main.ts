@@ -6,6 +6,7 @@ import { CommandPalettes } from './palettes';
 import { Contract, ContractFunction, ContractProvider } from './contract';
 import { exec } from 'child_process';
 import * as path from 'path';
+import forcRun from './commands/forcRun';
 
 let client: lc.LanguageClient;
 
@@ -31,22 +32,9 @@ export function activate(context: vscode.ExtensionContext) {
   vscode.commands.registerCommand(
     'contracts.run',
     (contractFunction: ContractFunction) => {
-      const fuelCoreLogFile = config.traceFuelCoreLogFile;
       vscode.window.showInformationMessage(`Running ${contractFunction.label}`);
-      exec(
-        `cd ${path.parse(contractFunction.sourceFilePath).dir} && forc run`,
-        (error, _stdout, _stderr) => {
-          if (error) {
-            vscode.window.showInformationMessage(
-              `Failed with error: ${error.message}. Logs at ${fuelCoreLogFile}`
-            );
-            return;
-          }
-          vscode.window.showInformationMessage(
-            `Successfully ran script. Logs at ${fuelCoreLogFile}`
-          );
-        }
-      );
+      const forcDir = path.parse(contractFunction.sourceFilePath).dir;
+      forcRun(config, forcDir);
     }
   );
 
