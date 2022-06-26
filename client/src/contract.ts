@@ -46,41 +46,72 @@ export class ContractProvider implements TreeDataProvider<ContractFunction | Con
     return contract ? Promise.resolve(contract['children']) : this.getContracts();
   }
 
-  /**
-   * Reads contracts from the ABI.
-   */
+ /**
+  * Reads contracts from the ABIs.
+  * @returns array of contracts
+  */ 
   private async getContracts(): Promise<Contract[]> {
-    const abiDirectory = `${this.workspaceRoot}/out/debug/`;
-    const abiFilePaths = await fs.promises.readdir(abiDirectory);
-    return abiFilePaths
-      .filter(filename => filename.endsWith('-abi.json'))
-      .map(filename => {
-		const filetpath = `${abiDirectory}${filename}`;
-        let buffer = fs.readFileSync(filetpath);
-        let abi: Object[] = JSON.parse(buffer.toString());
+	const allFiles = getAllFiles(this.workspaceRoot, []);
+	const swayFilePaths = allFiles.filter(file => file.endsWith('.sw'));
+	const forcTomlFilePaths = allFiles.filter(file => file.endsWith('Forc.toml'));
+	const abiFilePaths = allFiles.filter(file => file.endsWith('-abi.json'));
+	return abiFilePaths.map(filepath => {
+        const buffer = fs.readFileSync(filepath);
+        const abi: Object[] = JSON.parse(buffer.toString());
         const functions = abi
           .filter(obj => obj['type'] === 'function')
           .map(func => new ContractFunction(func['name']));
-        return new Contract(filetpath, functions);
-      });
+		const contractName = path.parse(filepath).base.replace('-abi.json', '');
+
+		// This is assuming that there is only one sway contract in the same directory as a Forc.toml
+		const forcFilePath = forcTomlFilePaths.find(forcFilePath => fs.readFileSync(forcFilePath).toString().includes(contractName));
+		const swayFilePath = swayFilePaths.find(swayFilePath => {
+			return swayFilePath.startsWith(path.parse(forcFilePath).dir);
+		});
+        return new Contract(contractName, swayFilePath, functions);
+	});
   }
+
 }
+
+/**
+* Recursively finds all ABI files in the workspace
+* @param dirPath path to current directory
+* @param arrayOfFiles array of files to search
+* @returns list of all ABI file paths
+*/
+const getAllFiles = (dirPath: string, arrayOfFiles: string[]): string[] => {
+	let files = fs.readdirSync(dirPath)
+  
+	arrayOfFiles = arrayOfFiles || []
+  
+	files.forEach(function(file) {
+	  if (fs.statSync(dirPath + "/" + file).isDirectory()) {
+		arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles)
+	  } else {
+		arrayOfFiles.push(path.join(dirPath, "/", file))
+	  }
+	})
+  
+	return arrayOfFiles
+  }
+  
 
 export class Contract extends TreeItem {
   constructor(
-    public readonly filepath: string,
+    public readonly name: string,
+	public readonly sourceFilePath: string,
     readonly children: ContractFunction[]
   ) {
-	const contractName = path.parse(filepath).name;
     super(
-		contractName,
+		name,
       children
-        ? TreeItemCollapsibleState.Collapsed
+        ? TreeItemCollapsibleState.Expanded
         : TreeItemCollapsibleState.None
     );
 
-	this.label = contractName;
-    this.tooltip = contractName;
+	this.label = name;
+    this.tooltip = name;
   }
 
   contextValue = 'contract';

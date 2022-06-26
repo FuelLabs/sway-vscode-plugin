@@ -22,7 +22,7 @@ export function activate(context: vscode.ExtensionContext) {
   contractProvider.refresh()
   );
   vscode.commands.registerCommand('contracts.editEntry', (contract: Contract) =>
-    vscode.workspace.openTextDocument(contract.filepath).then(doc => {
+    vscode.workspace.openTextDocument(contract.sourceFilePath).then(doc => {
       vscode.window.showTextDocument(doc);
     })
   );
