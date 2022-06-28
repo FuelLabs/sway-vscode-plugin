@@ -3,8 +3,7 @@ import * as lc from 'vscode-languageclient/node';
 import { Config } from './config';
 import { log } from './util';
 import { CommandPalettes } from './palettes';
-import { Contract, ContractFunction, ContractProvider } from './contract';
-import { exec } from 'child_process';
+import { Program, Function, ProgramProvider } from './program';
 import * as path from 'path';
 import forcRun from './commands/forcRun';
 
@@ -19,21 +18,23 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.workspace.workspaceFolders.length > 0
       ? vscode.workspace.workspaceFolders[0].uri.fsPath
       : undefined;
-  const contractProvider = new ContractProvider(rootPath);
-  vscode.window.registerTreeDataProvider('contracts', contractProvider);
-  vscode.commands.registerCommand('contracts.refreshEntry', () =>
-    contractProvider.refresh()
+  const contractProvider = 
+  vscode.window.registerTreeDataProvider('contracts', new ProgramProvider(rootPath, 'contract'));
+  vscode.window.registerTreeDataProvider('scripts', new ProgramProvider(rootPath, 'script'));
+  vscode.window.registerTreeDataProvider('predicates', new ProgramProvider(rootPath, 'predicate'));
+  vscode.commands.registerCommand('programs.refreshEntry', (provider: ProgramProvider) =>
+    provider.refresh()
   );
-  vscode.commands.registerCommand('contracts.editEntry', (contract: Contract) =>
+  vscode.commands.registerCommand('programs.editEntry', (contract: Program) =>
     vscode.workspace.openTextDocument(contract.sourceFilePath).then(doc => {
       vscode.window.showTextDocument(doc);
     })
   );
   vscode.commands.registerCommand(
-    'contracts.run',
-    (contractFunction: ContractFunction) => {
-      vscode.window.showInformationMessage(`Running ${contractFunction.label}`);
-      const forcDir = path.parse(contractFunction.sourceFilePath).dir;
+    'programs.run',
+    (runnableFunction: Function) => {
+      vscode.window.showInformationMessage(`Running ${runnableFunction.label}`);
+      const forcDir = path.parse(runnableFunction.sourceFilePath).dir;
       forcRun(config, forcDir);
     }
   );

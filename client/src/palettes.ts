@@ -21,6 +21,7 @@ export class CommandPalettes {
           var currentTabDirectory = path.dirname(
             vscode.window.activeTextEditor.document.fileName
           );
+          forcRun(this.config, currentTabDirectory);
         },
       },
       {

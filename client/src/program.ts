@@ -15,15 +15,15 @@ import {
 
 const ABI_FILE_SUFFIX = '-abi.json';
 
-export class ContractProvider
-  implements TreeDataProvider<ContractFunction | Contract>
+export class ProgramProvider
+  implements TreeDataProvider<Function | Program>
 {
-  private _onDidChangeTreeData: EventEmitter<Contract | undefined | void> =
-    new EventEmitter<Contract | undefined | void>();
-  readonly onDidChangeTreeData: Event<Contract | undefined | void> =
+  private _onDidChangeTreeData: EventEmitter<Program | undefined | void> =
+    new EventEmitter<Program | undefined | void>();
+  readonly onDidChangeTreeData: Event<Program | undefined | void> =
     this._onDidChangeTreeData.event;
 
-  constructor(private workspaceRoot: string | undefined) {}
+  constructor(private workspaceRoot: string | undefined, readonly type: ProgramType) {}
 
   refresh(): void {
     this._onDidChangeTreeData.fire();
@@ -34,8 +34,8 @@ export class ContractProvider
   }
 
   getChildren(
-    contract?: ContractFunction | Contract
-  ): ProviderResult<Contract[]> {
+    contract?: Function | Program
+  ): ProviderResult<Program[]> {
     if (!this.workspaceRoot) {
       window.showInformationMessage('No contract in empty workspace');
       return Promise.resolve([]);
@@ -43,14 +43,14 @@ export class ContractProvider
 
     return contract
       ? Promise.resolve(contract['children'])
-      : this.getContracts();
+      : this.getPrograms();
   }
 
   /**
    * Reads contracts from the ABIs.
    * @returns array of contracts
    */
-  private async getContracts(): Promise<Contract[]> {
+  private async getPrograms(): Promise<Program[]> {
     const allFiles = getAllFiles(this.workspaceRoot, []);
     const swayFilePaths = allFiles.filter(file => file.endsWith('.sw'));
     const forcTomlFilePaths = allFiles.filter(file =>
@@ -59,7 +59,7 @@ export class ContractProvider
     const abiFilePaths = allFiles.filter(file =>
       file.endsWith(ABI_FILE_SUFFIX)
     );
-    return abiFilePaths.map(filepath => {
+    const programs = abiFilePaths.map(filepath => {
       const contractName = path
         .parse(filepath)
         .base.replace(ABI_FILE_SUFFIX, '');
@@ -68,19 +68,26 @@ export class ContractProvider
       const forcFilePath = forcTomlFilePaths.find(forcFilePath =>
         fs.readFileSync(forcFilePath).toString().includes(contractName)
       );
+
+      // Find out the program type of the sway file
       const swayFilePath = swayFilePaths.find(swayFilePath => {
         return swayFilePath.startsWith(path.parse(forcFilePath).dir);
       });
+      const swayFileMatchesType = fs.readFileSync(swayFilePath).toString().startsWith(this.type);
+      if (!swayFileMatchesType) return undefined;
 
       // Attach the source file path to each function node in addition to the contract node
       const buffer = fs.readFileSync(filepath);
       const abi: Object[] = JSON.parse(buffer.toString());
       const functions = abi
         .filter(obj => obj['type'] === 'function')
-        .map(func => new ContractFunction(func['name'], swayFilePath));
+        .map(func => new Function(func['name'], swayFilePath));
 
-      return new Contract(contractName, swayFilePath, functions);
+      return new Program(contractName, swayFilePath, functions, this.type);
     });
+
+    // Filter out programs that do not match the given type
+    return programs.filter(program => !!program);
   }
 }
 
@@ -106,11 +113,14 @@ const getAllFiles = (dirPath: string, arrayOfFiles: string[]): string[] => {
   return arrayOfFiles;
 };
 
-export class Contract extends TreeItem {
+export type ProgramType = 'contract' | 'script' | 'predicate';
+
+export class Program extends TreeItem {
   constructor(
     public readonly name: string,
     public readonly sourceFilePath: string,
-    readonly children: ContractFunction[]
+    public readonly children: Function[],
+    public readonly type?: ProgramType
   ) {
     super(
       name,
@@ -123,18 +133,18 @@ export class Contract extends TreeItem {
     this.tooltip = name;
   }
 
-  contextValue = 'contract';
+  contextValue = this.type ?? 'program';
 }
 
-export class ContractFunction extends TreeItem {
+export class Function extends TreeItem {
   constructor(
     public readonly label: string,
-    public readonly sourceFilePath: string
+    public readonly sourceFilePath: string,
   ) {
     super(label, TreeItemCollapsibleState.None);
 
     this.tooltip = this.label;
   }
 
-  contextValue = 'contractFunction';
+  contextValue = 'function';
 }
