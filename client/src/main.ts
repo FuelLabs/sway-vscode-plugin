@@ -18,12 +18,21 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.workspace.workspaceFolders.length > 0
       ? vscode.workspace.workspaceFolders[0].uri.fsPath
       : undefined;
-  const contractProvider = 
-  vscode.window.registerTreeDataProvider('contracts', new ProgramProvider(rootPath, 'contract'));
-  vscode.window.registerTreeDataProvider('scripts', new ProgramProvider(rootPath, 'script'));
-  vscode.window.registerTreeDataProvider('predicates', new ProgramProvider(rootPath, 'predicate'));
-  vscode.commands.registerCommand('programs.refreshEntry', (provider: ProgramProvider) =>
-    provider.refresh()
+  const contractProvider = vscode.window.registerTreeDataProvider(
+    'contracts',
+    new ProgramProvider(rootPath, 'contract')
+  );
+  vscode.window.registerTreeDataProvider(
+    'scripts',
+    new ProgramProvider(rootPath, 'script')
+  );
+  vscode.window.registerTreeDataProvider(
+    'predicates',
+    new ProgramProvider(rootPath, 'predicate')
+  );
+  vscode.commands.registerCommand(
+    'programs.refreshEntry',
+    (provider: ProgramProvider) => provider.refresh()
   );
   vscode.commands.registerCommand('programs.editEntry', (contract: Program) =>
     vscode.workspace.openTextDocument(contract.sourceFilePath).then(doc => {

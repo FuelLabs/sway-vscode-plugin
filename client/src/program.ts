@@ -15,15 +15,16 @@ import {
 
 const ABI_FILE_SUFFIX = '-abi.json';
 
-export class ProgramProvider
-  implements TreeDataProvider<Function | Program>
-{
+export class ProgramProvider implements TreeDataProvider<Function | Program> {
   private _onDidChangeTreeData: EventEmitter<Program | undefined | void> =
     new EventEmitter<Program | undefined | void>();
   readonly onDidChangeTreeData: Event<Program | undefined | void> =
     this._onDidChangeTreeData.event;
 
-  constructor(private workspaceRoot: string | undefined, readonly type: ProgramType) {}
+  constructor(
+    private workspaceRoot: string | undefined,
+    readonly type: ProgramType
+  ) {}
 
   refresh(): void {
     this._onDidChangeTreeData.fire();
@@ -33,9 +34,7 @@ export class ProgramProvider
     return element;
   }
 
-  getChildren(
-    contract?: Function | Program
-  ): ProviderResult<Program[]> {
+  getChildren(contract?: Function | Program): ProviderResult<Program[]> {
     if (!this.workspaceRoot) {
       window.showInformationMessage('No contract in empty workspace');
       return Promise.resolve([]);
@@ -73,7 +72,10 @@ export class ProgramProvider
       const swayFilePath = swayFilePaths.find(swayFilePath => {
         return swayFilePath.startsWith(path.parse(forcFilePath).dir);
       });
-      const swayFileMatchesType = fs.readFileSync(swayFilePath).toString().startsWith(this.type);
+      const swayFileMatchesType = fs
+        .readFileSync(swayFilePath)
+        .toString()
+        .startsWith(this.type);
       if (!swayFileMatchesType) return undefined;
 
       // Attach the source file path to each function node in addition to the contract node
@@ -139,7 +141,7 @@ export class Program extends TreeItem {
 export class Function extends TreeItem {
   constructor(
     public readonly label: string,
-    public readonly sourceFilePath: string,
+    public readonly sourceFilePath: string
   ) {
     super(label, TreeItemCollapsibleState.None);
 
