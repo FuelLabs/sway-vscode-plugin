@@ -31,10 +31,80 @@
   "main": "./client/out/main",
   "activationEvents": [
     "onLanguage:sway",
+    "onView:sway",
     "onCommand:sway.runScript",
-    "onCommand:sway.startFuelCore"
+    "onCommand:sway.startFuelCore",
+    "onCommand:programs.refreshEntry",
+    "onCommand:programs.editEntry",
+    "onCommand:programs.run"
   ],
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "sway",
+          "title": "Sway",
+          "icon": "images/fuel.svg"
+        }
+      ]
+    },
+    "views": {
+      "sway": [
+        {
+          "id": "contracts",
+          "name": "Contracts",
+          "icon": "images/fuel.svg",
+          "contextualTitle": "Sway Contracts"
+        },
+        {
+          "id": "scripts",
+          "name": "Scripts",
+          "icon": "images/fuel.svg",
+          "contextualTitle": "Sway Scripts"
+        },
+        {
+          "id": "predicates",
+          "name": "Predicates",
+          "icon": "images/fuel.svg",
+          "contextualTitle": "Sway Predicates"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "contracts",
+        "contents": "No contracts found."
+      },
+      {
+        "view": "scripts",
+        "contents": "No scripts found."
+      },
+      {
+        "view": "predicates",
+        "contents": "No predicates found."
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "programs.refreshEntry",
+          "when": "view == contracts || view == scripts || view == predicates",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "programs.editEntry",
+          "when": "viewItem == contract || viewItem == script || viewItem == predicate",
+          "group": "inline"
+        },
+        {
+          "command": "programs.run",
+          "when": "view == scripts && viewItem == function",
+          "group": "inline"
+        }
+      ]
+    },
     "configuration": {
       "type": "object",
       "title": "Sway",
@@ -96,6 +166,30 @@
       }
     ],
     "commands": [
+      {
+        "command": "programs.refreshEntry",
+        "title": "Refresh",
+        "icon": {
+          "light": "images/light/refresh.svg",
+          "dark": "images/dark/refresh.svg"
+        }
+      },
+      {
+        "command": "programs.editEntry",
+        "title": "Edit",
+        "icon": {
+          "light": "images/light/edit.svg",
+          "dark": "images/dark/edit.svg"
+        }
+      },
+      {
+        "command": "programs.run",
+        "title": "Run",
+        "icon": {
+          "light": "images/light/play.svg",
+          "dark": "images/dark/play.svg"
+        }
+      },
       {
         "command": "sway.runScript",
         "title": "Sway: Run script"
