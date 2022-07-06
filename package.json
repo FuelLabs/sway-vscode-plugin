@@ -22,7 +22,7 @@
     "test-syntaxes": "vscode-tmgrammar-snap client/test/syntaxes/*sw"
   },
   "engines": {
-    "vscode": "^1.64.0"
+    "vscode": "^1.66.0"
   },
   "categories": [
     "Programming Languages",
@@ -147,6 +147,30 @@
           "description": "Set the file path for the Fuel core log output.",
           "type": "string",
           "default": "/tmp/fuel-core_sway-vscode-plugin.log"
+        },
+        "sway-lsp.inlayHints.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to show inlay hints."
+        },
+        "sway-lsp.inlayHints.renderColons": {
+          "markdownDescription": "Whether to render leading colons for type hints, and trailing colons for parameter hints.",
+          "default": true,
+          "type": "boolean"
+        },
+        "sway-lsp.inlayHints.typeHints.enable": {
+          "markdownDescription": "Whether to show inlay type hints for variables.",
+          "default": true,
+          "type": "boolean"
+        },
+        "sway-lsp.inlayHints.maxLength": {
+          "markdownDescription": "Maximum length for inlay hints. Set to null to have an unlimited length.",
+          "default": 25,
+          "type": [
+              "null",
+              "integer"
+          ],
+          "minimum": 0
         }
       },
       "commands": [
@@ -255,12 +279,12 @@
   },
   "dependencies": {
     "child_process": "^1.0.2",
-    "vscode-languageclient": "^7.0.0"
+    "vscode-languageclient": "^8.0.0-next.14"
   },
   "devDependencies": {
     "@types/mocha": "^8.2.3",
     "@types/node": "^12.20.46",
-    "@types/vscode": "^1.64.0",
+    "@types/vscode": "^1.66.0",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "@vscode/test-electron": "^1.6.1",
