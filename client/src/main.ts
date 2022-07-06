@@ -85,9 +85,7 @@ export function activate(context: ExtensionContext) {
   // Start the client. This will also launch the server
   client.start();
 
-  client.onReady().then(_ => {
-    log.info('Client has Connected to the Sway Language Server Successfully!');
-  });
+  log.info("Client has Connected to the Sway Language Server Successfully!");
 }
 
 export function deactivate(): Thenable<void> | undefined {
