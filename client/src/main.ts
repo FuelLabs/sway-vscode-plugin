@@ -6,11 +6,12 @@ import { CommandPalettes } from './palettes';
 import { Program, Function, ProgramProvider } from './program';
 import * as path from 'path';
 import forcRun from './commands/forcRun';
-
-let client: lc.LanguageClient;
+import { createClient, getClient } from './client';
 
 export function activate(context: vscode.ExtensionContext) {
   const config = new Config(context);
+
+  vscode.Uri.file.toString();
 
   // Register tree views
   const rootPath =
@@ -56,11 +57,9 @@ export function activate(context: vscode.ExtensionContext) {
     )
   );
 
-  client = new lc.LanguageClient(
-    'sway-lsp',
-    'Sway Language Server',
+  const client = createClient(
+    getClientOptions(),
     getServerOptions(context, config),
-    getClientOptions()
   );
 
   // Start the client. This will also launch the server
@@ -72,6 +71,7 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 export function deactivate(): Thenable<void> | undefined {
+  const client = getClient();
   if (!client) {
     return undefined;
   }

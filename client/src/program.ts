@@ -12,6 +12,8 @@ import {
   TreeItemCollapsibleState,
   window,
 } from 'vscode';
+import { getFileType } from './commands/getFileType';
+import { log } from './util';
 
 const ABI_FILE_SUFFIX = '-abi.json';
 
@@ -58,7 +60,7 @@ export class ProgramProvider implements TreeDataProvider<Function | Program> {
     const abiFilePaths = allFiles.filter(file =>
       file.endsWith(ABI_FILE_SUFFIX)
     );
-    const programs = abiFilePaths.map(filepath => {
+    const programs = await Promise.all(abiFilePaths.map(async filepath => {
       const contractName = path
         .parse(filepath)
         .base.replace(ABI_FILE_SUFFIX, '');
@@ -76,6 +78,18 @@ export class ProgramProvider implements TreeDataProvider<Function | Program> {
         .readFileSync(swayFilePath)
         .toString()
         .startsWith(this.type);
+
+      ///  
+      const type = await getFileType(swayFilePath);
+      log.error(`GOT TYPE of ${swayFilePath} as ${type}`);
+
+      window.showInformationMessage(
+        `GOT TYPE of ${swayFilePath} as ${type}`
+      );
+
+
+      // const swayFileMatchesType = type === this.type;
+
       if (!swayFileMatchesType) return undefined;
 
       // Attach the source file path to each function node in addition to the contract node
@@ -86,7 +100,7 @@ export class ProgramProvider implements TreeDataProvider<Function | Program> {
         .map(func => new Function(func['name'], swayFilePath));
 
       return new Program(contractName, swayFilePath, functions, this.type);
-    });
+    }));
 
     // Filter out programs that do not match the given type
     return programs.filter(program => !!program);
