@@ -51,6 +51,12 @@
     "views": {
       "sway": [
         {
+          "id": "fuelCoreStatus",
+          "name": "Fuel Core Status",
+          "icon": "images/fuel.svg",
+          "contextualTitle": "Fuel Core Status"
+        },
+        {
           "id": "contracts",
           "name": "Contracts",
           "icon": "images/fuel.svg",
@@ -72,6 +78,16 @@
     },
     "viewsWelcome": [
       {
+        "view": "fuelCoreStatus",
+        "contents": "Fuel Core is running",
+        "when": "sway.fuelCoreRunning"
+      },
+      {
+        "view": "fuelCoreStatus",
+        "contents": "[Start Fuel Core](command:sway.startFuelCore)",
+        "when": "!sway.fuelCoreRunning"
+      },      
+      {
         "view": "contracts",
         "contents": "No contracts found."
       },
@@ -82,7 +98,11 @@
       {
         "view": "predicates",
         "contents": "No predicates found."
-      }
+      },
+      {
+        "view": "predicates",
+        "contents": "No predicates found."
+      }      
     ],
     "menus": {
       "view/title": [

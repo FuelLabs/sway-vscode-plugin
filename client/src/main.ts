@@ -6,6 +6,7 @@ import { CommandPalettes } from './palettes';
 import { Program, Function, ProgramProvider } from './program';
 import * as path from 'path';
 import forcRun from './commands/forcRun';
+import checkFuelCoreStatus from './checkFuelCoreStatus';
 
 let client: lc.LanguageClient;
 
@@ -46,6 +47,9 @@ export function activate(context: vscode.ExtensionContext) {
       vscode.commands.registerCommand(command, callback)
     )
   );
+
+  // Check if fuel-core is running and set state
+  setInterval(checkFuelCoreStatus, 1000);
 
   client = new lc.LanguageClient(
     'sway-lsp',
