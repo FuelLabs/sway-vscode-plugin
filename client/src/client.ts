@@ -1,12 +1,8 @@
 import {
-  CancellationToken,
   LanguageClient,
   LanguageClientOptions,
-  LSPErrorCodes,
-  RequestType,
   ServerOptions,
 } from 'vscode-languageclient/node';
-import { log, sleep } from './util';
 
 let client: LanguageClient | null;
 
