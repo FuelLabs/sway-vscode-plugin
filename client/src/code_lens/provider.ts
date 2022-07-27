@@ -14,7 +14,7 @@ export class SwayCodeLensProvider implements CodeLensProvider {
     let forcRun: Command = {
       command: 'sway.runScript',
       title: '▶\u{fe0e} Run',
-      tooltip: 'Run the Sway script with Forc'
+      tooltip: 'Run the Sway script with Forc',
     };
 
     let forcRunLens = new CodeLens(topOfDocument, forcRun);
