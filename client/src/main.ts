@@ -14,14 +14,10 @@ import {
   ExtensionContext,
   ExtensionMode,
   languages,
-  Range,
-  SnippetString,
   window,
   workspace,
   WorkspaceConfiguration,
 } from 'vscode';
-
-let client: lc.LanguageClient;
 
 export function activate(context: ExtensionContext) {
   const config = new Config(context);
@@ -77,11 +73,9 @@ export function activate(context: ExtensionContext) {
     )
   );
 
-  client = new lc.LanguageClient(
-    'sway-lsp',
-    'Sway Language Server',
+  const client = createClient(
+    getClientOptions(),
     getServerOptions(context, config),
-    getClientOptions()
   );
 
   // Start the client. This will also launch the server

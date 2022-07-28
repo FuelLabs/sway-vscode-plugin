@@ -16,7 +16,7 @@ export class SwayCodeLensProvider implements CodeLensProvider {
     };
 
     // TODO: Get range of runnable function(s) from server
-    const runnableRanges = [new Range(0, 0, 0, 0)]
+    const runnableRanges = [new Range(0, 0, 0l, 0)]
     const forcRunLenses = runnableRanges.map(range => new CodeLens(range, forcRun));
 
     return forcRunLenses;
