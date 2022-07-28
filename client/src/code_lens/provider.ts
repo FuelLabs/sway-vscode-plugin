@@ -8,8 +8,6 @@ import {
 
 export class SwayCodeLensProvider implements CodeLensProvider {
   async provideCodeLenses(document: TextDocument): Promise<CodeLens[]> {
-    // TODO: Get range of runnable function from server
-    let topOfDocument = new Range(0, 0, 0, 0);
 
     let forcRun: Command = {
       command: 'sway.runScript',
@@ -17,8 +15,10 @@ export class SwayCodeLensProvider implements CodeLensProvider {
       tooltip: 'Run the Sway script with Forc',
     };
 
-    let forcRunLens = new CodeLens(topOfDocument, forcRun);
+    // TODO: Get range of runnable function(s) from server
+    const runnableRanges = [new Range(0, 0, 0, 0)]
+    const forcRunLenses = runnableRanges.map(range => new CodeLens(range, forcRun));
 
-    return [forcRunLens];
+    return forcRunLenses;
   }
 }
