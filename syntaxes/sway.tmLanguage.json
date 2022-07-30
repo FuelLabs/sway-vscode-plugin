@@ -678,6 +678,11 @@
                   "match": "\\b(trait)\\b"
               },
               {
+                "comment": "abi keyword",
+                "name": "keyword.declaration.abi.sway storage.type.sway",
+                "match": "\\b(abi)\\b"
+              },
+              {
                   "comment": "struct keyword",
                   "name": "keyword.declaration.struct.sway storage.type.sway",
                   "match": "\\b(struct)\\b"
@@ -968,6 +973,18 @@
                           "name": "entity.name.type.trait.sway"
                       }
                   }
+              },
+              {
+                "comment": "abi declarations",
+                "match": "\\b(abi)\\s+([A-Z][A-Za-z0-9]*)\\b",
+                "captures": {
+                    "1": {
+                        "name": "keyword.declaration.abi.sway storage.type.sway"
+                    },
+                    "2": {
+                        "name": "entity.name.type.abi.sway"
+                    }
+                }
               },
               {
                   "comment": "struct declarations",
