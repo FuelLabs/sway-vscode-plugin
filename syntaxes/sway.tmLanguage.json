@@ -1,439 +1,1167 @@
 {
-  "name": "sway",
+  "name": "Sway",
+  "fileTypes": [
+      "sw"
+  ],
   "scopeName": "source.sway",
   "patterns": [
-    {
-      "comment": "Implementation",
-      "begin": "\\b(impl)\\b",
-      "end": "\\{",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.sway"
-        }
+      {
+          "comment": "boxed slice literal",
+          "begin": "(<)(\\[)",
+          "beginCaptures": {
+              "1": {
+                  "name": "punctuation.brackets.angle.sway"
+              },
+              "2": {
+                  "name": "punctuation.brackets.square.sway"
+              }
+          },
+          "end": ">",
+          "endCaptures": {
+              "0": {
+                  "name": "punctuation.brackets.angle.sway"
+              }
+          },
+          "patterns": [
+              {
+                  "include": "#block-comments"
+              },
+              {
+                  "include": "#comments"
+              },
+              {
+                  "include": "#gtypes"
+              },
+              {
+                  "include": "#lvariables"
+              },
+              {
+                  "include": "#lifetimes"
+              },
+              {
+                  "include": "#punctuation"
+              },
+              {
+                  "include": "#types"
+              }
+          ]
       },
-      "patterns": [
-        {
-          "include": "#block_comment"
-        },
-        {
-          "include": "#line_comment"
-        },
-        {
-          "include": "#sigils"
-        },
-        {
-          "include": "#mut"
-        },
-        {
-          "include": "#core_types"
-        },
-        {
-          "include": "#type_params"
-        },
-        {
-          "include": "#where"
-        },
-        {
-          "name": "storage.type.sway",
-          "match": "\\bfor\\b"
-        },
-        {
-          "include": "#type"
-        }
-      ]
-    },
-    {
-      "include": "#block_doc_comment"
-    },
-    {
-      "include": "#block_comment"
-    },
-    {
-      "include": "#line_doc_comment"
-    },
-    {
-      "include": "#line_comment"
-    },
-    {
-      "comment": "Integer literal (decimal)",
-      "name": "constant.numeric.integer.sway",
-      "match": "\\b[0-9][0-9_]*([u](8|16|32|64|128))?\\b"
-    },
-    {
-      "comment": "Integer literal (hexadecimal)",
-      "name": "constant.numeric.integer.hexadecimal.sway",
-      "match": "\\b0x[a-fA-F0-9_]+([u](8|16|32|64|128))?\\b"
-    },
-    {
-      "comment": "Integer literal (binary)",
-      "name": "constant.numeric.integer.binary.sway",
-      "match": "\\b0b[01_]+([u](8|16|32|64|128))?\\b"
-    },
-    {
-      "comment": "Boolean constant",
-      "name": "constant.language.boolean.sway",
-      "match": "\\b(true|false)\\b"
-    },
-    {
-      "comment": "Control keyword",
-      "name": "keyword.control.sway",
-      "match": "\\b(else|if|for|match|return|while)\\b"
-    },
-    {
-      "comment": "Keyword",
-      "name": "keyword.other.sway",
-      "match": "\\b(break|continue|deref|enum|struct|let|ref|use|asm|dep)\\b"
-    },
-    {
-      "include": "#sigils"
-    },
-    {
-      "include": "#self"
-    },
-    {
-      "include": "#string_literal"
-    },
-    {
-      "include": "#mut"
-    },
-    {
-      "include": "#impl"
-    },
-    {
-      "include": "#pub"
-    },
-    {
-      "comment": "Miscellaneous operator",
-      "name": "keyword.operator.misc.sway",
-      "match": "(=>|::|->\\?)"
-    },
-    {
-      "comment": "Comparison operator",
-      "name": "keyword.operator.comparison.sway",
-      "match": "(&&|\\|\\||==|!=)"
-    },
-    {
-      "comment": "Assignment operator",
-      "name": "keyword.operator.assignment.sway",
-      "match": "(\\+=|-=|/=|\\*=|%=|\\^=|&=|\\|=|<<=|>>=|=)"
-    },
-    {
-      "comment": "Arithmetic operator",
-      "name": "keyword.operator.arithmetic.sway",
-      "match": "(!|\\+|-|/|\\*|%|\\^|&|\\||<<|>>)"
-    },
-    {
-      "comment": "Comparison operator (second group because of regex precedence)",
-      "name": "keyword.operator.comparison.sway",
-      "match": "(<=|>=|<|>)"
-    },
-    {
-      "include": "#core_types"
-    },
-    {
-      "comment": "Function call",
-      "match": "\\b([A-Za-z][A-Za-z0-9_]*|_[A-Za-z0-9_]+)\\s*\\(",
-      "captures": {
-        "1": {
-          "name": "entity.name.function.sway"
-        }
+      {
+          "comment": "macro type metavariables",
+          "name": "meta.macro.metavariable.type.sway",
+          "match": "(\\$)((crate)|([A-Z][A-Za-z0-9_]*))((:)(block|expr|ident|item|lifetime|literal|meta|path?|stmt|tt|ty|vis))?",
+          "captures": {
+              "1": {
+                  "name": "keyword.operator.macro.dollar.sway"
+              },
+              "3": {
+                  "name": "keyword.other.crate.sway"
+              },
+              "4": {
+                  "name": "entity.name.type.metavariable.sway"
+              },
+              "6": {
+                  "name": "keyword.operator.key-value.sway"
+              },
+              "7": {
+                  "name": "variable.other.metavariable.specifier.sway"
+              }
+          },
+          "patterns": [
+              {
+                  "include": "#keywords"
+              }
+          ]
+      },
+      {
+          "comment": "macro metavariables",
+          "name": "meta.macro.metavariable.sway",
+          "match": "(\\$)([a-z][A-Za-z0-9_]*)((:)(block|expr|ident|item|lifetime|literal|meta|path?|stmt|tt|ty|vis))?",
+          "captures": {
+              "1": {
+                  "name": "keyword.operator.macro.dollar.sway"
+              },
+              "2": {
+                  "name": "variable.other.metavariable.name.sway"
+              },
+              "4": {
+                  "name": "keyword.operator.key-value.sway"
+              },
+              "5": {
+                  "name": "variable.other.metavariable.specifier.sway"
+              }
+          },
+          "patterns": [
+              {
+                  "include": "#keywords"
+              }
+          ]
+      },
+      {
+          "comment": "macro rules",
+          "name": "meta.macro.rules.sway",
+          "match": "\\b(macro_rules!)\\s+(([a-z0-9_]+)|([A-Z][a-z0-9_]*))\\s+(\\{)",
+          "captures": {
+              "1": {
+                  "name": "entity.name.function.macro.rules.sway"
+              },
+              "3": {
+                  "name": "entity.name.function.macro.sway"
+              },
+              "4": {
+                  "name": "entity.name.type.macro.sway"
+              },
+              "5": {
+                  "name": "punctuation.brackets.curly.sway"
+              }
+          }
+      },
+      {
+          "comment": "attributes",
+          "name": "meta.attribute.sway",
+          "begin": "(#)(\\!?)(\\[)",
+          "beginCaptures": {
+              "1": {
+                  "name": "punctuation.definition.attribute.sway"
+              },
+              "2": {
+                  "name": "keyword.operator.attribute.inner.sway"
+              },
+              "3": {
+                  "name": "punctuation.brackets.attribute.sway"
+              }
+          },
+          "end": "\\]",
+          "endCaptures": {
+              "0": {
+                  "name": "punctuation.brackets.attribute.sway"
+              }
+          },
+          "patterns": [
+              {
+                  "include": "#block-comments"
+              },
+              {
+                  "include": "#comments"
+              },
+              {
+                  "include": "#keywords"
+              },
+              {
+                  "include": "#lifetimes"
+              },
+              {
+                  "include": "#punctuation"
+              },
+              {
+                  "include": "#strings"
+              },
+              {
+                  "include": "#gtypes"
+              },
+              {
+                  "include": "#types"
+              }
+          ]
+      },
+      {
+          "comment": "modules",
+          "match": "(mod)\\s+((?:r#(?!crate|[Ss]elf|super))?[a-z][A-Za-z0-9_]*)",
+          "captures": {
+              "1": {
+                  "name": "storage.type.sway"
+              },
+              "2": {
+                  "name": "entity.name.module.sway"
+              }
+          }
+      },
+      {
+          "comment": "external crate imports",
+          "name": "meta.import.sway",
+          "begin": "\\b(extern)\\s+(crate)",
+          "beginCaptures": {
+              "1": {
+                  "name": "storage.type.sway"
+              },
+              "2": {
+                  "name": "keyword.other.crate.sway"
+              }
+          },
+          "end": ";",
+          "endCaptures": {
+              "0": {
+                  "name": "punctuation.semi.sway"
+              }
+          },
+          "patterns": [
+              {
+                  "include": "#block-comments"
+              },
+              {
+                  "include": "#comments"
+              },
+              {
+                  "include": "#keywords"
+              },
+              {
+                  "include": "#punctuation"
+              }
+          ]
+      },
+      {
+          "comment": "use statements",
+          "name": "meta.use.sway",
+          "begin": "\\b(use)\\s",
+          "beginCaptures": {
+              "1": {
+                  "name": "keyword.other.sway"
+              }
+          },
+          "end": ";",
+          "endCaptures": {
+              "0": {
+                  "name": "punctuation.semi.sway"
+              }
+          },
+          "patterns": [
+              {
+                  "include": "#block-comments"
+              },
+              {
+                  "include": "#comments"
+              },
+              {
+                  "include": "#keywords"
+              },
+              {
+                  "include": "#namespaces"
+              },
+              {
+                  "include": "#punctuation"
+              },
+              {
+                  "include": "#types"
+              },
+              {
+                  "include": "#lvariables"
+              }
+          ]
+      },
+      {
+          "include": "#block-comments"
+      },
+      {
+          "include": "#comments"
+      },
+      {
+          "include": "#lvariables"
+      },
+      {
+          "include": "#constants"
+      },
+      {
+          "include": "#gtypes"
+      },
+      {
+          "include": "#functions"
+      },
+      {
+          "include": "#types"
+      },
+      {
+          "include": "#keywords"
+      },
+      {
+          "include": "#lifetimes"
+      },
+      {
+          "include": "#macros"
+      },
+      {
+          "include": "#namespaces"
+      },
+      {
+          "include": "#punctuation"
+      },
+      {
+          "include": "#strings"
+      },
+      {
+          "include": "#variables"
       }
-    },
-    {
-      "comment": "Function call with type parameters",
-      "begin": "\\b([A-Za-z][A-Za-z0-9_]*|_[A-Za-z0-9_]+)\\s*(::)(?=\\s*<.*>\\s*\\()",
-      "end": "\\(",
-      "captures": {
-        "1": {
-          "name": "entity.name.function.sway"
-        },
-        "2": {
-          "name": "keyword.operator.misc.sway"
-        }
-      },
-      "patterns": [
-        {
-          "include": "#type_params"
-        }
-      ]
-    },
-    {
-      "comment": "Function definition",
-      "begin": "\\b(fn)\\s+([A-Za-z][A-Za-z0-9_]*|_[A-Za-z0-9_]+)",
-      "end": "[\\{;]",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.other.fn.sway"
-        },
-        "2": {
-          "name": "entity.name.function.sway"
-        }
-      },
-      "patterns": [
-        {
-          "include": "#block_comment"
-        },
-        {
-          "include": "#line_comment"
-        },
-        {
-          "include": "#sigils"
-        },
-        {
-          "include": "#self"
-        },
-        {
-          "include": "#mut"
-        },
-        {
-          "include": "#impl"
-        },
-        {
-          "include": "#core_types"
-        },
-        {
-          "include": "#type_params"
-        },
-        {
-          "include": "#where"
-        },
-        {
-          "comment": "Function arguments",
-          "match": "\bfn\b",
-          "name": "keyword.other.fn.sway"
-        }
-      ]
-    },
-    {
-      "comment": "Top level declaration",
-      "begin": "\\b(library)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
-      "end": "[\\{\\(;]",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.sway"
-        },
-        "2": {
-          "name": "entity.name.type.sway"
-        }
-      },
-      "patterns": [
-        {
-          "include": "#block_comment"
-        },
-        {
-          "include": "#line_comment"
-        },
-        {
-          "include": "#impl"
-        },
-        {
-          "include": "#type_params"
-        },
-        {
-          "include": "#core_types"
-        },
-        {
-          "include": "#pub"
-        },
-        {
-          "include": "#where"
-        }
-      ]
-    },
-    {
-      "comment": "Top level declaration without name",
-      "match": "(contract|script|predicate);",
-      "captures": {
-        "1": {
-          "name": "storage.type.sway"
-        }
-      }
-    },
-    {
-      "comment": "Type declaration without name",
-      "begin": "\\b(storage)",
-      "end": "[\\{\\(;]",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.sway"
-        }
-      },
-      "patterns": [
-        {
-          "include": "#block_comment"
-        },
-        {
-          "include": "#line_comment"
-        },
-        {
-          "include": "#type_params"
-        },
-        {
-          "include": "#core_types"
-        },
-        {
-          "include": "#pub"
-        }
-      ]
-    },
-    {
-      "comment": "Type declaration",
-      "begin": "\\b(enum|struct|trait|abi)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
-      "end": "[\\{\\(;]",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.sway"
-        },
-        "2": {
-          "name": "entity.name.type.sway"
-        }
-      },
-      "patterns": [
-        {
-          "include": "#block_comment"
-        },
-        {
-          "include": "#line_comment"
-        },
-        {
-          "include": "#type_params"
-        },
-        {
-          "include": "#core_types"
-        },
-        {
-          "include": "#pub"
-        },
-        {
-          "include": "#where"
-        }
-      ]
-    }
   ],
   "repository": {
-    "block_doc_comment": {
-      "comment": "Block documentation comment",
-      "name": "comment.block.documentation.sway",
-      "begin": "/\\*[\\*!](?![\\*/])",
-      "end": "\\*/",
-      "patterns": [
-        {
-          "include": "#block_doc_comment"
-        },
-        {
-          "include": "#block_comment"
-        }
-      ]
-    },
-    "block_comment": {
-      "comment": "Block comment",
-      "name": "comment.block.sway",
-      "begin": "/\\*",
-      "end": "\\*/",
-      "patterns": [
-        {
-          "include": "#block_doc_comment"
-        },
-        {
-          "include": "#block_comment"
-        }
-      ]
-    },
-    "line_doc_comment": {
-      "comment": "Single-line documentation comment",
-      "name": "comment.line.documentation.sway",
-      "begin": "//[!/](?=[^/])",
-      "end": "$"
-    },
-    "line_comment": {
-      "comment": "Single-line comment",
-      "name": "comment.line.double-slash.sway",
-      "begin": "//",
-      "end": "$"
-    },
-    "escaped_character": {
-      "name": "constant.character.escape.sway",
-      "match": "\\\\(x[0-9A-Fa-f]{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)"
-    },
-    "string_literal": {
-      "comment": "Double-quote string literal",
-      "name": "string.quoted.double.sway",
-      "begin": "\"",
-      "end": "\"",
-      "patterns": [
-        {
-          "include": "#escaped_character"
-        }
-      ]
-    },
-    "sigils": {
-      "comment": "Sigil",
-      "name": "keyword.operator.sigil.sway",
-      "match": "[&*](?=[a-zA-Z0-9_\\(\\[\\|\\\"]+)"
-    },
-    "self": {
-      "comment": "Self variable",
-      "name": "variable.language.sway",
-      "match": "\\bself\\b"
-    },
-    "mut": {
-      "comment": "Mutable storage modifier",
-      "name": "storage.modifier.mut.sway",
-      "match": "\\bmut\\b"
-    },
-    "impl": {
-      "comment": "Existential type modifier",
-      "name": "storage.modifier.impl.sway",
-      "match": "\\bimpl\\b"
-    },
-    "pub": {
-      "comment": "Visibility modifier",
-      "name": "storage.modifier.visibility.sway",
-      "match": "\\bpub\\b"
-    },
-    "where": {
-      "comment": "Generic where clause",
-      "name": "keyword.other.where.sway",
-      "match": "\\bwhere\\b"
-    },
-    "core_types": {
-      "comment": "Built-in/core type",
-      "name": "support.type.primitive.sway",
-      "match": "\\b(bool|char|u8|u16|u32|u64|string|b256|str|Self)\\b"
-    },
-    "type": {
-      "comment": "A type",
-      "name": "entity.name.type.sway",
-      "match": "\\b([A-Za-z][_A-Za-z0-9]*|_[_A-Za-z0-9]+)\\b"
-    },
-    "type_params": {
-      "comment": "Type parameters",
-      "name": "meta.type_params.sway",
-      "begin": "<(?![=<])",
-      "end": "(?<![-])>",
-      "patterns": [
-        {
-          "include": "#block_comment"
-        },
-        {
-          "include": "#line_comment"
-        },
-        {
-          "include": "#sigils"
-        },
-        {
-          "include": "#mut"
-        },
-        {
-          "include": "#impl"
-        },
-        {
-          "include": "#core_types"
-        },
-        {
-          "include": "#type_params"
-        }
-      ]
-    }
+      "comments": {
+          "patterns": [
+              {
+                  "comment": "documentation comments",
+                  "name": "comment.line.documentation.sway",
+                  "match": "^\\s*///.*"
+              },
+              {
+                  "comment": "line comments",
+                  "name": "comment.line.double-slash.sway",
+                  "match": "\\s*//.*"
+              }
+          ]
+      },
+      "block-comments": {
+          "patterns": [
+              {
+                  "comment": "empty block comments",
+                  "name": "comment.block.sway",
+                  "match": "/\\*\\*/"
+              },
+              {
+                  "comment": "block documentation comments",
+                  "name": "comment.block.documentation.sway",
+                  "begin": "/\\*\\*",
+                  "end": "\\*/",
+                  "patterns": [
+                      {
+                          "include": "#block-comments"
+                      }
+                  ]
+              },
+              {
+                  "comment": "block comments",
+                  "name": "comment.block.sway",
+                  "begin": "/\\*(?!\\*)",
+                  "end": "\\*/",
+                  "patterns": [
+                      {
+                          "include": "#block-comments"
+                      }
+                  ]
+              }
+          ]
+      },
+      "constants": {
+          "patterns": [
+              {
+                  "comment": "ALL CAPS constants",
+                  "name": "constant.other.caps.sway",
+                  "match": "\\b[A-Z]{2}[A-Z0-9_]*\\b"
+              },
+              {
+                  "comment": "constant declarations",
+                  "match": "\\b(const)\\s+([A-Z][A-Za-z0-9_]*)\\b",
+                  "captures": {
+                      "1": {
+                          "name": "storage.type.sway"
+                      },
+                      "2": {
+                          "name": "constant.other.caps.sway"
+                      }
+                  }
+              },
+              {
+                  "comment": "decimal integers and floats",
+                  "name": "constant.numeric.decimal.sway",
+                  "match": "\\b\\d[\\d_]*(\\.?)[\\d_]*(?:(E)([+-])([\\d_]+))?(f32|f64|i128|i16|i32|i64|i8|isize|u128|u16|u32|u64|u8|usize)?\\b",
+                  "captures": {
+                      "1": {
+                          "name": "punctuation.separator.dot.decimal.sway"
+                      },
+                      "2": {
+                          "name": "keyword.operator.exponent.sway"
+                      },
+                      "3": {
+                          "name": "keyword.operator.exponent.sign.sway"
+                      },
+                      "4": {
+                          "name": "constant.numeric.decimal.exponent.mantissa.sway"
+                      },
+                      "5": {
+                          "name": "entity.name.type.numeric.sway"
+                      }
+                  }
+              },
+              {
+                  "comment": "hexadecimal integers",
+                  "name": "constant.numeric.hex.sway",
+                  "match": "\\b0x[\\da-fA-F_]+(i128|i16|i32|i64|i8|isize|u128|u16|u32|u64|u8|usize)?\\b",
+                  "captures": {
+                      "1": {
+                          "name": "entity.name.type.numeric.sway"
+                      }
+                  }
+              },
+              {
+                  "comment": "octal integers",
+                  "name": "constant.numeric.oct.sway",
+                  "match": "\\b0o[0-7_]+(i128|i16|i32|i64|i8|isize|u128|u16|u32|u64|u8|usize)?\\b",
+                  "captures": {
+                      "1": {
+                          "name": "entity.name.type.numeric.sway"
+                      }
+                  }
+              },
+              {
+                  "comment": "binary integers",
+                  "name": "constant.numeric.bin.sway",
+                  "match": "\\b0b[01_]+(i128|i16|i32|i64|i8|isize|u128|u16|u32|u64|u8|usize)?\\b",
+                  "captures": {
+                      "1": {
+                          "name": "entity.name.type.numeric.sway"
+                      }
+                  }
+              },
+              {
+                  "comment": "booleans",
+                  "name": "constant.language.bool.sway",
+                  "match": "\\b(true|false)\\b"
+              }
+          ]
+      },
+      "escapes": {
+          "comment": "escapes: ASCII, byte, Unicode, quote, regex",
+          "name": "constant.character.escape.sway",
+          "match": "(\\\\)(?:(?:(x[0-7][0-7a-fA-F])|(u(\\{)[\\da-fA-F]{4,6}(\\}))|.))",
+          "captures": {
+              "1": {
+                  "name": "constant.character.escape.backslash.sway"
+              },
+              "2": {
+                  "name": "constant.character.escape.bit.sway"
+              },
+              "3": {
+                  "name": "constant.character.escape.unicode.sway"
+              },
+              "4": {
+                  "name": "constant.character.escape.unicode.punctuation.sway"
+              },
+              "5": {
+                  "name": "constant.character.escape.unicode.punctuation.sway"
+              }
+          }
+      },
+      "functions": {
+          "patterns": [
+              {
+                  "comment": "pub as a function",
+                  "match": "\\b(pub)(\\()",
+                  "captures": {
+                      "1": {
+                          "name": "keyword.other.sway"
+                      },
+                      "2": {
+                          "name": "punctuation.brackets.round.sway"
+                      }
+                  }
+              },
+              {
+                  "comment": "function definition",
+                  "name": "meta.function.definition.sway",
+                  "begin": "\\b(fn)\\s+((?:r#(?!crate|[Ss]elf|super))?[A-Za-z0-9_]+)((\\()|(<))",
+                  "beginCaptures": {
+                      "1": {
+                          "name": "keyword.other.fn.sway"
+                      },
+                      "2": {
+                          "name": "entity.name.function.sway"
+                      },
+                      "4": {
+                          "name": "punctuation.brackets.round.sway"
+                      },
+                      "5": {
+                          "name": "punctuation.brackets.angle.sway"
+                      }
+                  },
+                  "end": "\\{|;",
+                  "endCaptures": {
+                      "0": {
+                          "name": "punctuation.brackets.curly.sway"
+                      }
+                  },
+                  "patterns": [
+                      {
+                          "include": "#block-comments"
+                      },
+                      {
+                          "include": "#comments"
+                      },
+                      {
+                          "include": "#keywords"
+                      },
+                      {
+                          "include": "#lvariables"
+                      },
+                      {
+                          "include": "#constants"
+                      },
+                      {
+                          "include": "#gtypes"
+                      },
+                      {
+                          "include": "#functions"
+                      },
+                      {
+                          "include": "#lifetimes"
+                      },
+                      {
+                          "include": "#macros"
+                      },
+                      {
+                          "include": "#namespaces"
+                      },
+                      {
+                          "include": "#punctuation"
+                      },
+                      {
+                          "include": "#strings"
+                      },
+                      {
+                          "include": "#types"
+                      },
+                      {
+                          "include": "#variables"
+                      }
+                  ]
+              },
+              {
+                  "comment": "function/method calls, chaining",
+                  "name": "meta.function.call.sway",
+                  "begin": "((?:r#(?!crate|[Ss]elf|super))?[A-Za-z0-9_]+)(\\()",
+                  "beginCaptures": {
+                      "1": {
+                          "name": "entity.name.function.sway"
+                      },
+                      "2": {
+                          "name": "punctuation.brackets.round.sway"
+                      }
+                  },
+                  "end": "\\)",
+                  "endCaptures": {
+                      "0": {
+                          "name": "punctuation.brackets.round.sway"
+                      }
+                  },
+                  "patterns": [
+                      {
+                          "include": "#block-comments"
+                      },
+                      {
+                          "include": "#comments"
+                      },
+                      {
+                          "include": "#keywords"
+                      },
+                      {
+                          "include": "#lvariables"
+                      },
+                      {
+                          "include": "#constants"
+                      },
+                      {
+                          "include": "#gtypes"
+                      },
+                      {
+                          "include": "#functions"
+                      },
+                      {
+                          "include": "#lifetimes"
+                      },
+                      {
+                          "include": "#macros"
+                      },
+                      {
+                          "include": "#namespaces"
+                      },
+                      {
+                          "include": "#punctuation"
+                      },
+                      {
+                          "include": "#strings"
+                      },
+                      {
+                          "include": "#types"
+                      },
+                      {
+                          "include": "#variables"
+                      }
+                  ]
+              },
+              {
+                  "comment": "function/method calls with turbofish",
+                  "name": "meta.function.call.sway",
+                  "begin": "((?:r#(?!crate|[Ss]elf|super))?[A-Za-z0-9_]+)(?=::<.*>\\()",
+                  "beginCaptures": {
+                      "1": {
+                          "name": "entity.name.function.sway"
+                      }
+                  },
+                  "end": "\\)",
+                  "endCaptures": {
+                      "0": {
+                          "name": "punctuation.brackets.round.sway"
+                      }
+                  },
+                  "patterns": [
+                      {
+                          "include": "#block-comments"
+                      },
+                      {
+                          "include": "#comments"
+                      },
+                      {
+                          "include": "#keywords"
+                      },
+                      {
+                          "include": "#lvariables"
+                      },
+                      {
+                          "include": "#constants"
+                      },
+                      {
+                          "include": "#gtypes"
+                      },
+                      {
+                          "include": "#functions"
+                      },
+                      {
+                          "include": "#lifetimes"
+                      },
+                      {
+                          "include": "#macros"
+                      },
+                      {
+                          "include": "#namespaces"
+                      },
+                      {
+                          "include": "#punctuation"
+                      },
+                      {
+                          "include": "#strings"
+                      },
+                      {
+                          "include": "#types"
+                      },
+                      {
+                          "include": "#variables"
+                      }
+                  ]
+              }
+          ]
+      },
+      "keywords": {
+          "patterns": [
+              {
+                  "comment": "control flow keywords",
+                  "name": "keyword.control.sway",
+                  "match": "\\b(await|break|continue|do|else|for|if|loop|match|return|try|while|yield)\\b"
+              },
+              {
+                  "comment": "storage keywords",
+                  "name": "keyword.other.sway storage.type.sway",
+                  "match": "\\b(extern|let|macro|mod)\\b"
+              },
+              {
+                  "comment": "const keyword",
+                  "name": "storage.modifier.sway",
+                  "match": "\\b(const)\\b"
+              },
+              {
+                  "comment": "type keyword",
+                  "name": "keyword.declaration.type.sway storage.type.sway",
+                  "match": "\\b(type)\\b"
+              },
+              {
+                  "comment": "enum keyword",
+                  "name": "keyword.declaration.enum.sway storage.type.sway",
+                  "match": "\\b(enum)\\b"
+              },
+              {
+                  "comment": "trait keyword",
+                  "name": "keyword.declaration.trait.sway storage.type.sway",
+                  "match": "\\b(trait)\\b"
+              },
+              {
+                  "comment": "struct keyword",
+                  "name": "keyword.declaration.struct.sway storage.type.sway",
+                  "match": "\\b(struct)\\b"
+              },
+              {
+                  "comment": "storage modifiers",
+                  "name": "storage.modifier.sway",
+                  "match": "\\b(abstract|static)\\b"
+              },
+              {
+                  "comment": "other keywords",
+                  "name": "keyword.other.sway",
+                  "match": "\\b(as|async|become|box|dyn|move|final|impl|in|override|priv|pub|ref|typeof|union|unsafe|unsized|use|virtual|where)\\b"
+              },
+              {
+                  "comment": "fn",
+                  "name": "keyword.other.fn.sway",
+                  "match": "\\bfn\\b"
+              },
+              {
+                  "comment": "crate",
+                  "name": "keyword.other.crate.sway",
+                  "match": "\\bcrate\\b"
+              },
+              {
+                  "comment": "mut",
+                  "name": "storage.modifier.mut.sway",
+                  "match": "\\bmut\\b"
+              },
+              {
+                  "comment": "logical operators",
+                  "name": "keyword.operator.logical.sway",
+                  "match": "(\\^|\\||\\|\\||&&|<<|>>|!)(?!=)"
+              },
+              {
+                  "comment": "logical AND, borrow references",
+                  "name": "keyword.operator.borrow.and.sway",
+                  "match": "&(?![&=])"
+              },
+              {
+                  "comment": "assignment operators",
+                  "name": "keyword.operator.assignment.sway",
+                  "match": "(\\+=|-=|\\*=|/=|%=|\\^=|&=|\\|=|<<=|>>=)"
+              },
+              {
+                  "comment": "single equal",
+                  "name": "keyword.operator.assignment.equal.sway",
+                  "match": "(?<![<>])=(?!=|>)"
+              },
+              {
+                  "comment": "comparison operators",
+                  "name": "keyword.operator.comparison.sway",
+                  "match": "(=(=)?(?!>)|!=|<=|(?<!=)>=)"
+              },
+              {
+                  "comment": "math operators",
+                  "name": "keyword.operator.math.sway",
+                  "match": "(([+%]|(\\*(?!\\w)))(?!=))|(-(?!>))|(/(?!/))"
+              },
+              {
+                  "comment": "less than, greater than (special case)",
+                  "match": "(?:\\b|(?:(\\))|(\\])|(\\})))[ \\t]+([<>])[ \\t]+(?:\\b|(?:(\\()|(\\[)|(\\{)))",
+                  "captures": {
+                      "1": {
+                          "name": "punctuation.brackets.round.sway"
+                      },
+                      "2": {
+                          "name": "punctuation.brackets.square.sway"
+                      },
+                      "3": {
+                          "name": "punctuation.brackets.curly.sway"
+                      },
+                      "4": {
+                          "name": "keyword.operator.comparison.sway"
+                      },
+                      "5": {
+                          "name": "punctuation.brackets.round.sway"
+                      },
+                      "6": {
+                          "name": "punctuation.brackets.square.sway"
+                      },
+                      "7": {
+                          "name": "punctuation.brackets.curly.sway"
+                      }
+                  }
+              },
+              {
+                  "comment": "namespace operator",
+                  "name": "keyword.operator.namespace.sway",
+                  "match": "::"
+              },
+              {
+                  "comment": "dereference asterisk",
+                  "match": "(\\*)(?=\\w+)",
+                  "captures": {
+                      "1": {
+                          "name": "keyword.operator.dereference.sway"
+                      }
+                  }
+              },
+              {
+                  "comment": "subpattern binding",
+                  "name": "keyword.operator.subpattern.sway",
+                  "match": "@"
+              },
+              {
+                  "comment": "dot access",
+                  "name": "keyword.operator.access.dot.sway",
+                  "match": "\\.(?!\\.)"
+              },
+              {
+                  "comment": "ranges, range patterns",
+                  "name": "keyword.operator.range.sway",
+                  "match": "\\.{2}(=|\\.)?"
+              },
+              {
+                  "comment": "colon",
+                  "name": "keyword.operator.key-value.sway",
+                  "match": ":(?!:)"
+              },
+              {
+                  "comment": "dashrocket, skinny arrow",
+                  "name": "keyword.operator.arrow.skinny.sway",
+                  "match": "->"
+              },
+              {
+                  "comment": "hashrocket, fat arrow",
+                  "name": "keyword.operator.arrow.fat.sway",
+                  "match": "=>"
+              },
+              {
+                  "comment": "dollar macros",
+                  "name": "keyword.operator.macro.dollar.sway",
+                  "match": "\\$"
+              },
+              {
+                  "comment": "question mark operator, questionably sized, macro kleene matcher",
+                  "name": "keyword.operator.question.sway",
+                  "match": "\\?"
+              }
+          ]
+      },
+      "interpolations": {
+          "comment": "curly brace interpolations",
+          "name": "meta.interpolation.sway",
+          "match": "({)[^\"{}]*(})",
+          "captures": {
+              "1": {
+                  "name": "punctuation.definition.interpolation.sway"
+              },
+              "2": {
+                  "name": "punctuation.definition.interpolation.sway"
+              }
+          }
+      },
+      "lifetimes": {
+          "patterns": [
+              {
+                  "comment": "named lifetime parameters",
+                  "match": "(['])([a-zA-Z_][0-9a-zA-Z_]*)(?!['])\\b",
+                  "captures": {
+                      "1": {
+                          "name": "punctuation.definition.lifetime.sway"
+                      },
+                      "2": {
+                          "name": "entity.name.type.lifetime.sway"
+                      }
+                  }
+              },
+              {
+                  "comment": "borrowing references to named lifetimes",
+                  "match": "(\\&)(['])([a-zA-Z_][0-9a-zA-Z_]*)(?!['])\\b",
+                  "captures": {
+                      "1": {
+                          "name": "keyword.operator.borrow.sway"
+                      },
+                      "2": {
+                          "name": "punctuation.definition.lifetime.sway"
+                      },
+                      "3": {
+                          "name": "entity.name.type.lifetime.sway"
+                      }
+                  }
+              }
+          ]
+      },
+      "macros": {
+          "patterns": [
+              {
+                  "comment": "macros",
+                  "name": "meta.macro.sway",
+                  "match": "(([a-z_][A-Za-z0-9_]*!)|([A-Z_][A-Za-z0-9_]*!))",
+                  "captures": {
+                      "2": {
+                          "name": "entity.name.function.macro.sway"
+                      },
+                      "3": {
+                          "name": "entity.name.type.macro.sway"
+                      }
+                  }
+              }
+          ]
+      },
+      "namespaces": {
+          "patterns": [
+              {
+                  "comment": "namespace (non-type, non-function path segment)",
+                  "match": "(?<![A-Za-z0-9_])([a-z0-9_]+)((?<!super|self)::)",
+                  "captures": {
+                      "1": {
+                          "name": "entity.name.namespace.sway"
+                      },
+                      "2": {
+                          "name": "keyword.operator.namespace.sway"
+                      }
+                  }
+              }
+          ]
+      },
+      "types": {
+          "patterns": [
+              {
+                  "comment": "numeric types",
+                  "match": "(?<![A-Za-z])(f32|f64|i128|i16|i32|i64|i8|isize|u128|u16|u32|u64|u8|usize)\\b",
+                  "captures": {
+                      "1": {
+                          "name": "entity.name.type.numeric.sway"
+                      }
+                  }
+              },
+              {
+                  "comment": "parameterized types",
+                  "begin": "\\b([A-Z][A-Za-z0-9]*)(<)",
+                  "beginCaptures": {
+                      "1": {
+                          "name": "entity.name.type.sway"
+                      },
+                      "2": {
+                          "name": "punctuation.brackets.angle.sway"
+                      }
+                  },
+                  "end": ">",
+                  "endCaptures": {
+                      "0": {
+                          "name": "punctuation.brackets.angle.sway"
+                      }
+                  },
+                  "patterns": [
+                      {
+                          "include": "#block-comments"
+                      },
+                      {
+                          "include": "#comments"
+                      },
+                      {
+                          "include": "#keywords"
+                      },
+                      {
+                          "include": "#lvariables"
+                      },
+                      {
+                          "include": "#lifetimes"
+                      },
+                      {
+                          "include": "#punctuation"
+                      },
+                      {
+                          "include": "#types"
+                      },
+                      {
+                          "include": "#variables"
+                      }
+                  ]
+              },
+              {
+                  "comment": "primitive types",
+                  "name": "entity.name.type.primitive.sway",
+                  "match": "\\b(bool|char|str)\\b"
+              },
+              {
+                  "comment": "trait declarations",
+                  "match": "\\b(trait)\\s+([A-Z][A-Za-z0-9]*)\\b",
+                  "captures": {
+                      "1": {
+                          "name": "keyword.declaration.trait.sway storage.type.sway"
+                      },
+                      "2": {
+                          "name": "entity.name.type.trait.sway"
+                      }
+                  }
+              },
+              {
+                  "comment": "struct declarations",
+                  "match": "\\b(struct)\\s+([A-Z][A-Za-z0-9]*)\\b",
+                  "captures": {
+                      "1": {
+                          "name": "keyword.declaration.struct.sway storage.type.sway"
+                      },
+                      "2": {
+                          "name": "entity.name.type.struct.sway"
+                      }
+                  }
+              },
+              {
+                  "comment": "enum declarations",
+                  "match": "\\b(enum)\\s+([A-Z][A-Za-z0-9_]*)\\b",
+                  "captures": {
+                      "1": {
+                          "name": "keyword.declaration.enum.sway storage.type.sway"
+                      },
+                      "2": {
+                          "name": "entity.name.type.enum.sway"
+                      }
+                  }
+              },
+              {
+                  "comment": "type declarations",
+                  "match": "\\b(type)\\s+([A-Z][A-Za-z0-9_]*)\\b",
+                  "captures": {
+                      "1": {
+                          "name": "keyword.declaration.type.sway storage.type.sway"
+                      },
+                      "2": {
+                          "name": "entity.name.type.declaration.sway"
+                      }
+                  }
+              },
+              {
+                  "comment": "types",
+                  "name": "entity.name.type.sway",
+                  "match": "\\b[A-Z][A-Za-z0-9]*\\b(?!!)"
+              }
+          ]
+      },
+      "gtypes": {
+          "patterns": [
+              {
+                  "comment": "option types",
+                  "name": "entity.name.type.option.sway",
+                  "match": "\\b(Some|None)\\b"
+              },
+              {
+                  "comment": "result types",
+                  "name": "entity.name.type.result.sway",
+                  "match": "\\b(Ok|Err)\\b"
+              }
+          ]
+      },
+      "punctuation": {
+          "patterns": [
+              {
+                  "comment": "comma",
+                  "name": "punctuation.comma.sway",
+                  "match": ","
+              },
+              {
+                  "comment": "curly braces",
+                  "name": "punctuation.brackets.curly.sway",
+                  "match": "[{}]"
+              },
+              {
+                  "comment": "parentheses, round brackets",
+                  "name": "punctuation.brackets.round.sway",
+                  "match": "[()]"
+              },
+              {
+                  "comment": "semicolon",
+                  "name": "punctuation.semi.sway",
+                  "match": ";"
+              },
+              {
+                  "comment": "square brackets",
+                  "name": "punctuation.brackets.square.sway",
+                  "match": "[\\[\\]]"
+              },
+              {
+                  "comment": "angle brackets",
+                  "name": "punctuation.brackets.angle.sway",
+                  "match": "(?<!=)[<>]"
+              }
+          ]
+      },
+      "strings": {
+          "patterns": [
+              {
+                  "comment": "double-quoted strings and byte strings",
+                  "name": "string.quoted.double.sway",
+                  "begin": "(b?)(\")",
+                  "beginCaptures": {
+                      "1": {
+                          "name": "string.quoted.byte.raw.sway"
+                      },
+                      "2": {
+                          "name": "punctuation.definition.string.sway"
+                      }
+                  },
+                  "end": "\"",
+                  "endCaptures": {
+                      "0": {
+                          "name": "punctuation.definition.string.sway"
+                      }
+                  },
+                  "patterns": [
+                      {
+                          "include": "#escapes"
+                      },
+                      {
+                          "include": "#interpolations"
+                      }
+                  ]
+              },
+              {
+                  "comment": "double-quoted raw strings and raw byte strings",
+                  "name": "string.quoted.double.sway",
+                  "begin": "(b?r)(#*)(\")",
+                  "beginCaptures": {
+                      "1": {
+                          "name": "string.quoted.byte.raw.sway"
+                      },
+                      "2": {
+                          "name": "punctuation.definition.string.raw.sway"
+                      },
+                      "3": {
+                          "name": "punctuation.definition.string.sway"
+                      }
+                  },
+                  "end": "(\")(\\2)",
+                  "endCaptures": {
+                      "1": {
+                          "name": "punctuation.definition.string.sway"
+                      },
+                      "2": {
+                          "name": "punctuation.definition.string.raw.sway"
+                      }
+                  }
+              },
+              {
+                  "comment": "characters and bytes",
+                  "name": "string.quoted.single.char.sway",
+                  "begin": "(b)?(')",
+                  "beginCaptures": {
+                      "1": {
+                          "name": "string.quoted.byte.raw.sway"
+                      },
+                      "2": {
+                          "name": "punctuation.definition.char.sway"
+                      }
+                  },
+                  "end": "'",
+                  "endCaptures": {
+                      "0": {
+                          "name": "punctuation.definition.char.sway"
+                      }
+                  },
+                  "patterns": [
+                      {
+                          "include": "#escapes"
+                      }
+                  ]
+              }
+          ]
+      },
+      "lvariables": {
+          "patterns": [
+              {
+                  "comment": "self",
+                  "name": "variable.language.self.sway",
+                  "match": "\\b[Ss]elf\\b"
+              },
+              {
+                  "comment": "super",
+                  "name": "variable.language.super.sway",
+                  "match": "\\bsuper\\b"
+              }
+          ]
+      },
+      "variables": {
+          "patterns": [
+              {
+                  "comment": "variables",
+                  "name": "variable.other.sway",
+                  "match": "\\b(?<!(?<!\\.)\\.)(?:r#(?!(crate|[Ss]elf|super)))?[a-z0-9_]+\\b"
+              }
+          ]
+      }
   }
 }
