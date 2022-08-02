@@ -5,7 +5,7 @@ import { Range } from 'vscode';
 export interface GetRunnablesParams {}
 
 const request = new RequestType<GetRunnablesParams, Range[], void>(
-    "sway/runnable"
+    "sway/runnables"
 );
 
 export const getRunnables = async (): Promise<Range[]> => {
