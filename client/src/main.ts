@@ -75,7 +75,7 @@ export function activate(context: ExtensionContext) {
 
   const client = createClient(
     getClientOptions(),
-    getServerOptions(context, config),
+    getServerOptions(context, config)
   );
 
   // Start the client. This will also launch the server
