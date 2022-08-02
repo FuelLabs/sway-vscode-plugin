@@ -13,6 +13,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 16
+      - run: npm ci
       - run: npm run format:check
 
   build:
@@ -25,7 +26,6 @@ jobs:
           node-version: 16
 
       - run: npm ci
-
       - name: Dry run publish
         uses: HaaLeo/publish-vscode-extension@v1
         with:
