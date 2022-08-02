@@ -34,4 +34,4 @@ jobs:
         with:
           node-version: 16
       - run: npm ci
-      - run: npm run test-textmate
+      - run: npm run test-syntaxes

@@ -18,7 +18,8 @@
     "install-extension": "vsce package -o sway-vscode-plugin.vsix && code --install-extension sway-vscode-plugin.vsix --force",
     "format:check": "prettier --check 'client/src' 'snippets' 'syntaxes'",
     "format:fix": "prettier --write 'client/src' 'snippets' 'syntaxes'",
-    "test-textmate": "vscode-tmgrammar-snap --updateSnapshot client/test/syntaxes/*sw"
+    "fix-syntaxes": "vscode-tmgrammar-snap --updateSnapshot client/test/syntaxes/*sw",
+    "test-syntaxes": "vscode-tmgrammar-snap client/test/syntaxes/*sw"
   },
   "engines": {
     "vscode": "^1.64.0"
