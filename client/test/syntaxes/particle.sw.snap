@@ -1,0 +1,151 @@
+>script;
+#^^^^^^ source.sway storage.type.sway
+#      ^ source.sway
+>
+>/// A simple Particle struct
+#^^^ source.sway comment.line.documentation.sway
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^ source.sway comment.line.documentation.sway
+>pub struct Particle {
+#^^^ source.sway storage.modifier.visibility.sway
+#   ^ source.sway
+#    ^^^^^^ source.sway keyword.other.sway
+#          ^^^^^^^^^^^^ source.sway
+>    position: [u64; 3],
+#^^^^^^^^^^^^^^^ source.sway
+#               ^^^ source.sway support.type.primitive.sway
+#                  ^^ source.sway
+#                    ^ source.sway constant.numeric.integer.sway
+#                     ^^^ source.sway
+>    velocity: [u64; 3],
+#^^^^^^^^^^^^^^^ source.sway
+#               ^^^ source.sway support.type.primitive.sway
+#                  ^^ source.sway
+#                    ^ source.sway constant.numeric.integer.sway
+#                     ^^^ source.sway
+>    acceleration: [u64; 3],
+#^^^^^^^^^^^^^^^^^^^ source.sway
+#                   ^^^ source.sway support.type.primitive.sway
+#                      ^^ source.sway
+#                        ^ source.sway constant.numeric.integer.sway
+#                         ^^^ source.sway
+>    mass: u64,
+#^^^^^^^^^^ source.sway
+#          ^^^ source.sway support.type.primitive.sway
+#             ^^ source.sway
+>}
+#^^ source.sway
+>
+>impl Particle {
+#^^^^ source.sway storage.type.sway
+#    ^ source.sway
+#     ^^^^^^^^ source.sway entity.name.type.sway
+#             ^ source.sway
+#              ^ source.sway
+>    /// Creates a new Particle with the given position, velocity, acceleration, and mass
+#^^^^ source.sway
+#    ^^^ source.sway comment.line.documentation.sway
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.sway comment.line.documentation.sway
+>    fn new(position: [u64; 3], velocity: [u64; 3], acceleration: [u64; 3], mass: u64) -> Particle {
+#^^^^ source.sway
+#    ^^ source.sway keyword.other.fn.sway
+#      ^ source.sway
+#       ^^^ source.sway entity.name.function.sway
+#          ^^^^^^^^^^^^ source.sway
+#                      ^^^ source.sway support.type.primitive.sway
+#                         ^ source.sway
+#                          ^ source.sway
+#                           ^ source.sway constant.numeric.integer.sway
+#                            ^^^^^^^^^^^^^^ source.sway
+#                                          ^^^ source.sway support.type.primitive.sway
+#                                             ^^ source.sway
+#                                               ^ source.sway constant.numeric.integer.sway
+#                                                ^^^^^^^^^^^^^^^^^^ source.sway
+#                                                                  ^^^ source.sway support.type.primitive.sway
+#                                                                     ^^ source.sway
+#                                                                       ^ source.sway constant.numeric.integer.sway
+#                                                                        ^^^^^^^^^ source.sway
+#                                                                                 ^^^ source.sway support.type.primitive.sway
+#                                                                                    ^^ source.sway
+#                                                                                      ^ source.sway keyword.operator.arithmetic.sway
+#                                                                                       ^ source.sway keyword.operator.comparison.sway
+#                                                                                        ^^^^^^^^^^^^ source.sway
+>        Particle {
+#^^^^^^^^^^^^^^^^^^^ source.sway
+>            position: position,
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.sway
+>            velocity: velocity,
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.sway
+>            acceleration: acceleration,
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.sway
+>            mass: mass,
+#^^^^^^^^^^^^^^^^^^^^^^^^ source.sway
+>        }
+#^^^^^^^^^^ source.sway
+>    }
+#^^^^^^ source.sway
+>}
+#^^ source.sway
+>
+>fn main() {
+#^^ source.sway keyword.other.fn.sway
+#  ^ source.sway
+#   ^^^^ source.sway entity.name.function.sway
+#       ^^^ source.sway
+#          ^ source.sway
+>    let position = [0, 0, 0];
+#^^^^ source.sway
+#    ^^^ source.sway keyword.other.sway
+#       ^^^^^^^^^^ source.sway
+#                 ^ source.sway keyword.operator.assignment.sway
+#                  ^^ source.sway
+#                    ^ source.sway constant.numeric.integer.sway
+#                     ^^ source.sway
+#                       ^ source.sway constant.numeric.integer.sway
+#                        ^^ source.sway
+#                          ^ source.sway constant.numeric.integer.sway
+#                           ^^^ source.sway
+>    let velocity = [0, 1, 0];
+#^^^^ source.sway
+#    ^^^ source.sway keyword.other.sway
+#       ^^^^^^^^^^ source.sway
+#                 ^ source.sway keyword.operator.assignment.sway
+#                  ^^ source.sway
+#                    ^ source.sway constant.numeric.integer.sway
+#                     ^^ source.sway
+#                       ^ source.sway constant.numeric.integer.sway
+#                        ^^ source.sway
+#                          ^ source.sway constant.numeric.integer.sway
+#                           ^^^ source.sway
+>    let acceleration = [1, 1, position[1]];
+#^^^^ source.sway
+#    ^^^ source.sway keyword.other.sway
+#       ^^^^^^^^^^^^^^ source.sway
+#                     ^ source.sway keyword.operator.assignment.sway
+#                      ^^ source.sway
+#                        ^ source.sway constant.numeric.integer.sway
+#                         ^^ source.sway
+#                           ^ source.sway constant.numeric.integer.sway
+#                            ^^^^^^^^^^^ source.sway
+#                                       ^ source.sway constant.numeric.integer.sway
+#                                        ^^^^ source.sway
+>    let mass = 10;
+#^^^^ source.sway
+#    ^^^ source.sway keyword.other.sway
+#       ^^^^^^ source.sway
+#             ^ source.sway keyword.operator.assignment.sway
+#              ^ source.sway
+#               ^^ source.sway constant.numeric.integer.sway
+#                 ^^ source.sway
+>    let p = ~Particle::new(position, velocity, acceleration, mass);
+#^^^^ source.sway
+#    ^^^ source.sway keyword.other.sway
+#       ^^^ source.sway
+#          ^ source.sway keyword.operator.assignment.sway
+#           ^^^^^^^^^^ source.sway
+#                     ^^ source.sway keyword.operator.misc.sway
+#                       ^^^ source.sway entity.name.function.sway
+#                          ^ source.sway
+#                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.sway
+>}
+#^^ source.sway
+>
