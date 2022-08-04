@@ -1,4 +1,3 @@
-import * as vscode from 'vscode';
 import * as lc from 'vscode-languageclient/node';
 import { Config } from './config';
 import { log } from './util';
@@ -7,60 +6,76 @@ import { Program, Function, ProgramProvider } from './program';
 import * as path from 'path';
 import forcRun from './commands/forcRun';
 
-let client: lc.LanguageClient;
+import { createClient, getClient } from './client';
+import { SwayCodeLensProvider } from './code_lens/provider';
+import {
+  commands,
+  DocumentSelector,
+  ExtensionContext,
+  ExtensionMode,
+  languages,
+  window,
+  workspace,
+  WorkspaceConfiguration,
+} from 'vscode';
 
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: ExtensionContext) {
   const config = new Config(context);
+
+  // Register code lenses
+  let documentSelector: DocumentSelector = {
+    language: 'sway',
+    scheme: 'file',
+  };
+  let swayCodeLensProviderDisposable = languages.registerCodeLensProvider(
+    documentSelector,
+    new SwayCodeLensProvider()
+  );
+  context.subscriptions.push(swayCodeLensProviderDisposable);
 
   // Register tree views
   const rootPath =
-    vscode.workspace.workspaceFolders &&
-    vscode.workspace.workspaceFolders.length > 0
-      ? vscode.workspace.workspaceFolders[0].uri.fsPath
+    workspace.workspaceFolders && workspace.workspaceFolders.length > 0
+      ? workspace.workspaceFolders[0].uri.fsPath
       : undefined;
-  const contractProvider = vscode.window.registerTreeDataProvider(
+  const contractProvider = window.registerTreeDataProvider(
     'contracts',
     new ProgramProvider(rootPath, 'contract')
   );
-  vscode.window.registerTreeDataProvider(
+  window.registerTreeDataProvider(
     'scripts',
     new ProgramProvider(rootPath, 'script')
   );
-  vscode.window.registerTreeDataProvider(
+  window.registerTreeDataProvider(
     'predicates',
     new ProgramProvider(rootPath, 'predicate')
   );
-  vscode.commands.registerCommand(
+  commands.registerCommand(
     'programs.refreshEntry',
     (provider: ProgramProvider) => provider.refresh()
   );
-  vscode.commands.registerCommand('programs.editEntry', (contract: Program) =>
-    vscode.workspace.openTextDocument(contract.sourceFilePath).then(doc => {
-      vscode.window.showTextDocument(doc);
+  commands.registerCommand('programs.editEntry', (contract: Program) =>
+    workspace.openTextDocument(contract.sourceFilePath).then(doc => {
+      window.showTextDocument(doc);
     })
   );
-  vscode.commands.registerCommand(
-    'programs.run',
-    (runnableFunction: Function) => {
-      vscode.window.showInformationMessage(`Running ${runnableFunction.label}`);
-      const forcDir = path.parse(runnableFunction.sourceFilePath).dir;
-      forcRun(config, forcDir);
-    }
-  );
+  commands.registerCommand('programs.run', (runnableFunction: Function) => {
+    window.showInformationMessage(`Running ${runnableFunction.label}`);
+    const forcDir = path.parse(runnableFunction.sourceFilePath).dir;
+    forcRun(config, forcDir);
+  });
 
   // Register all command palettes
   const commandPalettes = new CommandPalettes(config).get();
   context.subscriptions.push(
     ...commandPalettes.map(({ command, callback }) =>
-      vscode.commands.registerCommand(command, callback)
+      commands.registerCommand(command, callback)
     )
   );
 
-  client = new lc.LanguageClient(
-    'sway-lsp',
-    'Sway Language Server',
-    getServerOptions(context, config),
-    getClientOptions()
+  const client = createClient(
+    getClientOptions(),
+    getServerOptions(context, config)
   );
 
   // Start the client. This will also launch the server
@@ -72,6 +87,7 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 export function deactivate(): Thenable<void> | undefined {
+  const client = getClient();
   if (!client) {
     return undefined;
   }
@@ -79,7 +95,7 @@ export function deactivate(): Thenable<void> | undefined {
 }
 
 function getServerOptions(
-  context: vscode.ExtensionContext,
+  context: ExtensionContext,
   config: Config
 ): lc.ServerOptions {
   let args = ['lsp'];
@@ -102,8 +118,8 @@ function getServerOptions(
   };
 
   switch (context.extensionMode) {
-    case vscode.ExtensionMode.Development:
-    case vscode.ExtensionMode.Test:
+    case ExtensionMode.Development:
+    case ExtensionMode.Test:
       return devServerOptions;
 
     default:
@@ -123,8 +139,8 @@ function getClientOptions(): lc.LanguageClientOptions {
     synchronize: {
       // Notify the server about file changes to *.sw files contained in the workspace
       fileEvents: [
-        vscode.workspace.createFileSystemWatcher('**/.sw'),
-        vscode.workspace.createFileSystemWatcher('**/*.sw'),
+        workspace.createFileSystemWatcher('**/.sw'),
+        workspace.createFileSystemWatcher('**/*.sw'),
       ],
     },
     initializationOptions: {
@@ -162,9 +178,9 @@ function getSwayConfigOptions(): SwayConfig {
   }
 }
 
-function getSwayFormattingOptions(): vscode.WorkspaceConfiguration | null {
-  const swayOptions = vscode.workspace.getConfiguration('sway');
-  const swayOptionsBracket = vscode.workspace.getConfiguration('[sway]');
+function getSwayFormattingOptions(): WorkspaceConfiguration | null {
+  const swayOptions = workspace.getConfiguration('sway');
+  const swayOptionsBracket = workspace.getConfiguration('[sway]');
 
   if (swayOptions && swayOptions.format) {
     if (swayOptionsBracket && swayOptionsBracket.format) {
