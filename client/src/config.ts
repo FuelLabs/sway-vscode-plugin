@@ -93,8 +93,8 @@ export class Config {
 
   get debug() {
     return {
-      showParsedTokensAsWarnings: this.get<boolean>(
-        'debug.showParsedTokensAsWarnings'
+      showCollectedTokensAsWarnings: this.get<string>(
+        'debug.showCollectedTokensAsWarnings'
       ),
     };
   }
