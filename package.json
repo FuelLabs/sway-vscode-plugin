@@ -17,7 +17,9 @@
     "test": "sh ./scripts/e2e.sh",
     "install-extension": "vsce package -o sway-vscode-plugin.vsix && code --install-extension sway-vscode-plugin.vsix --force",
     "format:check": "prettier --check 'client/src' 'snippets' 'syntaxes'",
-    "format:fix": "prettier --write 'client/src' 'snippets' 'syntaxes'"
+    "format:fix": "prettier --write 'client/src' 'snippets' 'syntaxes'",
+    "fix-syntaxes": "vscode-tmgrammar-snap --updateSnapshot client/test/syntaxes/*sw",
+    "test-syntaxes": "vscode-tmgrammar-snap client/test/syntaxes/*sw"
   },
   "engines": {
     "vscode": "^1.64.0"
@@ -228,6 +230,7 @@
     "mocha": "^8.4.0",
     "prettier": "^2.5.1",
     "typescript": "^4.5.5",
-    "vsce": "^2.5.3"
+    "vsce": "^2.5.3",
+    "vscode-tmgrammar-test": "^0.1.1"
   }
 }

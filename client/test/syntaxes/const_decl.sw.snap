@@ -1,0 +1,34 @@
+>script;
+#^^^^^^ source.sway storage.type.sway
+#      ^ source.sway
+>
+>const GLOBAL_VAL: u64 = 99;
+#^^^^^^^^^^^^^^^^^^ source.sway
+#                  ^^^ source.sway support.type.primitive.sway
+#                     ^ source.sway
+#                      ^ source.sway keyword.operator.assignment.sway
+#                       ^ source.sway
+#                        ^^ source.sway constant.numeric.integer.sway
+#                          ^^ source.sway
+>
+>fn main() -> u64 {
+#^^ source.sway keyword.other.fn.sway
+#  ^ source.sway
+#   ^^^^ source.sway entity.name.function.sway
+#       ^^^^^^ source.sway
+#             ^^^ source.sway support.type.primitive.sway
+#                ^ source.sway
+#                 ^ source.sway
+>    const LOCAL_VAL = 1;
+#^^^^^^^^^^^^^^^^^^^^ source.sway
+#                    ^ source.sway keyword.operator.assignment.sway
+#                     ^ source.sway
+#                      ^ source.sway constant.numeric.integer.sway
+#                       ^^ source.sway
+>    GLOBAL_VAL + LOCAL_VAL
+#^^^^^^^^^^^^^^^ source.sway
+#               ^ source.sway keyword.operator.arithmetic.sway
+#                ^^^^^^^^^^^ source.sway
+>}
+#^^ source.sway
+>
