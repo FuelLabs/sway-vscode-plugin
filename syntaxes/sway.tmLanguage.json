@@ -653,12 +653,17 @@
         {
           "comment": "storage keywords",
           "name": "keyword.other.sway storage.type.sway",
-          "match": "\\b(extern|let|macro|mod)\\b"
+          "match": "\\b(extern|macro|mod)\\b"
         },
         {
           "comment": "const keyword",
           "name": "storage.modifier.sway",
           "match": "\\b(const)\\b"
+        },
+        {
+          "comment": "let keyword",
+          "name": "storage.modifier.sway",
+          "match": "\\b(let)\\b"
         },
         {
           "comment": "type keyword",
@@ -682,7 +687,7 @@
         },
         {
           "comment": "struct keyword",
-          "name": "keyword.declaration.struct.sway storage.type.sway",
+          "name": "keyword.declaration.struct.sway",
           "match": "\\b(struct)\\b"
         },
         {
@@ -989,7 +994,7 @@
           "match": "\\b(struct)\\s+([A-Z][A-Za-z0-9]*)\\b",
           "captures": {
             "1": {
-              "name": "keyword.declaration.struct.sway storage.type.sway"
+              "name": "keyword.declaration.struct.sway"
             },
             "2": {
               "name": "entity.name.type.struct.sway"
@@ -1001,7 +1006,7 @@
           "match": "\\b(enum)\\s+([A-Z][A-Za-z0-9_]*)\\b",
           "captures": {
             "1": {
-              "name": "keyword.declaration.enum.sway storage.type.sway"
+              "name": "keyword.declaration.enum.sway"
             },
             "2": {
               "name": "entity.name.type.enum.sway"
