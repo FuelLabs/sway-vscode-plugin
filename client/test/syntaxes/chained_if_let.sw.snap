@@ -3,7 +3,7 @@
 #      ^ source.sway
 >
 >enum Result<T, E> {
-#^^^^ source.sway keyword.declaration.enum.sway storage.type.sway
+#^^^^ source.sway keyword.declaration.enum.sway
 #    ^ source.sway
 #     ^^^^^^ source.sway entity.name.type.enum.sway
 #           ^ source.sway punctuation.brackets.angle.sway
@@ -47,7 +47,7 @@
 #                 ^ source.sway meta.function.definition.sway punctuation.brackets.curly.sway
 >    let result_a = Result::Ok::<u64, bool>(5u64);
 #^^^^ source.sway
-#    ^^^ source.sway keyword.other.sway storage.type.sway
+#    ^^^ source.sway storage.modifier.sway
 #       ^ source.sway
 #        ^^^^^^^^ source.sway variable.other.sway
 #                ^ source.sway
@@ -70,7 +70,7 @@
 #                                                ^ source.sway punctuation.semi.sway
 >    let result_b = Result::Err::<u64, bool>(false);
 #^^^^ source.sway
-#    ^^^ source.sway keyword.other.sway storage.type.sway
+#    ^^^ source.sway storage.modifier.sway
 #       ^ source.sway
 #        ^^^^^^^^ source.sway variable.other.sway
 #                ^ source.sway
@@ -95,7 +95,7 @@
 #^^^^ source.sway
 #    ^^ source.sway keyword.control.sway
 #      ^ source.sway
-#       ^^^ source.sway keyword.other.sway storage.type.sway
+#       ^^^ source.sway storage.modifier.sway
 #          ^ source.sway
 #           ^^^^^^ source.sway entity.name.type.sway
 #                 ^^ source.sway keyword.operator.namespace.sway
@@ -120,7 +120,7 @@
 #          ^ source.sway
 #           ^^ source.sway keyword.control.sway
 #             ^ source.sway
-#              ^^^ source.sway keyword.other.sway storage.type.sway
+#              ^^^ source.sway storage.modifier.sway
 #                 ^ source.sway
 #                  ^^^^^^ source.sway entity.name.type.sway
 #                        ^^ source.sway keyword.operator.namespace.sway
@@ -145,7 +145,7 @@
 #          ^ source.sway
 #           ^^ source.sway keyword.control.sway
 #             ^ source.sway
-#              ^^^ source.sway keyword.other.sway storage.type.sway
+#              ^^^ source.sway storage.modifier.sway
 #                 ^ source.sway
 #                  ^^^^^^ source.sway entity.name.type.sway
 #                        ^^ source.sway keyword.operator.namespace.sway

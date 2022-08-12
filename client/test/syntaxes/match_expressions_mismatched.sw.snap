@@ -3,7 +3,7 @@
 #      ^ source.sway
 >
 >struct MyStruct {
-#^^^^^^ source.sway keyword.declaration.struct.sway storage.type.sway
+#^^^^^^ source.sway keyword.declaration.struct.sway
 #      ^ source.sway
 #       ^^^^^^^^ source.sway entity.name.type.struct.sway
 #               ^ source.sway
@@ -26,7 +26,7 @@
 #^ source.sway punctuation.brackets.curly.sway
 >
 >enum MyEnum {
-#^^^^ source.sway keyword.declaration.enum.sway storage.type.sway
+#^^^^ source.sway keyword.declaration.enum.sway
 #    ^ source.sway
 #     ^^^^^^ source.sway entity.name.type.enum.sway
 #           ^ source.sway
@@ -70,7 +70,7 @@
 #                 ^ source.sway meta.function.definition.sway punctuation.brackets.curly.sway
 >    let x = MyEnum::Variant1;
 #^^^^ source.sway
-#    ^^^ source.sway keyword.other.sway storage.type.sway
+#    ^^^ source.sway storage.modifier.sway
 #       ^ source.sway
 #        ^ source.sway variable.other.sway
 #         ^ source.sway
@@ -82,7 +82,7 @@
 #                            ^ source.sway punctuation.semi.sway
 >    let y = MyEnum::Variant2(5);
 #^^^^ source.sway
-#    ^^^ source.sway keyword.other.sway storage.type.sway
+#    ^^^ source.sway storage.modifier.sway
 #       ^ source.sway
 #        ^ source.sway variable.other.sway
 #         ^ source.sway
@@ -97,7 +97,7 @@
 #                               ^ source.sway punctuation.semi.sway
 >    let z = MyEnum::Variant3(MyStruct {
 #^^^^ source.sway
-#    ^^^ source.sway keyword.other.sway storage.type.sway
+#    ^^^ source.sway storage.modifier.sway
 #       ^ source.sway
 #        ^ source.sway variable.other.sway
 #         ^ source.sway

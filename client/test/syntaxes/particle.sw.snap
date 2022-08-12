@@ -7,7 +7,7 @@
 >pub struct Particle {
 #^^^ source.sway keyword.other.sway
 #   ^ source.sway
-#    ^^^^^^ source.sway keyword.declaration.struct.sway storage.type.sway
+#    ^^^^^^ source.sway keyword.declaration.struct.sway
 #          ^ source.sway
 #           ^^^^^^^^ source.sway entity.name.type.struct.sway
 #                   ^ source.sway
@@ -168,7 +168,7 @@
 #          ^ source.sway meta.function.definition.sway punctuation.brackets.curly.sway
 >    let position = [0, 0, 0];
 #^^^^ source.sway
-#    ^^^ source.sway keyword.other.sway storage.type.sway
+#    ^^^ source.sway storage.modifier.sway
 #       ^ source.sway
 #        ^^^^^^^^ source.sway variable.other.sway
 #                ^ source.sway
@@ -186,7 +186,7 @@
 #                            ^ source.sway punctuation.semi.sway
 >    let velocity = [0, 1, 0];
 #^^^^ source.sway
-#    ^^^ source.sway keyword.other.sway storage.type.sway
+#    ^^^ source.sway storage.modifier.sway
 #       ^ source.sway
 #        ^^^^^^^^ source.sway variable.other.sway
 #                ^ source.sway
@@ -204,7 +204,7 @@
 #                            ^ source.sway punctuation.semi.sway
 >    let acceleration = [1, 1, position[1]];
 #^^^^ source.sway
-#    ^^^ source.sway keyword.other.sway storage.type.sway
+#    ^^^ source.sway storage.modifier.sway
 #       ^ source.sway
 #        ^^^^^^^^^^^^ source.sway variable.other.sway
 #                    ^ source.sway
@@ -225,7 +225,7 @@
 #                                          ^ source.sway punctuation.semi.sway
 >    let mass = 10;
 #^^^^ source.sway
-#    ^^^ source.sway keyword.other.sway storage.type.sway
+#    ^^^ source.sway storage.modifier.sway
 #       ^ source.sway
 #        ^^^^ source.sway variable.other.sway
 #            ^ source.sway
@@ -235,7 +235,7 @@
 #                 ^ source.sway punctuation.semi.sway
 >    let p = ~Particle::new(position, velocity, acceleration, mass);
 #^^^^ source.sway
-#    ^^^ source.sway keyword.other.sway storage.type.sway
+#    ^^^ source.sway storage.modifier.sway
 #       ^ source.sway
 #        ^ source.sway variable.other.sway
 #         ^ source.sway
