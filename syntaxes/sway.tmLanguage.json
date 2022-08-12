@@ -163,14 +163,14 @@
       ]
     },
     {
-      "comment": "modules",
-      "match": "(mod)\\s+((?:r#(?!crate|[Ss]elf|super))?[a-z][A-Za-z0-9_]*)",
+      "comment": "dependency",
+      "match": "(dep)\\s+((?:r#(?!crate|[Ss]elf|super))?[a-z][A-Za-z0-9_]*)",
       "captures": {
         "1": {
           "name": "storage.type.sway"
         },
         "2": {
-          "name": "entity.name.module.sway"
+          "name": "entity.name.dependency.sway"
         }
       }
     },
@@ -653,7 +653,7 @@
         {
           "comment": "storage keywords",
           "name": "keyword.other.sway storage.type.sway",
-          "match": "\\b(extern|macro|mod)\\b"
+          "match": "\\b(extern|macro|dep)\\b"
         },
         {
           "comment": "const keyword",
