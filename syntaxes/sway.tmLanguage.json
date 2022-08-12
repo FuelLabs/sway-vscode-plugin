@@ -45,76 +45,6 @@
       ]
     },
     {
-      "comment": "macro type metavariables",
-      "name": "meta.macro.metavariable.type.sway",
-      "match": "(\\$)((crate)|([A-Z][A-Za-z0-9_]*))((:)(block|expr|ident|item|lifetime|literal|meta|path?|stmt|tt|ty|vis))?",
-      "captures": {
-        "1": {
-          "name": "keyword.operator.macro.dollar.sway"
-        },
-        "3": {
-          "name": "keyword.other.crate.sway"
-        },
-        "4": {
-          "name": "entity.name.type.metavariable.sway"
-        },
-        "6": {
-          "name": "keyword.operator.key-value.sway"
-        },
-        "7": {
-          "name": "variable.other.metavariable.specifier.sway"
-        }
-      },
-      "patterns": [
-        {
-          "include": "#keywords"
-        }
-      ]
-    },
-    {
-      "comment": "macro metavariables",
-      "name": "meta.macro.metavariable.sway",
-      "match": "(\\$)([a-z][A-Za-z0-9_]*)((:)(block|expr|ident|item|lifetime|literal|meta|path?|stmt|tt|ty|vis))?",
-      "captures": {
-        "1": {
-          "name": "keyword.operator.macro.dollar.sway"
-        },
-        "2": {
-          "name": "variable.other.metavariable.name.sway"
-        },
-        "4": {
-          "name": "keyword.operator.key-value.sway"
-        },
-        "5": {
-          "name": "variable.other.metavariable.specifier.sway"
-        }
-      },
-      "patterns": [
-        {
-          "include": "#keywords"
-        }
-      ]
-    },
-    {
-      "comment": "macro rules",
-      "name": "meta.macro.rules.sway",
-      "match": "\\b(macro_rules!)\\s+(([a-z0-9_]+)|([A-Z][a-z0-9_]*))\\s+(\\{)",
-      "captures": {
-        "1": {
-          "name": "entity.name.function.macro.rules.sway"
-        },
-        "3": {
-          "name": "entity.name.function.macro.sway"
-        },
-        "4": {
-          "name": "entity.name.type.macro.sway"
-        },
-        "5": {
-          "name": "punctuation.brackets.curly.sway"
-        }
-      }
-    },
-    {
       "comment": "attributes",
       "name": "meta.attribute.sway",
       "begin": "(#)(\\!?)(\\[)",
@@ -450,6 +380,69 @@
           }
         },
         {
+          "comment": "assembly block",
+          "name": "meta.asm.definition.sway",
+          "begin": "\\b(asm)((\\())",
+          "beginCaptures": {
+            "1": {
+              "name": "meta.attribute.asm.sway"
+            },
+            "2": {
+              "name": "punctuation.brackets.round.sway"
+            }
+          },
+          "end": "\\{|;",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.brackets.curly.sway"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#block-comments"
+            },
+            {
+              "include": "#comments"
+            },
+            {
+              "include": "#keywords"
+            },
+            {
+              "include": "#lvariables"
+            },
+            {
+              "include": "#constants"
+            },
+            {
+              "include": "#gtypes"
+            },
+            {
+              "include": "#functions"
+            },
+            {
+              "include": "#lifetimes"
+            },
+            {
+              "include": "#macros"
+            },
+            {
+              "include": "#namespaces"
+            },
+            {
+              "include": "#punctuation"
+            },
+            {
+              "include": "#strings"
+            },
+            {
+              "include": "#types"
+            },
+            {
+              "include": "#variables"
+            }
+          ]
+        },
+        {
           "comment": "function definition",
           "name": "meta.function.definition.sway",
           "begin": "\\b(fn)\\s+((?:r#(?!crate|[Ss]elf|super))?[A-Za-z0-9_]+)((\\()|(<))",
@@ -704,6 +697,11 @@
           "comment": "fn",
           "name": "keyword.other.fn.sway",
           "match": "\\bfn\\b"
+        },
+        {
+          "comment": "asm",
+          "name": "meta.attribute.asm.sway",
+          "match": "\\basm\\b"
         },
         {
           "comment": "crate",
