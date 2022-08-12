@@ -15,12 +15,6 @@ const request = new RequestType<GetRunnablesParams, Runnable[], void>(
 export const getRunnables = async (): Promise<Runnable[]> => {
   const client = getClient();
   const params: GetRunnablesParams = {};
-
-  log.info(`\n\nREQUEST`);
-  return [];
-
-  // const response = await client.sendRequest(request, params);
-  // log.info(`\n\n\nRESPONSE`);
-  // log.info(response);
-  // return response ?? [];
+  const response = await client.sendRequest(request, params);
+  return response ?? [];
 };

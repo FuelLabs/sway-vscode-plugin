@@ -13,13 +13,11 @@ export class SwayCodeLensProvider implements CodeLensProvider {
       command: 'sway.forcBuild',
       title: '▶\u{fe0e} Build',
       tooltip: 'Build the Sway program with Forc',
-    };    
-    const runnableLenses = runnables.map(
-      ([ range, programType ]: Runnable) => { 
-        const command = programType === 'script' ? forcRun : forcBuild;
-        return new CodeLens(range, command);
-      }
-    );
+    };
+    const runnableLenses = runnables.map(([range, programType]: Runnable) => {
+      const command = programType === 'script' ? forcRun : forcBuild;
+      return new CodeLens(range, command);
+    });
 
     return runnableLenses;
   }
