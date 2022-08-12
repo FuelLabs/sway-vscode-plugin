@@ -22,7 +22,7 @@ export class CommandPalettes {
           var currentTabDirectory = path.dirname(
             vscode.window.activeTextEditor.document.fileName
           );
-          forcRun(this.config, currentTabDirectory);
+          forcRun(currentTabDirectory);
         },
       },
       {
@@ -31,7 +31,7 @@ export class CommandPalettes {
           var currentTabDirectory = path.dirname(
             vscode.window.activeTextEditor.document.fileName
           );
-          forcBuild(this.config, currentTabDirectory);
+          forcBuild(currentTabDirectory);
         },
       },
       {
