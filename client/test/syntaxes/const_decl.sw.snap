@@ -1,5 +1,5 @@
 >script;
-#^^^^^^ source.sway storage.type.sway
+#^^^^^^ source.sway source.sway meta.attribute.sway
 #      ^ source.sway
 >
 >const GLOBAL_VAL: u64 = 99;

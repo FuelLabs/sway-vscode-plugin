@@ -1036,7 +1036,7 @@
           "end": "[\\{\\(;]",
           "beginCaptures": {
             "1": {
-              "name": "storage.type.sway"
+              "name": "source.sway meta.attribute.sway"
             },
             "2": {
               "name": "entity.name.type.sway"
@@ -1071,7 +1071,7 @@
           "match": "(contract|script|predicate);",
           "captures": {
             "1": {
-              "name": "storage.type.sway"
+              "name": "source.sway meta.attribute.sway"
             }
           }
         }
