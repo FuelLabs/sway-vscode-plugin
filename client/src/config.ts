@@ -93,7 +93,7 @@ export class Config {
 
   get debug() {
     return {
-      showCollectedTokensAsWarnings: this.get<string>(
+      showCollectedTokensAsWarnings: this.get<'off' | 'parsed' | 'typed'>(
         'debug.showCollectedTokensAsWarnings'
       ),
     };

@@ -99,10 +99,9 @@ function getServerOptions(
   config: Config
 ): lc.ServerOptions {
   let args = ['lsp'];
-  let debug_tokens = config.debug.showCollectedTokensAsWarnings;
-  if (debug_tokens != 'off') {
-    args.push(' --collected-tokens-as-warnings ');
-    args.push(debug_tokens);
+  const debug_tokens = config.debug.showCollectedTokensAsWarnings;
+  if (debug_tokens !== 'off') {
+    args.push(` --collected-tokens-as-warnings ${debug_tokens}`);
   }
 
   const serverExecutable: lc.Executable = {
