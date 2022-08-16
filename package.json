@@ -3,7 +3,7 @@
   "displayName": "Sway",
   "description": "Sway language extension for Visual Studio Code",
   "icon": "images/logo.png",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "publisher": "FuelLabs",
   "license": "Apache-2.0",
   "repository": {
@@ -132,10 +132,21 @@
           "type": "boolean",
           "default": false
         },
-        "sway-lsp.debug.showParsedTokensAsWarnings": {
-          "markdownDescription": "Show successfully parsed tokens by the sway-lsp server as warnings. If set to false, sway-lsp will revert to only showing warnings and errors reported by the compiler.",
-          "default": false,
-          "type": "boolean"
+        "sway-lsp.debug.showCollectedTokensAsWarnings": {
+          "scope": "window",
+          "type": "string",
+          "description": "Show either successfully parsed or typed tokens by the sway-lsp server as warnings. If set to off, sway-lsp will revert to only showing warnings and errors reported by the compiler.",
+          "enum": [
+            "off",
+            "parsed",
+            "typed"
+          ],
+          "enumDescriptions": [
+            "Debugging off",
+            "Show parsed tokens",
+            "Show typed tokens"
+          ],
+          "default": "off"
         },
         "sway-lsp.trace.fuel-core.logfile": {
           "description": "Set the file path for the Fuel core log output.",
