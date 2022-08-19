@@ -1,6 +1,7 @@
 import { exec } from 'child_process';
 import { window } from 'vscode';
 import { Config } from '../config';
+import updateFuelCoreStatus from '../status_bar/fuelCoreStatus';
 
 export default function startFuelCore(config: Config) {
   const fuelCoreLogFile = config.traceFuelCoreLogFile;
@@ -8,5 +9,6 @@ export default function startFuelCore(config: Config) {
     window.showInformationMessage(
       `Started Fuel Core in the background. Logs at ${fuelCoreLogFile}`
     );
+    updateFuelCoreStatus();
   });
 }
