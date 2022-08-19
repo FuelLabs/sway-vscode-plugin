@@ -4,6 +4,7 @@ import { exec } from 'child_process';
 import { Config } from './config';
 import forcRun from './commands/forcRun';
 import startFuelCore from './commands//startFuelCore';
+import forcBuild from './commands/forcBuild';
 
 interface CommandPalette {
   command: string;
@@ -21,7 +22,16 @@ export class CommandPalettes {
           var currentTabDirectory = path.dirname(
             vscode.window.activeTextEditor.document.fileName
           );
-          forcRun(this.config, currentTabDirectory);
+          forcRun(currentTabDirectory);
+        },
+      },
+      {
+        command: 'sway.forcBuild',
+        callback: async () => {
+          var currentTabDirectory = path.dirname(
+            vscode.window.activeTextEditor.document.fileName
+          );
+          forcBuild(currentTabDirectory);
         },
       },
       {
