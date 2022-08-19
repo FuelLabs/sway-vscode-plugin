@@ -35,6 +35,7 @@
     "onLanguage:sway",
     "onView:sway",
     "onCommand:sway.runScript",
+    "onCommand:sway.forcBuild",
     "onCommand:sway.startFuelCore",
     "onCommand:programs.refreshEntry",
     "onCommand:programs.editEntry",
@@ -160,6 +161,10 @@
           "title": "Sway: Run script"
         },
         {
+          "command": "sway.forcBuild",
+          "title": "Sway: Build"
+        },
+        {
           "command": "sway.startFuelCore",
           "title": "Sway: Start Fuel Core"
         }
@@ -206,6 +211,10 @@
       {
         "command": "sway.runScript",
         "title": "Sway: Run script"
+      },
+      {
+        "command": "sway.forcBuild",
+        "title": "Sway: Build"
       },
       {
         "command": "sway.startFuelCore",
