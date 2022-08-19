@@ -1,4 +1,7 @@
-import { RequestType, TextDocumentIdentifier } from 'vscode-languageclient/node';
+import {
+  RequestType,
+  TextDocumentIdentifier,
+} from 'vscode-languageclient/node';
 import { getClient } from '../client';
 import { Range } from 'vscode';
 import { log } from '../util';
@@ -10,17 +13,22 @@ interface ShowAstParams {
   astKind: AstKind;
 }
 
-const request = new RequestType<ShowAstParams, TextDocumentIdentifier | null, void>(
-  'sway/show_ast'
-);
+const request = new RequestType<
+  ShowAstParams,
+  TextDocumentIdentifier | null,
+  void
+>('sway/show_ast');
 
-export const showAst = async (filePath: string, astKind: AstKind): Promise<TextDocumentIdentifier | null> => {
+export const showAst = async (
+  filePath: string,
+  astKind: AstKind
+): Promise<TextDocumentIdentifier | null> => {
   const client = getClient();
   const params: ShowAstParams = {
     textDocument: {
-      uri: filePath
+      uri: filePath,
     },
-    astKind
+    astKind,
   };
   log.info(`params`, params);
   const response = await client.sendRequest(request, params);
@@ -28,5 +36,3 @@ export const showAst = async (filePath: string, astKind: AstKind): Promise<TextD
 
   return response;
 };
-
-
