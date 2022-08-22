@@ -1,21 +1,16 @@
 import { exec } from 'child_process';
-import { StatusBarAlignment, StatusBarItem, window } from 'vscode';
+import { StatusBarAlignment, StatusBarItem, ThemeColor, window } from 'vscode';
 import { log } from '../util';
 
 let fuelCoreStatus: StatusBarItem;
 let isFuelCoreRunning: boolean;
 
 export const getFuelCoreStatus = () => {
-    if (!fuelCoreStatus) {
-        fuelCoreStatus = window.createStatusBarItem(StatusBarAlignment.Left, 100);
-        // TODO: start it when you click on the status bar
-        // fuelCoreStatus.command = '';
-    }
-    if (!isFuelCoreRunning) {
-        fuelCoreStatus.command = 'sway.startFuelCore';
-    }
-    return fuelCoreStatus;
-}
+  if (!fuelCoreStatus) {
+    fuelCoreStatus = window.createStatusBarItem(StatusBarAlignment.Left, 100);
+  }
+  return fuelCoreStatus;
+};
 
 export default function updateFuelCoreStatus() {
   const initializedItem = getFuelCoreStatus();
@@ -24,11 +19,19 @@ export default function updateFuelCoreStatus() {
   });
 
   if (isFuelCoreRunning) {
-    initializedItem.text = `$(symbol-event) fuel-core running`;
+    initializedItem.text = '$(symbol-event) running';
+    initializedItem.command = 'sway.stopFuelCore';
+    initializedItem.tooltip = 'Stop the locally running fuel-core server';
+    // Using any string other than the approved theme colors will reset the background to default.
+    initializedItem.backgroundColor = new ThemeColor('reset');
     initializedItem.show();
-
   } else {
-    initializedItem.text = `$(symbol-event) fuel-core stopped`;
+    initializedItem.text = '$(symbol-event) stopped';
+    initializedItem.command = 'sway.startFuelCore';
+    initializedItem.tooltip = 'Start fuel-core server at 127.0.0.1:4000';
+    initializedItem.backgroundColor = new ThemeColor(
+      'statusBarItem.warningBackground'
+    );
     initializedItem.show();
   }
 }

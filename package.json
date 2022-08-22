@@ -37,6 +37,7 @@
     "onCommand:sway.runScript",
     "onCommand:sway.forcBuild",
     "onCommand:sway.startFuelCore",
+    "onCommand:sway.stopFuelCore",
     "onCommand:programs.refreshEntry",
     "onCommand:programs.editEntry",
     "onCommand:programs.run"
@@ -167,7 +168,11 @@
         {
           "command": "sway.startFuelCore",
           "title": "Sway: Start Fuel Core"
-        }
+        },
+        {
+          "command": "sway.stopFuelCore",
+          "title": "Sway: Stop Fuel Core"
+        }        
       ]
     },
     "languages": [
@@ -219,6 +224,10 @@
       {
         "command": "sway.startFuelCore",
         "title": "Sway: Start Fuel Core"
+      },
+      {
+        "command": "sway.stopFuelCore",
+        "title": "Sway: Stop Fuel Core"
       }
     ],
     "snippets": [
