@@ -62,7 +62,7 @@ export function activate(context: ExtensionContext) {
   commands.registerCommand('programs.run', (runnableFunction: Function) => {
     window.showInformationMessage(`Running ${runnableFunction.label}`);
     const forcDir = path.parse(runnableFunction.sourceFilePath).dir;
-    forcRun(config, forcDir);
+    forcRun(forcDir);
   });
 
   // Register all command palettes
