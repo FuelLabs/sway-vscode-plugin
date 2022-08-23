@@ -30,9 +30,5 @@ export const showAst = async (
     },
     astKind,
   };
-  log.info(`params`, params);
-  const response = await client.sendRequest(request, params);
-  log.info(`response`, response);
-
-  return response;
+  return await client.sendRequest(request, params);
 };
