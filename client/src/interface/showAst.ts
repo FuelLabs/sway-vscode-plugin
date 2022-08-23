@@ -3,8 +3,6 @@ import {
   TextDocumentIdentifier,
 } from 'vscode-languageclient/node';
 import { getClient } from '../client';
-import { Range } from 'vscode';
-import { log } from '../util';
 
 export type AstKind = 'parsed' | 'typed';
 
