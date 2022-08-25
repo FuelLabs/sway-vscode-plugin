@@ -4,7 +4,7 @@ import { Config } from '../config';
 import updateFuelCoreStatus from '../status_bar/fuelCoreStatus';
 
 export default function stopFuelCore() {
-  exec(`pkill -9 fuel-core`, () => {
+  exec(`pkill -15 fuel-core`, () => {
     window.showInformationMessage(`Stopped fuel-core`);
     updateFuelCoreStatus();
   });
