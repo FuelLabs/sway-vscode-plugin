@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { AstKind } from './interface/showAst';
 import { log } from './util';
 
 export class Config {
@@ -93,7 +94,7 @@ export class Config {
 
   get debug() {
     return {
-      showCollectedTokensAsWarnings: this.get<'off' | 'parsed' | 'typed'>(
+      showCollectedTokensAsWarnings: this.get<'off' | AstKind>(
         'debug.showCollectedTokensAsWarnings'
       ),
     };

@@ -1,7 +1,6 @@
 import { RequestType } from 'vscode-languageclient/node';
 import { getClient } from '../client';
 import { Range } from 'vscode';
-import { log } from '../util';
 import { ProgramType } from '../program';
 
 interface GetRunnablesParams {}

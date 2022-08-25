@@ -5,6 +5,7 @@ import forcRun from './commands/forcRun';
 import startFuelCore from './commands/startFuelCore';
 import forcBuild from './commands/forcBuild';
 import stopFuelCore from './commands/stopFuelCore';
+import openAstFile from './commands/openAstFile';
 
 interface CommandPalette {
   command: string;
@@ -19,7 +20,7 @@ export class CommandPalettes {
       {
         command: 'sway.runScript',
         callback: async () => {
-          var currentTabDirectory = path.dirname(
+          const currentTabDirectory = path.dirname(
             vscode.window.activeTextEditor.document.fileName
           );
           forcRun(currentTabDirectory);
@@ -28,7 +29,7 @@ export class CommandPalettes {
       {
         command: 'sway.forcBuild',
         callback: async () => {
-          var currentTabDirectory = path.dirname(
+          const currentTabDirectory = path.dirname(
             vscode.window.activeTextEditor.document.fileName
           );
           forcBuild(currentTabDirectory);
@@ -43,6 +44,20 @@ export class CommandPalettes {
       {
         command: 'sway.stopFuelCore',
         callback: async () => stopFuelCore(),
+      },
+      {
+        command: 'sway.showParsedAst',
+        callback: async () => {
+          const currentFile = vscode.window.activeTextEditor.document.fileName;
+          await openAstFile(currentFile, 'parsed');
+        },
+      },
+      {
+        command: 'sway.showTypedAst',
+        callback: async () => {
+          const currentFile = vscode.window.activeTextEditor.document.fileName;
+          await openAstFile(currentFile, 'typed');
+        },
       },
     ];
   }
