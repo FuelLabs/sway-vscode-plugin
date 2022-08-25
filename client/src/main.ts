@@ -18,6 +18,7 @@ import {
   workspace,
   WorkspaceConfiguration,
 } from 'vscode';
+import updateFuelCoreStatus from './status_bar/fuelCoreStatus';
 
 export function activate(context: ExtensionContext) {
   const config = new Config(context);
@@ -72,6 +73,9 @@ export function activate(context: ExtensionContext) {
       commands.registerCommand(command, callback)
     )
   );
+
+  // Start a recurring task to keep fuel-core status updated
+  setInterval(updateFuelCoreStatus, 1000);
 
   const client = createClient(
     getClientOptions(),

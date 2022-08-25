@@ -1,10 +1,10 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { exec } from 'child_process';
 import { Config } from './config';
 import forcRun from './commands/forcRun';
-import startFuelCore from './commands//startFuelCore';
+import startFuelCore from './commands/startFuelCore';
 import forcBuild from './commands/forcBuild';
+import stopFuelCore from './commands/stopFuelCore';
 import openAstFile from './commands/openAstFile';
 
 interface CommandPalette {
@@ -40,6 +40,10 @@ export class CommandPalettes {
         callback: async () => {
           startFuelCore(this.config);
         },
+      },
+      {
+        command: 'sway.stopFuelCore',
+        callback: async () => stopFuelCore(),
       },
       {
         command: 'sway.showParsedAst',
