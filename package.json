@@ -37,6 +37,8 @@
     "onCommand:sway.runScript",
     "onCommand:sway.forcBuild",
     "onCommand:sway.startFuelCore",
+    "onCommand:sway.showParsedAst",
+    "onCommand:sway.showTypedAst",
     "onCommand:programs.refreshEntry",
     "onCommand:programs.editEntry",
     "onCommand:programs.run"
@@ -167,7 +169,15 @@
         {
           "command": "sway.startFuelCore",
           "title": "Sway: Start Fuel Core"
-        }
+        },
+        {
+          "command": "sway.showParsedAst",
+          "title": "Sway: Show Parsed AST"
+        },
+        {
+          "command": "sway.showTypedAst",
+          "title": "Sway: Show Typed AST"
+        }  
       ]
     },
     "languages": [
@@ -219,6 +229,14 @@
       {
         "command": "sway.startFuelCore",
         "title": "Sway: Start Fuel Core"
+      },
+      {
+        "command": "sway.showParsedAst",
+        "title": "Sway: Show Parsed AST"
+      },
+      {
+        "command": "sway.showTypedAst",
+        "title": "Sway: Show Typed AST"
       }
     ],
     "snippets": [
