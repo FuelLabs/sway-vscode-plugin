@@ -1,15 +1,14 @@
 import { exec } from 'child_process';
 import { window } from 'vscode';
-import { Config } from '../config';
 import { log } from '../util';
 
-export default function forcRun(forcDir: string) {
+export default function forcBuild(forcDir: string) {
   exec(`cd ${forcDir} && forc run`, (error, stdout, _stderr) => {
     if (error) {
       window.showInformationMessage(`Failed: see output console for error`);
       log.error(stdout);
     } else {
-      window.showInformationMessage(`Successfully ran script`);
+      window.showInformationMessage(`Successfully built sway program`);
       log.info(stdout);
     }
   });

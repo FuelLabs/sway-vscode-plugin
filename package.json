@@ -17,7 +17,9 @@
     "test": "sh ./scripts/e2e.sh",
     "install-extension": "vsce package -o sway-vscode-plugin.vsix && code --install-extension sway-vscode-plugin.vsix --force",
     "format:check": "prettier --check 'client/src' 'snippets' 'syntaxes'",
-    "format:fix": "prettier --write 'client/src' 'snippets' 'syntaxes'"
+    "format:fix": "prettier --write 'client/src' 'snippets' 'syntaxes'",
+    "fix-syntaxes": "vscode-tmgrammar-snap --updateSnapshot client/test/syntaxes/*sw",
+    "test-syntaxes": "vscode-tmgrammar-snap client/test/syntaxes/*sw"
   },
   "engines": {
     "vscode": "^1.64.0"
@@ -33,7 +35,11 @@
     "onLanguage:sway",
     "onView:sway",
     "onCommand:sway.runScript",
+    "onCommand:sway.forcBuild",
     "onCommand:sway.startFuelCore",
+    "onCommand:sway.stopFuelCore",
+    "onCommand:sway.showParsedAst",
+    "onCommand:sway.showTypedAst",
     "onCommand:programs.refreshEntry",
     "onCommand:programs.editEntry",
     "onCommand:programs.run"
@@ -130,10 +136,21 @@
           "type": "boolean",
           "default": false
         },
-        "sway-lsp.debug.showParsedTokensAsWarnings": {
-          "markdownDescription": "Show successfully parsed tokens by the sway-lsp server as warnings. If set to false, sway-lsp will revert to only showing warnings and errors reported by the compiler.",
-          "default": false,
-          "type": "boolean"
+        "sway-lsp.debug.showCollectedTokensAsWarnings": {
+          "scope": "window",
+          "type": "string",
+          "description": "Show either successfully parsed or typed tokens by the sway-lsp server as warnings. If set to off, sway-lsp will revert to only showing warnings and errors reported by the compiler.",
+          "enum": [
+            "off",
+            "parsed",
+            "typed"
+          ],
+          "enumDescriptions": [
+            "Debugging off",
+            "Show parsed tokens",
+            "Show typed tokens"
+          ],
+          "default": "off"
         },
         "sway-lsp.trace.fuel-core.logfile": {
           "description": "Set the file path for the Fuel core log output.",
@@ -147,9 +164,25 @@
           "title": "Sway: Run script"
         },
         {
+          "command": "sway.forcBuild",
+          "title": "Sway: Build"
+        },
+        {
           "command": "sway.startFuelCore",
           "title": "Sway: Start Fuel Core"
-        }
+        },
+        {
+          "command": "sway.stopFuelCore",
+          "title": "Sway: Stop Fuel Core"
+        },
+        {
+          "command": "sway.showParsedAst",
+          "title": "Sway: Show Parsed AST"
+        },
+        {
+          "command": "sway.showTypedAst",
+          "title": "Sway: Show Typed AST"
+        }  
       ]
     },
     "languages": [
@@ -195,8 +228,24 @@
         "title": "Sway: Run script"
       },
       {
+        "command": "sway.forcBuild",
+        "title": "Sway: Build"
+      },
+      {
         "command": "sway.startFuelCore",
         "title": "Sway: Start Fuel Core"
+      },
+      {
+        "command": "sway.stopFuelCore",
+        "title": "Sway: Stop Fuel Core"
+      },
+      {
+        "command": "sway.showParsedAst",
+        "title": "Sway: Show Parsed AST"
+      },
+      {
+        "command": "sway.showTypedAst",
+        "title": "Sway: Show Typed AST"
       }
     ],
     "snippets": [
@@ -228,6 +277,7 @@
     "mocha": "^8.4.0",
     "prettier": "^2.5.1",
     "typescript": "^4.5.5",
-    "vsce": "^2.5.3"
+    "vsce": "^2.5.3",
+    "vscode-tmgrammar-test": "^0.1.1"
   }
 }
