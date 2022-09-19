@@ -148,58 +148,7 @@ function getClientOptions(): lc.LanguageClientOptions {
         workspace.createFileSystemWatcher('**/*.sw'),
       ],
     },
-    initializationOptions: {
-      ...getSwayConfigOptions(),
-    },
   };
 
   return clientOptions;
 }
-
-function getSwayConfigOptions(): SwayConfig {
-  const swayOptions = getSwayFormattingOptions();
-
-  const defaultSwayConfig: SwayConfig = {
-    alignFields: true,
-    tabSize: 4,
-  };
-
-  if (swayOptions) {
-    const swayFormatOptions = getSwayFormattingOptions().format;
-    if (swayFormatOptions) {
-      return {
-        alignFields: swayFormatOptions.hasOwnProperty('alignFields')
-          ? swayFormatOptions.alignFields
-          : defaultSwayConfig.alignFields,
-        tabSize: swayFormatOptions.hasOwnProperty('tabSize')
-          ? swayFormatOptions.tabSize
-          : defaultSwayConfig.tabSize,
-      };
-    } else {
-      return defaultSwayConfig;
-    }
-  } else {
-    return defaultSwayConfig;
-  }
-}
-
-function getSwayFormattingOptions(): WorkspaceConfiguration | null {
-  const swayOptions = workspace.getConfiguration('sway');
-  const swayOptionsBracket = workspace.getConfiguration('[sway]');
-
-  if (swayOptions && swayOptions.format) {
-    if (swayOptionsBracket && swayOptionsBracket.format) {
-      return Object.assign({}, swayOptions, swayOptionsBracket);
-    }
-    return swayOptions;
-  } else if (swayOptionsBracket && swayOptionsBracket.format) {
-    return swayOptionsBracket;
-  } else {
-    return null;
-  }
-}
-
-type SwayConfig = {
-  alignFields: boolean;
-  tabSize: number;
-};
