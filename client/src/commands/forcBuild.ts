@@ -7,7 +7,7 @@ export default function forcBuild(forcDir: string) {
     if (error) {
       window.showInformationMessage(`Failed: see output console for error`);
       log.error(stdout);
-    } else {g
+    } else {
       window.showInformationMessage(`Successfully built sway program`);
       log.info(stdout);
     }
