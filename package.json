@@ -45,15 +45,6 @@
     "onCommand:programs.run"
   ],
   "contributes": {
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "sway",
-          "title": "Sway",
-          "icon": "images/fuel.svg"
-        }
-      ]
-    },
     "views": {
       "sway": [
         {
