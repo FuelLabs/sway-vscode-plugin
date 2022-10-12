@@ -146,7 +146,15 @@ function getClientOptions(): lc.LanguageClientOptions {
         workspace.createFileSystemWatcher('**/*.sw'),
       ],
     },
+    initializationOptions: {
+      ...getSwayConfigOptions(),
+    },
   };
 
   return clientOptions;
 }
+
+type SwayConfig = {
+  alignFields: boolean;
+  tabSize: number;
+};
