@@ -92,15 +92,6 @@ export class Config {
     return this.get<boolean>('trace.fuel-core.logfile');
   }
 
-  get inlayHints() {
-    return {
-        enable: this.get<boolean>("inlayHints.enable"),
-        typeHints: this.get<boolean>("inlayHints.typeHints"),
-        renderColons: this.get<boolean>("inlayHints.renderColons"),
-        maxLength: this.get<null | number>("inlayHints.maxLength"),
-    };
-  }
-
   get debug() {
     return {
       showCollectedTokensAsWarnings: this.get<'off' | AstKind>(
