@@ -148,11 +148,6 @@
           "type": "string",
           "default": "/tmp/fuel-core_sway-vscode-plugin.log"
         },
-        "sway-lsp.inlayHints.enable": {
-          "type": "boolean",
-          "default": true,
-          "description": "Whether to show inlay hints."
-        },
         "sway-lsp.inlayHints.renderColons": {
           "markdownDescription": "Whether to render leading colons for type hints, and trailing colons for parameter hints.",
           "default": true,
