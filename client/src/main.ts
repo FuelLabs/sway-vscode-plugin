@@ -100,15 +100,9 @@ function getServerOptions(
   context: ExtensionContext,
   config: Config
 ): lc.ServerOptions {
-  let args = ['lsp'];
-  const debug_tokens = config.debug.showCollectedTokensAsWarnings;
-  if (debug_tokens !== 'off') {
-    args.push(` --collected-tokens-as-warnings ${debug_tokens}`);
-  }
-
   const serverExecutable: lc.Executable = {
     command: 'forc',
-    args,
+    args: ['lsp'],
     options: {
       shell: true,
     },

@@ -91,12 +91,4 @@ export class Config {
   get traceFuelCoreLogFile() {
     return this.get<boolean>('trace.fuel-core.logfile');
   }
-
-  get debug() {
-    return {
-      showCollectedTokensAsWarnings: this.get<'off' | AstKind>(
-        'debug.showCollectedTokensAsWarnings'
-      ),
-    };
-  }
 }
