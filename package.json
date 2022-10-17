@@ -153,7 +153,7 @@
           "default": true,
           "type": "boolean"
         },
-        "sway-lsp.inlayHints.typeHints.enable": {
+        "sway-lsp.inlayHints.typeHints": {
           "markdownDescription": "Whether to show inlay type hints for variables.",
           "default": true,
           "type": "boolean"
