@@ -162,8 +162,8 @@
           "markdownDescription": "Maximum length for inlay hints. Set to null to have an unlimited length.",
           "default": 25,
           "type": [
-              "null",
-              "integer"
+            "null",
+            "integer"
           ],
           "minimum": 0
         }
@@ -192,7 +192,7 @@
         {
           "command": "sway.showTypedAst",
           "title": "Sway: Show Typed AST"
-        }  
+        }
       ]
     },
     "languages": [
