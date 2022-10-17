@@ -85,9 +85,7 @@ export function activate(context: ExtensionContext) {
   // Start the client. This will also launch the server
   client.start();
 
-  client.onReady().then(_ => {
-    log.info('Client has Connected to the Sway Language Server Successfully!');
-  });
+  log.info('Client has Connected to the Sway Language Server Successfully!');
 }
 
 export function deactivate(): Thenable<void> | undefined {
@@ -102,15 +100,9 @@ function getServerOptions(
   context: ExtensionContext,
   config: Config
 ): lc.ServerOptions {
-  let args = ['lsp'];
-  const debug_tokens = config.debug.showCollectedTokensAsWarnings;
-  if (debug_tokens !== 'off') {
-    args.push(` --collected-tokens-as-warnings ${debug_tokens}`);
-  }
-
   const serverExecutable: lc.Executable = {
     command: 'forc',
-    args,
+    args: ['lsp'],
     options: {
       shell: true,
     },
@@ -148,6 +140,7 @@ function getClientOptions(): lc.LanguageClientOptions {
         workspace.createFileSystemWatcher('**/*.sw'),
       ],
     },
+    initializationOptions: workspace.getConfiguration('sway-lsp'),
   };
 
   return clientOptions;
