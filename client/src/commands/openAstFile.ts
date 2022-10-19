@@ -1,8 +1,6 @@
 import { commands, Uri } from 'vscode';
 import { AstKind, showAst } from '../interface/showAst';
-import { log } from '../util';
-
-const addFilePrefix = (path: string) => `file://${path}`;
+import { log, addFilePrefix } from '../util';
 
 export default async function openAstFile(filePath: string, astKind: AstKind) {
   try {
