@@ -1,6 +1,8 @@
 import * as vscode from 'vscode';
 import { inspect } from 'util';
 
+export const addFilePrefix = (path: string) => `file://${path}`;
+
 export const log = new (class {
   private enabled = true;
   private readonly output =
