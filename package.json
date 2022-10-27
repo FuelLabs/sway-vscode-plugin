@@ -156,7 +156,7 @@
             "trace"
           ],
           "default": "info"
-        },        
+        },
         "sway-lsp.trace.fuel-core.logfile": {
           "description": "Set the file path for the Fuel core log output.",
           "type": "string",
