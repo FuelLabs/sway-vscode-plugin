@@ -143,6 +143,20 @@
           ],
           "default": "off"
         },
+        "sway-lsp.logging.level": {
+          "scope": "window",
+          "type": "string",
+          "description": "Set the log level for LSP server logs.",
+          "enum": [
+            "off",
+            "error",
+            "warn",
+            "info",
+            "debug",
+            "trace"
+          ],
+          "default": "error"
+        },
         "sway-lsp.trace.fuel-core.logfile": {
           "description": "Set the file path for the Fuel core log output.",
           "type": "string",
