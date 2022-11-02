@@ -39,10 +39,7 @@
     "onCommand:sway.startFuelCore",
     "onCommand:sway.stopFuelCore",
     "onCommand:sway.showParsedAst",
-    "onCommand:sway.showTypedAst",
-    "onCommand:programs.refreshEntry",
-    "onCommand:programs.editEntry",
-    "onCommand:programs.run"
+    "onCommand:sway.showTypedAst"
   ],
   "contributes": {
     "configuration": {

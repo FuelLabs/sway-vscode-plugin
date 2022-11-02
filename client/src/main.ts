@@ -34,38 +34,6 @@ export function activate(context: ExtensionContext) {
   );
   context.subscriptions.push(swayCodeLensProviderDisposable);
 
-  // Register tree views
-  const rootPath =
-    workspace.workspaceFolders && workspace.workspaceFolders.length > 0
-      ? workspace.workspaceFolders[0].uri.fsPath
-      : undefined;
-  const contractProvider = window.registerTreeDataProvider(
-    'contracts',
-    new ProgramProvider(rootPath, 'contract')
-  );
-  window.registerTreeDataProvider(
-    'scripts',
-    new ProgramProvider(rootPath, 'script')
-  );
-  window.registerTreeDataProvider(
-    'predicates',
-    new ProgramProvider(rootPath, 'predicate')
-  );
-  commands.registerCommand(
-    'programs.refreshEntry',
-    (provider: ProgramProvider) => provider.refresh()
-  );
-  commands.registerCommand('programs.editEntry', (contract: Program) =>
-    workspace.openTextDocument(contract.sourceFilePath).then(doc => {
-      window.showTextDocument(doc);
-    })
-  );
-  commands.registerCommand('programs.run', (runnableFunction: Function) => {
-    window.showInformationMessage(`Running ${runnableFunction.label}`);
-    const forcDir = path.parse(runnableFunction.sourceFilePath).dir;
-    forcRun(forcDir);
-  });
-
   // Register all command palettes
   const commandPalettes = new CommandPalettes(config).get();
   context.subscriptions.push(
