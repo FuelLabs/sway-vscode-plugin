@@ -2,9 +2,6 @@ import * as lc from 'vscode-languageclient/node';
 import { Config } from './config';
 import { log } from './util';
 import { CommandPalettes } from './palettes';
-import { Program, Function, ProgramProvider } from './program';
-import * as path from 'path';
-import forcRun from './commands/forcRun';
 
 import { createClient, getClient } from './client';
 import { SwayCodeLensProvider } from './code_lens/provider';
@@ -14,9 +11,7 @@ import {
   ExtensionContext,
   ExtensionMode,
   languages,
-  window,
   workspace,
-  WorkspaceConfiguration,
 } from 'vscode';
 import updateFuelCoreStatus from './status_bar/fuelCoreStatus';
 
@@ -33,38 +28,6 @@ export function activate(context: ExtensionContext) {
     new SwayCodeLensProvider()
   );
   context.subscriptions.push(swayCodeLensProviderDisposable);
-
-  // Register tree views
-  const rootPath =
-    workspace.workspaceFolders && workspace.workspaceFolders.length > 0
-      ? workspace.workspaceFolders[0].uri.fsPath
-      : undefined;
-  const contractProvider = window.registerTreeDataProvider(
-    'contracts',
-    new ProgramProvider(rootPath, 'contract')
-  );
-  window.registerTreeDataProvider(
-    'scripts',
-    new ProgramProvider(rootPath, 'script')
-  );
-  window.registerTreeDataProvider(
-    'predicates',
-    new ProgramProvider(rootPath, 'predicate')
-  );
-  commands.registerCommand(
-    'programs.refreshEntry',
-    (provider: ProgramProvider) => provider.refresh()
-  );
-  commands.registerCommand('programs.editEntry', (contract: Program) =>
-    workspace.openTextDocument(contract.sourceFilePath).then(doc => {
-      window.showTextDocument(doc);
-    })
-  );
-  commands.registerCommand('programs.run', (runnableFunction: Function) => {
-    window.showInformationMessage(`Running ${runnableFunction.label}`);
-    const forcDir = path.parse(runnableFunction.sourceFilePath).dir;
-    forcRun(forcDir);
-  });
 
   // Register all command palettes
   const commandPalettes = new CommandPalettes(config).get();
