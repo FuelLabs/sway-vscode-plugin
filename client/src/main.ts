@@ -2,9 +2,6 @@ import * as lc from 'vscode-languageclient/node';
 import { Config } from './config';
 import { log } from './util';
 import { CommandPalettes } from './palettes';
-import { Program, Function, ProgramProvider } from './program';
-import * as path from 'path';
-import forcRun from './commands/forcRun';
 
 import { createClient, getClient } from './client';
 import { SwayCodeLensProvider } from './code_lens/provider';
@@ -14,9 +11,7 @@ import {
   ExtensionContext,
   ExtensionMode,
   languages,
-  window,
   workspace,
-  WorkspaceConfiguration,
 } from 'vscode';
 import updateFuelCoreStatus from './status_bar/fuelCoreStatus';
 
