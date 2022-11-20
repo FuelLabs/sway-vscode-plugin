@@ -28,4 +28,4 @@ _Coming Soon_
 
 ## Configuration
 
-This extension provides configurations through VSCode's configuration settings. All configurations are under `sway-lsp.\*`.
+This extension provides configurations through VSCode's configuration settings. All configurations are under `sway-lsp.*`.
