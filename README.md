@@ -8,7 +8,6 @@ This extension provides support for the Sway smart contract programming language
 ## Features
 
 - go to definition, implementation, type definition
-- find all references, workspace symbol search
 - symbol renaming
 - types and documentation on hover
 - inlay hints for types and parameter names
@@ -19,6 +18,7 @@ _Coming Soon_
 - code completion with imports insertion
 - code actions
 - apply suggestions from errors
+- find all references, workspace symbol search
   ... and many more
 
 ## Quick start
