@@ -19,7 +19,7 @@ _Coming Soon_
 - code actions
 - apply suggestions from errors
 - find all references, workspace symbol search
-  ... and many more
+- ... and many more
 
 ## Quick start
 
