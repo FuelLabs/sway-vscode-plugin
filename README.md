@@ -1,7 +1,7 @@
 <picture>
-  <source media="(prefers-color-scheme: light)" srcset="./images/light/sway.png">
-  <source media="(prefers-color-scheme: dark)" srcset="./images/dark/sway.png">
-<img alt="Sway VSCode Plugin">
+   <source media="(prefers-color-scheme: light)" srcset="./images/light/sway.png">
+   <source media="(prefers-color-scheme: dark)" srcset="./images/dark/sway.png">
+   <img alt="Sway VSCode Plugin" src="./images/dark/sway.png">
 </picture>
 
 [![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/FuelLabs.sway-vscode-plugin)](https://marketplace.visualstudio.com/items?itemName=FuelLabs.sway-vscode-plugin)
