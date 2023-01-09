@@ -46,6 +46,13 @@ export class CommandPalettes {
         callback: async () => stopFuelCore(),
       },
       {
+        command: 'sway.showLexedAst',
+        callback: async () => {
+          const currentFile = vscode.window.activeTextEditor.document.fileName;
+          await openAstFile(currentFile, 'lexed');
+        },
+      },
+      {
         command: 'sway.showParsedAst',
         callback: async () => {
           const currentFile = vscode.window.activeTextEditor.document.fileName;

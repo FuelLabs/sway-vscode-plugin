@@ -4,7 +4,7 @@ import {
 } from 'vscode-languageclient/node';
 import { getClient } from '../client';
 
-export type AstKind = 'parsed' | 'typed';
+export type AstKind = 'lexed' | 'parsed' | 'typed';
 
 interface ShowAstParams {
   textDocument: TextDocumentIdentifier;
