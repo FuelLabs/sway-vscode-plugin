@@ -38,6 +38,7 @@
     "onCommand:sway.forcBuild",
     "onCommand:sway.startFuelCore",
     "onCommand:sway.stopFuelCore",
+    "onCommand:sway.showLexedAst",
     "onCommand:sway.showParsedAst",
     "onCommand:sway.showTypedAst"
   ],
@@ -140,6 +141,10 @@
           "title": "Sway: Stop Fuel Core"
         },
         {
+          "command": "sway.showLexedAst",
+          "title": "Sway: Show Lexed AST"
+        },
+        {
           "command": "sway.showParsedAst",
           "title": "Sway: Show Parsed AST"
         },
@@ -202,6 +207,10 @@
       {
         "command": "sway.stopFuelCore",
         "title": "Sway: Stop Fuel Core"
+      },
+      {
+        "command": "sway.showLexedAst",
+        "title": "Sway: Show Lexed AST"
       },
       {
         "command": "sway.showParsedAst",
