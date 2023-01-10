@@ -84,6 +84,16 @@
           ],
           "default": "off"
         },
+        "sway-lsp.diagnostic.showWarnings": {
+          "description": "Show compiler warnings",
+          "type": "boolean",
+          "default": true
+        },
+        "sway-lsp.diagnostic.showErrors": {
+          "description": "Show compiler errors",
+          "type": "boolean",
+          "default": true
+        },
         "sway-lsp.logging.level": {
           "scope": "window",
           "type": "string",
