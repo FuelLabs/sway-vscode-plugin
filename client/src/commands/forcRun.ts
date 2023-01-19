@@ -4,7 +4,7 @@ import { Config } from '../config';
 import { log } from '../util';
 
 export default function forcRun(forcDir: string) {
-  exec(`cd ${forcDir} && forc run`, (error, stdout, _stderr) => {
+  exec(`cd ${forcDir} && fuel-core run`, (error, stdout, _stderr) => {
     if (error) {
       window.showInformationMessage(`Failed: see output console for error`);
       log.error(stdout);
