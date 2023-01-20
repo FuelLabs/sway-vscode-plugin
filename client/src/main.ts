@@ -4,7 +4,6 @@ import { log } from './util';
 import { CommandPalettes } from './palettes';
 
 import { createClient, getClient } from './client';
-import { SwayCodeLensProvider } from './code_lens/provider';
 import {
   commands,
   DocumentSelector,
@@ -17,17 +16,6 @@ import updateFuelCoreStatus from './status_bar/fuelCoreStatus';
 
 export function activate(context: ExtensionContext) {
   const config = new Config(context);
-
-  // Register code lenses
-  let documentSelector: DocumentSelector = {
-    language: 'sway',
-    scheme: 'file',
-  };
-  let swayCodeLensProviderDisposable = languages.registerCodeLensProvider(
-    documentSelector,
-    new SwayCodeLensProvider()
-  );
-  context.subscriptions.push(swayCodeLensProviderDisposable);
 
   // Register all command palettes
   const commandPalettes = new CommandPalettes(config).get();
