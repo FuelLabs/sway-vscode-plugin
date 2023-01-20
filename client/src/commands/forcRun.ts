@@ -1,13 +1,12 @@
 import { exec } from 'child_process';
 import { window } from 'vscode';
-import { Config } from '../config';
 import { log } from '../util';
 
 export default function forcRun(forcDir: string) {
-  exec(`cd ${forcDir} && forc run`, (error, stdout, _stderr) => {
+  exec(`cd ${forcDir} && forc run --unsigned`, (error, stdout, stderr) => {
     if (error) {
       window.showInformationMessage(`Failed: see output console for error`);
-      log.error(stdout);
+      log.error(stderr);
     } else {
       window.showInformationMessage(`Successfully ran script`);
       log.info(stdout);
