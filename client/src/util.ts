@@ -38,7 +38,7 @@ export const log = new (class {
   }
 
   private getTerminal(): vscode.Terminal {
-    const name = "sway";
+    const name = 'sway';
     const terminals = vscode.window.terminals;
     if (terminals.length === 0) {
       return vscode.window.createTerminal(name);
