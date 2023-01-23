@@ -31,6 +31,21 @@ export const log = new (class {
     log.output.show(true);
   }
 
+  terminal(msg: string): void {
+    const terminal = log.getTerminal();
+    terminal.sendText(msg);
+    terminal.show(true);
+  }
+
+  private getTerminal(): vscode.Terminal {
+    const name = 'sway';
+    const terminals = vscode.window.terminals;
+    if (terminals.length === 0) {
+      return vscode.window.createTerminal(name);
+    }
+    return terminals.find(t => t.name == name) ?? terminals[0];
+  }
+
   private write(label: string, ...messageParts: unknown[]): void {
     const message = messageParts.map(log.stringify).join(' ');
     const dateTime = new Date().toLocaleString();
