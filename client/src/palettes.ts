@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import { Config } from './config';
 import forcRun from './commands/forcRun';
+import forcTest from './commands/forcTest';
 import startFuelCore from './commands/startFuelCore';
 import forcBuild from './commands/forcBuild';
 import stopFuelCore from './commands/stopFuelCore';
@@ -9,7 +10,7 @@ import openAstFile from './commands/openAstFile';
 
 interface CommandPalette {
   command: string;
-  callback: () => Promise<void>;
+  callback: (args?: any) => Promise<void>;
 }
 
 export class CommandPalettes {
@@ -24,6 +25,15 @@ export class CommandPalettes {
             vscode.window.activeTextEditor.document.fileName
           );
           forcRun(currentTabDirectory);
+        },
+      },
+      {
+        command: 'sway.runTests',
+        callback: async ({ name }: { name?: string }) => {
+          const currentTabDirectory = path.dirname(
+            vscode.window.activeTextEditor.document.fileName
+          );
+          forcTest(currentTabDirectory, name);
         },
       },
       {
