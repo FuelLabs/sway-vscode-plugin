@@ -107,3 +107,12 @@ dist
 out
 .vscode-test
 sway-vscode-plugin.vsix
+
+# Yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

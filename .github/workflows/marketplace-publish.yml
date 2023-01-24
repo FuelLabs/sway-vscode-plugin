@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: 16
 
-      - run: npm ci
+      - run: yarn install --frozen-lockfile
 
       - name: Publish to Visual Studio Marketplace
         uses: HaaLeo/publish-vscode-extension@v1

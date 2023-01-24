@@ -13,8 +13,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 16
-      - run: npm ci
-      - run: npm run format:check
+      - run: yarn install --frozen-lockfile
+      - run: yarn format:check
 
   build:
     needs: [format]
@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: 16
 
-      - run: npm ci
+      - run: yarn install --frozen-lockfile
       - name: Dry run publish
         uses: HaaLeo/publish-vscode-extension@v1
         with:
@@ -33,11 +33,10 @@ jobs:
           dryRun: true
   syntaxes:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: 16
-      - run: npm ci
-      - run: npm run test-syntaxes
+      - run: yarn install --frozen-lockfile
+      - run: yarn test-syntaxes

@@ -9,8 +9,8 @@ On macOS, ensure you have the `code` CLI tool installed by running `code --versi
 ```sh
 git clone git@github.com:FuelLabs/sway-vscode-plugin.git
 cd sway-vscode-plugin
-npm i
-npm run install-extension
+yarn
+yarn install-extension
 ```
 
 ## Test your changes on your local install of VS Code
@@ -19,7 +19,7 @@ Firstly, uninstall the official release of the extension and reload VS Code if y
 
 ```sh
 cd sway-vscode-plugin
-npm i
+yarn
 git checkout <branch>
 vsce package -o sway-vscode-plugin-dev.vsix
 code --install-extension sway-vscode-plugin-dev.vsix
