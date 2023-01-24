@@ -1,5 +1,4 @@
 import * as vscode from 'vscode';
-import { AstKind } from './interface/showAst';
 import { log } from './util';
 
 export class Config {
@@ -86,9 +85,5 @@ export class Config {
 
   get traceExtension() {
     return this.get<boolean>('trace.extension');
-  }
-
-  get traceFuelCoreLogFile() {
-    return this.get<boolean>('trace.fuel-core.logfile');
   }
 }

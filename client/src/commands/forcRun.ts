@@ -1,5 +1,5 @@
-import { log } from '../util';
+import { Terminal } from '../util';
 
 export default function forcRun(forcDir: string) {
-  log.terminal(`cd ${forcDir} && forc run --unsigned`);
+  Terminal.Sway.execute(`cd ${forcDir} && forc run --unsigned`);
 }
