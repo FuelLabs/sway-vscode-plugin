@@ -1,8 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-
 // import * as fuels from 'typechain-target-fuels';
-
 import {
   Event,
   EventEmitter,

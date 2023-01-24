@@ -1,6 +1,5 @@
 import { exec } from 'child_process';
 import { StatusBarAlignment, StatusBarItem, ThemeColor, window } from 'vscode';
-import { log } from '../util';
 
 let fuelCoreStatus: StatusBarItem;
 let isFuelCoreRunning: boolean;

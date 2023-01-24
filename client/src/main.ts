@@ -1,18 +1,10 @@
+import { commands, ExtensionContext, ExtensionMode, workspace } from 'vscode';
 import * as lc from 'vscode-languageclient/node';
-import { Config } from './config';
-import { log } from './util';
-import { CommandPalettes } from './palettes';
-
 import { createClient, getClient } from './client';
-import {
-  commands,
-  DocumentSelector,
-  ExtensionContext,
-  ExtensionMode,
-  languages,
-  workspace,
-} from 'vscode';
+import { Config } from './config';
+import { CommandPalettes } from './palettes';
 import updateFuelCoreStatus from './status_bar/fuelCoreStatus';
+import { log } from './util';
 
 export function activate(context: ExtensionContext) {
   const config = new Config(context);
