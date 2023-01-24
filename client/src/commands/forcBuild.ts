@@ -1,5 +1,5 @@
-import { log } from '../util';
+import { Terminal } from '../util';
 
 export default function forcBuild(forcDir: string) {
-  log.terminal(`cd ${forcDir} && forc build`);
+  Terminal.Sway.execute(`cd ${forcDir} && forc build`);
 }

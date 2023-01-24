@@ -1,5 +1,5 @@
-import * as vscode from 'vscode';
 import { inspect } from 'util';
+import * as vscode from 'vscode';
 
 export const addFilePrefix = (path: string) => `file://${path}`;
 
@@ -31,21 +31,6 @@ export const log = new (class {
     log.output.show(true);
   }
 
-  terminal(msg: string): void {
-    const terminal = log.getTerminal();
-    terminal.sendText(msg);
-    terminal.show(true);
-  }
-
-  private getTerminal(): vscode.Terminal {
-    const name = 'sway';
-    const terminals = vscode.window.terminals;
-    if (terminals.length === 0) {
-      return vscode.window.createTerminal(name);
-    }
-    return terminals.find(t => t.name == name) ?? terminals[0];
-  }
-
   private write(label: string, ...messageParts: unknown[]): void {
     const message = messageParts.map(log.stringify).join(' ');
     const dateTime = new Date().toLocaleString();
@@ -60,3 +45,29 @@ export const log = new (class {
     });
   }
 })();
+
+// Utilities for interacting with VSCode terminals.
+export namespace Terminal {
+  type Names = 'sway' | 'fuel-core';
+  class NamedTerminal {
+    static type: Names;
+    static execute(cmd: string): void {
+      const terminal = this.get();
+      terminal.sendText(cmd);
+      terminal.show(true);
+    }
+
+    private static get(): vscode.Terminal {
+      const existing = vscode.window.terminals.find(t => t.name === this.type);
+      return existing ?? vscode.window.createTerminal(this.type);
+    }
+  }
+  // Used to execute any commands that are not long-running.
+  export class Sway extends NamedTerminal {
+    static type: Names = 'sway';
+  }
+  // Only used for starting fuel-core, which is a long-running process.
+  export class FuelCore extends NamedTerminal {
+    static type: Names = 'fuel-core';
+  }
+}

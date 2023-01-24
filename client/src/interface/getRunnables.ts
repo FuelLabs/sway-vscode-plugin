@@ -1,9 +1,9 @@
+import { Range } from 'vscode';
 import {
   RequestType,
   TextDocumentIdentifier,
 } from 'vscode-languageclient/node';
 import { getClient } from '../client';
-import { Range } from 'vscode';
 import { ProgramType } from '../program';
 import { addFilePrefix } from '../util';
 
