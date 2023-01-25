@@ -10,10 +10,8 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - uses: BobAnkh/auto-generate-changelog@v1
+    - uses: BobAnkh/auto-generate-changelog@v1.2.3
       with:
-        REPO_NAME: ''
         ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
         PATH: 'CHANGELOG.md'
-        COMMIT_MESSAGE: 'docs(CHANGELOG): Update release notes'
         TYPE: 'feat:Feature,fix:Bug Fixes,docs:Documentation,refactor:Refactor,perf:Performance Improvements'
