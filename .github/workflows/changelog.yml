@@ -1,7 +1,7 @@
 name: Generate changelog
 on:
   release:
-    types: [published]
+    types: [created, edited]
 
 jobs:
   generate-changelog:
@@ -12,7 +12,7 @@ jobs:
         fetch-depth: 0
     - uses: BobAnkh/auto-generate-changelog@v1
       with:
-        REPO_NAME: 'FuelLabs/sway-vscode-plugin'
+        REPO_NAME: ''
         ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
         PATH: 'CHANGELOG.md'
         COMMIT_MESSAGE: 'docs(CHANGELOG): Update release notes'
