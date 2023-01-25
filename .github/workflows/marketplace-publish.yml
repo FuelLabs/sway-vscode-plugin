@@ -1,8 +1,10 @@
 name: Publish Extension
 
 on:
-  release:
-    types: [published]
+  workflow_run:
+    workflows: ['Generate Changelog']
+    types:
+      - completed
 
 jobs:
   build:
