@@ -1,4 +1,4 @@
-name: Generate changelog
+name: Generate Changelog
 on:
   release:
     types: [created, edited]
