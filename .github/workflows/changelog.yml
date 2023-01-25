@@ -1,17 +1,17 @@
 name: Generate changelog
 on:
   release:
-    types: [published]
+    types: [created, edited]
 
 jobs:
   generate-changelog:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - uses: BobAnkh/auto-generate-changelog@v1.2.3
-      with:
-        ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        PATH: 'CHANGELOG.md'
-        TYPE: 'feat:Feature,fix:Bug Fixes,docs:Documentation,refactor:Refactor,perf:Performance Improvements'
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: BobAnkh/auto-generate-changelog@v1.2.3
+        with:
+          ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          PATH: 'CHANGELOG.md'
+          TYPE: 'feat:Feature,fix:Bug Fixes,docs:Documentation,refactor:Refactor,perf:Performance Improvements'
