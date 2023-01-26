@@ -1,0 +1,19 @@
+name: Bump & Release
+
+on:
+  # Manually triggered
+  workflow_dispatch:
+
+jobs:
+  bump-version-and-release:
+    name: Bump version & release
+    if: github.event.base_ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: undergroundwires/bump-everywhere@master
+        with:
+          user: fuel-bot
+          # Used for commit & push
+          git-token: ${{ secrets.FUEL_BOT_PAT }}
+          # User for creating the release
+          release-token: ${{ secrets.FUEL_BOT_PAT }}
