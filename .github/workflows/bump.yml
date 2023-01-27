@@ -7,10 +7,11 @@ jobs:
   increment-version:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Bump package version
         id: package_version
-        uses: KageKirin/bump-node-package-version@v0
+        uses: KageKirin/bump-node-package-version@v1
         with:
           patch: true
       - name: Tag and push
