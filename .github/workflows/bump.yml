@@ -1,0 +1,20 @@
+name: Bump Version
+on:
+  # Manually triggered
+  workflow_dispatch:
+
+jobs:
+  increment-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Bump package version
+        id: package_version
+        uses: KageKirin/bump-node-package-version@v0
+        with:
+          patch: true
+      - name: Tag and push
+        run: |
+          git commit -am "chore: Bump version to ${{ steps.test.package_version.version }}"
+          git tag ${{ steps.test.package_version.version }}
+          git push --follow-tags https://${{ secrets.FUEL_BOT_PAT }}@github.com/{{ github.repository }}
