@@ -4,7 +4,8 @@ import { addFilePrefix, log } from '../util';
 
 export default async function openAstFile(filePath: string, astKind: AstKind) {
   try {
-    const astDocument = await showAst(addFilePrefix(filePath), astKind);
+    let savePath = '/tmp/';
+    const astDocument = await showAst(addFilePrefix(filePath), astKind, addFilePrefix(savePath));
     if (astDocument) {
       const openPath = Uri.parse(astDocument.uri);
       await commands.executeCommand('vscode.openFolder', openPath, {
