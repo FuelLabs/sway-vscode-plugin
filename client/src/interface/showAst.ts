@@ -22,7 +22,7 @@ const request = new RequestType<
 export const showAst = async (
   filePath: string,
   astKind: AstKind,
-  savePath: string,
+  savePath: string
 ): Promise<TextDocumentIdentifier | null> => {
   const client = getClient();
   const params: ShowAstParams = {
