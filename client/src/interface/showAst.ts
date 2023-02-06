@@ -1,4 +1,5 @@
 import {
+  DocumentUri,
   RequestType,
   TextDocumentIdentifier,
 } from 'vscode-languageclient/node';
@@ -9,6 +10,7 @@ export type AstKind = 'lexed' | 'parsed' | 'typed';
 interface ShowAstParams {
   textDocument: TextDocumentIdentifier;
   astKind: AstKind;
+  savePath: DocumentUri;
 }
 
 const request = new RequestType<
@@ -19,7 +21,8 @@ const request = new RequestType<
 
 export const showAst = async (
   filePath: string,
-  astKind: AstKind
+  astKind: AstKind,
+  savePath: string
 ): Promise<TextDocumentIdentifier | null> => {
   const client = getClient();
   const params: ShowAstParams = {
@@ -27,6 +30,7 @@ export const showAst = async (
       uri: filePath,
     },
     astKind,
+    savePath,
   };
   return await client.sendRequest(request, params);
 };
