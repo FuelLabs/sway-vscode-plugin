@@ -127,6 +127,16 @@
             "integer"
           ],
           "minimum": 0
+        },
+        "sway-lsp.onEnter.continueDocComments": {
+          "markdownDescription": "Whether to continue /// comments when enter is pressed.",
+          "default": true,
+          "type": "boolean"
+        },
+        "sway-lsp.onEnter.continueComments": {
+          "markdownDescription": "Whether to continue // comments when enter is pressed.",
+          "default": false,
+          "type": "boolean"
         }
       },
       "commands": [
