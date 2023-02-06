@@ -2,13 +2,14 @@ import { commands, Uri } from 'vscode';
 import { AstKind, showAst } from '../interface/showAst';
 import { addFilePrefix, log } from '../util';
 
+const SAVE_PATH = '/tmp/';
+
 export default async function openAstFile(filePath: string, astKind: AstKind) {
   try {
-    let savePath = '/tmp/';
     const astDocument = await showAst(
       addFilePrefix(filePath),
       astKind,
-      addFilePrefix(savePath)
+      addFilePrefix(SAVE_PATH)
     );
     if (astDocument) {
       const openPath = Uri.parse(astDocument.uri);
