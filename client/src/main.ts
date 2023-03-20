@@ -1,12 +1,6 @@
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import {
-  commands,
-  ExtensionContext,
-  ExtensionMode,
-  window,
-  workspace,
-} from 'vscode';
+import { commands, ExtensionContext, window, workspace } from 'vscode';
 import * as lc from 'vscode-languageclient/node';
 import { createClient, getClient } from './client';
 import { Config } from './config';
@@ -31,10 +25,7 @@ export async function activate(context: ExtensionContext) {
   setInterval(updateFuelCoreStatus, 1000);
 
   try {
-    const client = createClient(
-      getClientOptions(),
-      await getServerOptions()
-    );
+    const client = createClient(getClientOptions(), await getServerOptions());
 
     // Start the client. This will also launch the server
     await client.start();
