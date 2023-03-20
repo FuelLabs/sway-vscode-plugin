@@ -11,7 +11,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Generate changelog and push
-        uses: BobAnkh/auto-generate-changelog@v1.2.3
+        uses: BobAnkh/auto-generate-changelog@v1.2.4
         with:
           ACCESS_TOKEN: ${{secrets.FUEL_BOT_PAT}}
           COMMIT_MESSAGE: 'docs(CHANGELOG): Update release notes'
