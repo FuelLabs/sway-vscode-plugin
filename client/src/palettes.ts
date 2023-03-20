@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 import forcBuild from './commands/forcBuild';
 import forcRun from './commands/forcRun';
 import forcTest from './commands/forcTest';
+import installServer from './commands/installServer';
 import openAstFile from './commands/openAstFile';
 import startFuelCore from './commands/startFuelCore';
 import stopFuelCore from './commands/stopFuelCore';
@@ -73,6 +74,10 @@ export class CommandPalettes {
           const currentFile = vscode.window.activeTextEditor.document.fileName;
           await openAstFile(currentFile, 'typed');
         },
+      },
+      {
+        command: 'sway.installServer',
+        callback: async () => installServer(),
       },
     ];
   }

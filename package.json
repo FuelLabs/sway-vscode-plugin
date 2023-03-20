@@ -41,7 +41,8 @@
     "onCommand:sway.stopFuelCore",
     "onCommand:sway.showLexedAst",
     "onCommand:sway.showParsedAst",
-    "onCommand:sway.showTypedAst"
+    "onCommand:sway.showTypedAst",
+    "onCommand:sway.installServer"
   ],
   "contributes": {
     "configuration": {
@@ -171,6 +172,10 @@
         {
           "command": "sway.showTypedAst",
           "title": "Sway: Show Typed AST"
+        },
+        {
+          "command": "sway.installServer",
+          "title": "Sway: Install Server"
         }
       ]
     },
@@ -243,6 +248,10 @@
       {
         "command": "sway.showTypedAst",
         "title": "Sway: Show Typed AST"
+      },
+      {
+        "command": "sway.installServer",
+        "title": "Sway: Install Server"
       }
     ],
     "snippets": [
@@ -261,6 +270,7 @@
   },
   "dependencies": {
     "child_process": "^1.0.2",
+    "util": "^0.12.5",
     "vscode-languageclient": "^8.0.0-next.14"
   },
   "devDependencies": {
