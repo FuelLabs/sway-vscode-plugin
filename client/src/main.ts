@@ -33,7 +33,7 @@ export async function activate(context: ExtensionContext) {
   try {
     const client = createClient(
       getClientOptions(),
-      await getServerOptions(context, config)
+      await getServerOptions()
     );
 
     // Start the client. This will also launch the server
@@ -56,10 +56,7 @@ export function deactivate(): Thenable<void> | undefined {
   return client.stop();
 }
 
-async function getServerOptions(
-  context: ExtensionContext,
-  config: Config
-): Promise<lc.ServerOptions> {
+async function getServerOptions(): Promise<lc.ServerOptions> {
   // Check if the executable exists.
   try {
     await promisify(exec)(`type -P ${LSP_EXECUTABLE_NAME}`);
@@ -79,7 +76,7 @@ async function getServerOptions(
         }
       });
     throw Error(`Missing executable: ${LSP_EXECUTABLE_NAME}\
-        \n\nYou may need to install the fuel toolchain or add it to your path. Try running:\
+        \n\nYou may need to install the fuel toolchain or add ${process.env.HOME}/.fuelup/bin your path. Try running:\
         \n\ncurl --proto '=https' --tlsv1.2 -sSf https://install.fuel.network/fuelup-init.sh | sh\
         \n\nOr read about fuelup for more information: https://github.com/FuelLabs/fuelup\n`);
   }
@@ -98,21 +95,11 @@ async function getServerOptions(
     },
   };
 
-  const devServerOptions: lc.ServerOptions = {
+  return {
     run: serverExecutable,
     debug: serverExecutable,
     transport: lc.TransportKind.stdio,
   };
-
-  switch (context.extensionMode) {
-    case ExtensionMode.Development:
-    case ExtensionMode.Test:
-      return devServerOptions;
-
-    default:
-      // TODO: for production we need to be able to install the Language Server
-      return devServerOptions;
-  }
 }
 
 function getClientOptions(): lc.LanguageClientOptions {

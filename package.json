@@ -31,19 +31,6 @@
     "Themes"
   ],
   "main": "./client/out/main",
-  "activationEvents": [
-    "onLanguage:sway",
-    "onView:sway",
-    "onCommand:sway.runScript",
-    "onCommand:sway.runTests",
-    "onCommand:sway.forcBuild",
-    "onCommand:sway.startFuelCore",
-    "onCommand:sway.stopFuelCore",
-    "onCommand:sway.showLexedAst",
-    "onCommand:sway.showParsedAst",
-    "onCommand:sway.showTypedAst",
-    "onCommand:sway.installServer"
-  ],
   "contributes": {
     "configuration": {
       "type": "object",
