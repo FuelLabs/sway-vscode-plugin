@@ -48,7 +48,7 @@ export function deactivate(): Thenable<void> | undefined {
 }
 
 async function getServerOptions(): Promise<lc.ServerOptions> {
-  // Look for the executable in FUELUP_HOME if it exists, otherwise use the default path.
+  // Look for the executable in FUELUP_HOME if it exists, otherwise look for it in the PATH.
   const executable = process.env.FUELUP_HOME
     ? `${process.env.FUELUP_HOME}/bin/${LSP_EXECUTABLE_NAME}`
     : LSP_EXECUTABLE_NAME;
