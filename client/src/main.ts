@@ -48,9 +48,15 @@ export function deactivate(): Thenable<void> | undefined {
 }
 
 async function getServerOptions(): Promise<lc.ServerOptions> {
+  // Look for the executable in FUELUP_HOME if it exists, otherwise look for it in the PATH.
+  const executable = process.env.FUELUP_HOME
+    ? `${process.env.FUELUP_HOME}/bin/${LSP_EXECUTABLE_NAME}`
+    : LSP_EXECUTABLE_NAME;
+
   // Check if the executable exists.
   try {
-    await promisify(exec)(`type -P ${LSP_EXECUTABLE_NAME}`);
+    let version = await promisify(exec)(`${executable} --version`);
+    log.info(`Server executable version: ${version.stdout}`);
   } catch (error) {
     window
       .showErrorMessage(
@@ -74,7 +80,7 @@ async function getServerOptions(): Promise<lc.ServerOptions> {
 
   // Get the full path to the server executable.
   const { stdout: executablePath } = await promisify(exec)(
-    `which ${LSP_EXECUTABLE_NAME}`
+    `which ${executable}`
   );
   const command = executablePath.trim();
   log.info(`Using server executable: ${command}`);
