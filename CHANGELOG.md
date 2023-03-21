@@ -1,25 +1,16 @@
 # CHANGELOG
 
-## [0.2.11](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.2.11) - 2023-03-20 23:15:58
+## [0.2.12](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.2.12) - 2023-03-21 00:02:00
 
 ## What's Changed
-* Trigger publish only after generating changelog by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/127
-* Switch to bump-everywhere action by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/128
-* Revert "⬆️ bump everywhere to 0.2.10" by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/130
-* Revert "⬆️ bump everywhere to 0.2.10" by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/131
-* Github actions with new token by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/132
-* Try bump v1 by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/133
-* Bump to 0.2.10 by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/134
-* Remove bad gh action by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/135
-* Set savePath for show AST commands to tmp dir by @JoshuaBatty in https://github.com/FuelLabs/sway-vscode-plugin/pull/137
-* Add onEnter config options by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/138
-* make save path const by @JoshuaBatty in https://github.com/FuelLabs/sway-vscode-plugin/pull/139
-* Check and install server executable by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/143
-* Fix dependency vulnerabilities by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/144
-* Bump to 0.2.11 by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/145
+* Upgrade changelog workflow action by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/146
+* Print the user's home in error message by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/147
+* Bump version to 0.2.12 by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/148
 
 
-**Full Changelog**: https://github.com/FuelLabs/sway-vscode-plugin/compare/0.2.9...0.2.11
+**Full Changelog**: https://github.com/FuelLabs/sway-vscode-plugin/compare/0.2.11...0.2.12
+
+## [0.2.11](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.2.11) - 2023-03-20 23:15:58
 
 ## [0.2.9](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.2.9) - 2023-01-25 02:19:45
 
