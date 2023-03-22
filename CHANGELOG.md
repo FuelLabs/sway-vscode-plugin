@@ -1,14 +1,16 @@
 # CHANGELOG
 
-## [0.2.12](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.2.12) - 2023-03-21 00:02:00
+## [0.2.13](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.2.13) - 2023-03-22 04:17:52
 
 ## What's Changed
-* Upgrade changelog workflow action by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/146
-* Print the user's home in error message by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/147
-* Bump version to 0.2.12 by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/148
+* Check for forc in FUELUP_HOME by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/149
+* Trim newline from version output by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/150
+* Bump version to 0.2.13 by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/151
 
 
-**Full Changelog**: https://github.com/FuelLabs/sway-vscode-plugin/compare/0.2.11...0.2.12
+**Full Changelog**: https://github.com/FuelLabs/sway-vscode-plugin/compare/0.2.12...0.2.13
+
+## [0.2.12](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.2.12) - 2023-03-21 00:02:00
 
 ## [0.2.11](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.2.11) - 2023-03-20 23:15:58
 
