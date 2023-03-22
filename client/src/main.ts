@@ -56,7 +56,7 @@ async function getServerOptions(): Promise<lc.ServerOptions> {
   // Check if the executable exists.
   try {
     let version = await promisify(exec)(`${executable} --version`);
-    log.info(`Server executable version: ${version.stdout}`);
+    log.info(`Server executable version: ${version.stdout.trim()}`);
   } catch (error) {
     window
       .showErrorMessage(
