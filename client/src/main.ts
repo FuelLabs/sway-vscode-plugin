@@ -6,7 +6,7 @@ import { createClient, getClient } from './client';
 import { Config } from './config';
 import { CommandPalettes } from './palettes';
 import updateFuelCoreStatus from './status_bar/fuelCoreStatus';
-import { log } from './util';
+import { log } from './util/util';
 
 const LSP_EXECUTABLE_NAME = 'forc-lsp';
 
@@ -115,6 +115,10 @@ function getClientOptions(): lc.LanguageClientOptions {
       ],
     },
     initializationOptions: workspace.getConfiguration('sway-lsp'),
+    markdown: {
+      isTrusted: true,
+      supportHtml: true,
+    },
   };
 
   return clientOptions;
