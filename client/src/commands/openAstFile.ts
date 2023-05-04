@@ -1,6 +1,6 @@
 import { commands, Uri } from 'vscode';
 import { AstKind, showAst } from '../interface/showAst';
-import { addFilePrefix, log } from '../util';
+import { addFilePrefix, log } from '../util/util';
 
 const SAVE_PATH = '/tmp/';
 

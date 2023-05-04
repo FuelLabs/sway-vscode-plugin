@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { log } from './util';
+import { log } from './util/util';
 
 export class Config {
   readonly extensionId = 'fuellabs.sway-vscode-plugin';
