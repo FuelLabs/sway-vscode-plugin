@@ -5,7 +5,7 @@ import {
 } from 'vscode-languageclient/node';
 import { getClient } from '../client';
 import { ProgramType } from '../program';
-import { addFilePrefix } from '../util';
+import { addFilePrefix } from '../util/util';
 
 interface GetRunnablesParams {
   textDocument: TextDocumentIdentifier;

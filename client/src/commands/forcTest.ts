@@ -1,4 +1,4 @@
-import { Terminal } from '../util';
+import { Terminal } from '../util/util';
 
 export default function forcTest(forcDir: string, _testName?: string) {
   // TODO: add support for running specific tests when

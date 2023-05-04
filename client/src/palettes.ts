@@ -3,8 +3,10 @@ import * as vscode from 'vscode';
 import forcBuild from './commands/forcBuild';
 import forcRun from './commands/forcRun';
 import forcTest from './commands/forcTest';
+import goToLocation from './commands/goToLocation';
 import installServer from './commands/installServer';
 import openAstFile from './commands/openAstFile';
+import peekLocations from './commands/peekLocations';
 import startFuelCore from './commands/startFuelCore';
 import stopFuelCore from './commands/stopFuelCore';
 import { Config } from './config';
@@ -78,6 +80,14 @@ export class CommandPalettes {
       {
         command: 'sway.installServer',
         callback: async () => installServer(),
+      },
+      {
+        command: 'sway.goToLocation',
+        callback: goToLocation,
+      },
+      {
+        command: 'sway.peekLocations',
+        callback: peekLocations,
       },
     ];
   }
