@@ -1,4 +1,4 @@
-import { Terminal } from '../util';
+import { Terminal } from '../util/util';
 
 export default function installServer() {
   Terminal.Sway.execute(

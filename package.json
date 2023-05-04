@@ -42,7 +42,9 @@
     "onCommand:sway.showLexedAst",
     "onCommand:sway.showParsedAst",
     "onCommand:sway.showTypedAst",
-    "onCommand:sway.installServer"
+    "onCommand:sway.installServer",
+    "onCommand:sway.goToLocation",
+    "onCommand:sway.peekLocations"
   ],
   "contributes": {
     "configuration": {
@@ -176,6 +178,14 @@
         {
           "command": "sway.installServer",
           "title": "Sway: Install Server"
+        },
+        {
+          "command": "sway.goToLocation",
+          "title": "Sway: Go To Definition"
+        },
+        {
+          "command": "sway.peekLocations",
+          "title": "Sway: Peek Locations"
         }
       ]
     },
@@ -252,6 +262,40 @@
       {
         "command": "sway.installServer",
         "title": "Sway: Install Server"
+      },
+      {
+        "command": "sway.goToLocation",
+        "title": "Sway: Go To Definition",
+        "args": [
+          {
+            "name": "uri",
+            "description": "URI of the document to open.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "range",
+            "description": "Range of selected text in the document.",
+            "schema": {
+              "$ref": "#/definitions/Range"
+            }
+          }
+        ]
+      },
+      {
+        "command": "sway.peekLocations",
+        "title": "Sway: Peek Locations",
+        "args": [
+          {
+            "name": "locations",
+            "description": "Array of locations.",
+            "schema": {
+              "type": "array",
+              "items": [ {"$ref": "#/definitions/Location"} ]
+            }
+          }
+        ]
       }
     ],
     "snippets": [

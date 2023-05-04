@@ -1,5 +1,5 @@
 import { window } from 'vscode';
-import { Terminal } from '../util';
+import { Terminal } from '../util/util';
 
 export default function startFuelCore() {
   Terminal.FuelCore.execute(`fuel-core run --db-type in-memory`);
