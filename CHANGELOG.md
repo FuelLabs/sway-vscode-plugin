@@ -1,14 +1,20 @@
 # CHANGELOG
 
-## [0.2.13](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.2.13) - 2023-03-22 04:17:52
+## [0.2.14](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.2.14) - 2023-05-04 20:01:53
 
 ## What's Changed
-* Check for forc in FUELUP_HOME by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/149
-* Trim newline from version output by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/150
-* Bump version to 0.2.13 by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/151
+* Support hover links by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/152
+* chore: bump to v0.2.14 by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/153
 
 
-**Full Changelog**: https://github.com/FuelLabs/sway-vscode-plugin/compare/0.2.12...0.2.13
+**Full Changelog**: https://github.com/FuelLabs/sway-vscode-plugin/compare/0.2.13...0.2.14
+
+### Chores
+
+- general:
+  - bump to v0.2.14 (#153) ([1c9a317](https://github.com/FuelLabs/sway-vscode-plugin/commit/1c9a317d2b3b6602912a5b10e1ed42eec2a5c198)) ([#153](https://github.com/FuelLabs/sway-vscode-plugin/pull/153))
+
+## [0.2.13](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.2.13) - 2023-03-22 04:17:52
 
 ## [0.2.12](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.2.12) - 2023-03-21 00:02:00
 
