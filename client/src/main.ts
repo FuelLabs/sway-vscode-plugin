@@ -4,6 +4,7 @@ import { commands, ExtensionContext, window, workspace } from 'vscode';
 import * as lc from 'vscode-languageclient/node';
 import { createClient, getClient } from './client';
 import { Config } from './config';
+import { onEnter } from './interface/onEnter';
 import { CommandPalettes } from './palettes';
 import updateFuelCoreStatus from './status_bar/fuelCoreStatus';
 import { log } from './util/util';
@@ -23,6 +24,11 @@ export async function activate(context: ExtensionContext) {
 
   // Start a recurring task to keep fuel-core status updated
   setInterval(updateFuelCoreStatus, 1000);
+
+  // Listen for did_change events for on_enter capabilities.
+  workspace.onDidChangeTextDocument(
+    async changeEvent => await onEnter(changeEvent)
+  );
 
   try {
     const client = createClient(getClientOptions(), await getServerOptions());

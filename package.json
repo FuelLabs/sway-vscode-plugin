@@ -133,7 +133,7 @@
         },
         "sway-lsp.onEnter.continueDocComments": {
           "markdownDescription": "Whether to continue /// comments when enter is pressed.",
-          "default": true,
+          "default": false,
           "type": "boolean"
         },
         "sway-lsp.onEnter.continueComments": {
