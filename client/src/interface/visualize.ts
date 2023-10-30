@@ -1,5 +1,4 @@
 import {
-  DocumentUri,
   RequestType,
   TextDocumentIdentifier,
 } from 'vscode-languageclient/node';
@@ -12,15 +11,13 @@ interface VisualizeParams {
   graphKind: GraphKind;
 }
 
-const request = new RequestType<
-  VisualizeParams,
-  string | null, 
-  void
->('sway/visualize');
+const request = new RequestType<VisualizeParams, string | null, void>(
+  'sway/visualize'
+);
 
 export const visualize = async (
   filePath: string,
-  graphKind: GraphKind,
+  graphKind: GraphKind
 ): Promise<string | null> => {
   const client = getClient();
   const params: VisualizeParams = {

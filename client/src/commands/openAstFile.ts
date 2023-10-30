@@ -21,9 +21,6 @@ export default async function openAstFile(filePath: string, astKind: AstKind) {
       log.error(`No ${astKind} AST file found for ${filePath}`);
     }
   } catch (error) {
-    log.error(
-      `Failed to open ${astKind} AST file for ${filePath}`,
-      error
-    );
+    log.error(`Failed to open ${astKind} AST file for ${filePath}`, error);
   }
 }

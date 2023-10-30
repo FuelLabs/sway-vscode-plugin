@@ -4,7 +4,8 @@ import { log } from './util/util';
 export const EXTENSION_ID = 'fuellabs.sway-vscode-plugin';
 export const EXTENSION_ROOT = 'sway-lsp';
 
-export const getExtensionPath = () => vscode.extensions.getExtension(EXTENSION_ID)!.extensionPath;
+export const getExtensionPath = () =>
+  vscode.extensions.getExtension(EXTENSION_ID)!.extensionPath;
 
 export class Config {
   private readonly requiresReloadOpts = ['debug'].map(

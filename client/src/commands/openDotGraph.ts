@@ -1,27 +1,29 @@
+import * as path from 'path';
+import * as vscode from 'vscode';
+import { EXTENSION_ROOT, getExtensionPath } from '../config';
 import { GraphKind, visualize } from '../interface/visualize';
 import { addFilePrefix, log } from '../util/util';
-import * as vscode from 'vscode' ;
-import * as path from "path";
-import { EXTENSION_ROOT, getExtensionPath } from '../config';
 
-export default async function openDotGraph(filePath: string, graphKind: GraphKind) {
+export default async function openDotGraph(
+  filePath: string,
+  graphKind: GraphKind
+) {
   try {
-    const dotContents = await visualize(
-      addFilePrefix(filePath),
-      graphKind,
-    );
+    const dotContents = await visualize(addFilePrefix(filePath), graphKind);
     if (dotContents) {
-      const nodeModulesPath = vscode.Uri.file(path.join(getExtensionPath(), "node_modules"));
+      const nodeModulesPath = vscode.Uri.file(
+        path.join(getExtensionPath(), 'node_modules')
+      );
 
       const panel = vscode.window.createWebviewPanel(
-          `${EXTENSION_ROOT}.crate-graph`,
-          `${EXTENSION_ROOT} build plan graph`,
-          vscode.ViewColumn.Two,
-          {
-              enableScripts: true,
-              retainContextWhenHidden: true,
-              localResourceRoots: [nodeModulesPath],
-          },
+        `${EXTENSION_ROOT}.crate-graph`,
+        `${EXTENSION_ROOT} build plan graph`,
+        vscode.ViewColumn.Two,
+        {
+          enableScripts: true,
+          retainContextWhenHidden: true,
+          localResourceRoots: [nodeModulesPath],
+        }
       );
       const uri = panel.webview.asWebviewUri(nodeModulesPath);
 
@@ -73,9 +75,6 @@ export default async function openDotGraph(filePath: string, graphKind: GraphKin
       log.error(`No ${graphKind} graph found for ${filePath}`);
     }
   } catch (error) {
-    log.error(
-      `Failed to open ${graphKind} graph for ${filePath}`,
-      error
-    );
+    log.error(`Failed to open ${graphKind} graph for ${filePath}`, error);
   }
 }
