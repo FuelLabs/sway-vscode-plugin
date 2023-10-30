@@ -6,6 +6,7 @@ import forcTest from './commands/forcTest';
 import goToLocation from './commands/goToLocation';
 import installServer from './commands/installServer';
 import openAstFile from './commands/openAstFile';
+import openDotGraph from './commands/openDotGraph';
 import peekLocations from './commands/peekLocations';
 import startFuelCore from './commands/startFuelCore';
 import stopFuelCore from './commands/stopFuelCore';
@@ -75,6 +76,13 @@ export class CommandPalettes {
         callback: async () => {
           const currentFile = vscode.window.activeTextEditor.document.fileName;
           await openAstFile(currentFile, 'typed');
+        },
+      },
+      {
+        command: 'sway.viewBuildPlan',
+        callback: async () => {
+          const currentFile = vscode.window.activeTextEditor.document.fileName;
+          await openDotGraph(currentFile, 'build_plan');
         },
       },
       {

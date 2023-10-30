@@ -22,7 +22,7 @@ export default async function openAstFile(filePath: string, astKind: AstKind) {
     }
   } catch (error) {
     log.error(
-      `Failed to open ${astKind} AST file found for ${filePath}`,
+      `Failed to open ${astKind} AST file for ${filePath}`,
       error
     );
   }
