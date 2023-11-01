@@ -3,7 +3,7 @@ import { promisify } from 'util';
 import { commands, ExtensionContext, window, workspace } from 'vscode';
 import * as lc from 'vscode-languageclient/node';
 import { createClient, getClient } from './client';
-import { Config } from './config';
+import { Config, EXTENSION_ROOT as EXTENSION_ROOT } from './config';
 import { onEnter } from './interface/onEnter';
 import { CommandPalettes } from './palettes';
 import updateFuelCoreStatus from './status_bar/fuelCoreStatus';
@@ -120,7 +120,7 @@ function getClientOptions(): lc.LanguageClientOptions {
         workspace.createFileSystemWatcher('**/*.sw'),
       ],
     },
-    initializationOptions: workspace.getConfiguration('sway-lsp'),
+    initializationOptions: workspace.getConfiguration(EXTENSION_ROOT),
     markdown: {
       isTrusted: true,
       supportHtml: true,

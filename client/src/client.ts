@@ -3,6 +3,7 @@ import {
   LanguageClientOptions,
   ServerOptions,
 } from 'vscode-languageclient/node';
+import { EXTENSION_ROOT } from './config';
 
 let client: LanguageClient | null;
 
@@ -14,7 +15,7 @@ export const createClient = (
     throw new Error('Client already exists!');
   }
   client = new LanguageClient(
-    'sway-lsp',
+    EXTENSION_ROOT,
     'Sway Language Server',
     serverOptions,
     clientOptions
