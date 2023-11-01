@@ -1,16 +1,20 @@
 import * as vscode from 'vscode';
 import { log } from './util/util';
 
+export const EXTENSION_ID = 'fuellabs.sway-vscode-plugin';
+export const EXTENSION_ROOT = 'sway-lsp';
+
+export const getExtensionPath = () =>
+  vscode.extensions.getExtension(EXTENSION_ID)!.extensionPath;
+
 export class Config {
-  readonly extensionId = 'fuellabs.sway-vscode-plugin';
-  readonly rootSection = 'sway-lsp';
   private readonly requiresReloadOpts = ['debug'].map(
-    opt => `${this.rootSection}.${opt}`
+    opt => `${EXTENSION_ROOT}.${opt}`
   );
 
   readonly package: {
     version: string;
-  } = vscode.extensions.getExtension(this.extensionId)!.packageJSON;
+  } = vscode.extensions.getExtension(EXTENSION_ID)!.packageJSON;
 
   readonly globalStorageUri: vscode.Uri;
 
@@ -60,7 +64,7 @@ export class Config {
   // https://stackoverflow.com/questions/60135780/what-is-the-best-way-to-type-check-the-configuration-for-vscode-extension
 
   private get cfg(): vscode.WorkspaceConfiguration {
-    return vscode.workspace.getConfiguration(this.rootSection);
+    return vscode.workspace.getConfiguration(EXTENSION_ROOT);
   }
 
   /**

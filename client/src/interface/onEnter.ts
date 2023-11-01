@@ -1,4 +1,4 @@
-import { Range, TextDocumentChangeEvent, window } from 'vscode';
+import { TextDocumentChangeEvent, window } from 'vscode';
 import {
   RequestType,
   TextDocumentContentChangeEvent,
@@ -7,7 +7,6 @@ import {
   WorkspaceEdit,
 } from 'vscode-languageclient/node';
 import { getClient } from '../client';
-import { ProgramType } from '../program';
 import { toVSCodeRange } from '../util/convert';
 import { addFilePrefix } from '../util/util';
 
@@ -15,8 +14,6 @@ interface OnEnterParams {
   textDocument: TextDocumentIdentifier;
   contentChanges: TextDocumentContentChangeEvent[];
 }
-
-export type Runnable = [Range, ProgramType];
 
 const request = new RequestType<OnEnterParams, WorkspaceEdit | null, void>(
   'sway/on_enter'
