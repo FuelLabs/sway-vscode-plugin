@@ -1,0 +1,2 @@
+import{r as t,j as r}from"./main-1b1b8631.js";import"./config-27341492.js";import"./config-039f390a.js";import"./BaseConnection-538d8d30.js";const o=()=>{throw new Error("Test Error")};function h(){const[e,s]=t.useState(!1);return t.useEffect(()=>(window.addEventListener("crashReact",()=>{s(!0)}),window.removeEventListener("crashReact",()=>{})),[]),r.jsx(r.Fragment,{children:e&&r.jsx(o,{})})}export{h as default};
+//# sourceMappingURL=ThrowError-9c0be82a.js.map
