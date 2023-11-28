@@ -15,15 +15,17 @@ This extension provides LSP support for the Sway smart contract programming lang
 - types and documentation on hover
 - inlay hints for types and parameter names
 - semantic syntax highlighting
+- symbol renaming
+- code actions
+- imports insertion
 
 _Coming Soon_
 
-- symbol renaming
-- code completion with imports insertion
-- code actions
+- code completion
 - apply suggestions from errors
 - find all references, workspace symbol search
 - ... and many more
+
 
 ## Quick start
 
