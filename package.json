@@ -28,10 +28,12 @@
     "Programming Languages",
     "Extension Packs",
     "Snippets",
-    "Themes"
+    "Themes",
+    "Debuggers"
   ],
   "main": "./client/out/main",
   "activationEvents": [
+    "onDebug",
     "onLanguage:sway",
     "onView:sway",
     "onCommand:sway.runScript",
@@ -318,6 +320,42 @@
         "language": "sway",
         "scopeName": "source.sway",
         "path": "./syntaxes/sway.tmLanguage.json"
+      }
+    ],
+    "breakpoints": [{ "language": "sway" }],
+    "debuggers": [
+      {
+        "type": "mock",
+        "label": "Mock Debug",
+        "program": "/Users/sophiedankel/.cargo/bin/fuel-debugger",
+        "args": ["--serve"],
+        "languages": ["sway"],
+        "configurationAttributes": {
+          "launch": {
+            "required": [
+              "program"
+            ],
+            "properties": {
+              "program": {
+                "type": "string",
+                "description": "Absolute path to a text file.",
+                "default": "${file}"
+              }
+            }
+          },
+          "attach": {
+            "required": [
+              "program"
+            ],
+            "properties": {
+              "program": {
+                "type": "string",
+                "description": "Absolute path to a text file.",
+                "default": "${file}"
+              }
+            }
+          }
+        }
       }
     ]
   },
