@@ -325,10 +325,10 @@
     "breakpoints": [{ "language": "sway" }],
     "debuggers": [
       {
-        "type": "mock",
-        "label": "Mock Debug",
-        "program": "/Users/sophiedankel/.cargo/bin/fuel-debugger",
-        "args": ["--serve"],
+        "type": "sway",
+        "label": "Sway Debugger",
+        "program": "/usr/bin/env",
+        "args": ["forc-debug", "--serve"],
         "languages": ["sway"],
         "configurationAttributes": {
           "launch": {
