@@ -36,3 +36,9 @@ _Coming Soon_
 ## Configuration
 
 This extension provides configurations through VSCode's configuration settings. All configurations are under `sway-lsp.*`.
+
+
+## Q&A
+
+- vsce package : ERROR Command failed: npm list --production --parseable --depth=99999 --loglevel=error
+try `npm upgrade`, reference https://github.com/microsoft/vscode-vsce/issues/477#issuecomment-1188993833
