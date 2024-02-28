@@ -1,14 +1,20 @@
 # CHANGELOG
 
-## [0.2.16](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.2.16) - 2023-11-28 21:57:20
+## [0.3.0](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.0) - 2024-02-27 23:35:46
 
 ## What's Changed
-* Command palette for displaying build graph by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/162
-* Update README.md with new features by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/163
-* Bump to 0.2.16 by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/164
+* Add config for debugger by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/166
+* chore: bump version to 0.3.0 by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/168
 
 
-**Full Changelog**: https://github.com/FuelLabs/sway-vscode-plugin/compare/0.2.15...0.2.16
+**Full Changelog**: https://github.com/FuelLabs/sway-vscode-plugin/compare/0.2.16...0.3.0
+
+### Chores
+
+- general:
+  - bump version to 0.3.0 (#168) ([f8fd884](https://github.com/FuelLabs/sway-vscode-plugin/commit/f8fd8843c9840e546ade27a0ecec628654ae8f14)) ([#168](https://github.com/FuelLabs/sway-vscode-plugin/pull/168))
+
+## [0.2.16](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.2.16) - 2023-11-28 21:57:20
 
 ## [0.2.15](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.2.15) - 2023-08-01 03:58:38
 
