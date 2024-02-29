@@ -15,10 +15,6 @@
       "runtimeExecutable": "${execPath}",
       "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
       "outFiles": ["${workspaceRoot}/client/out/**/*.js"],
-      "preLaunchTask": {
-        "type": "npm",
-        "script": "watch"
-      }
     }
   ],
   "compounds": [
