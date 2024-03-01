@@ -1,18 +1,23 @@
 # CHANGELOG
 
-## [0.3.0](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.0) - 2024-02-27 23:35:46
+## [0.3.1](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.1) - 2024-03-01 20:38:57
 
 ## What's Changed
-* Add config for debugger by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/166
-* chore: bump version to 0.3.0 by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/168
+* chore: ignore node_modules when using vsce for bundling by @bethatguyad in https://github.com/FuelLabs/sway-vscode-plugin/pull/170
+* chore: bump version to 0.3.1 by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/171
 
+## New Contributors
+* @bethatguyad made their first contribution in https://github.com/FuelLabs/sway-vscode-plugin/pull/170
 
-**Full Changelog**: https://github.com/FuelLabs/sway-vscode-plugin/compare/0.2.16...0.3.0
+**Full Changelog**: https://github.com/FuelLabs/sway-vscode-plugin/compare/0.3.0...0.3.1
 
 ### Chores
 
 - general:
-  - bump version to 0.3.0 (#168) ([f8fd884](https://github.com/FuelLabs/sway-vscode-plugin/commit/f8fd8843c9840e546ade27a0ecec628654ae8f14)) ([#168](https://github.com/FuelLabs/sway-vscode-plugin/pull/168))
+  - bump version to 0.3.1 (#171) ([eaadf28](https://github.com/FuelLabs/sway-vscode-plugin/commit/eaadf283cd49763722ef7b8c7d7e6ddfda7531f8)) ([#171](https://github.com/FuelLabs/sway-vscode-plugin/pull/171))
+  - ignore node_modules when using vsce for bundling (#170) ([f6e7598](https://github.com/FuelLabs/sway-vscode-plugin/commit/f6e759891b2692e7689cbbc2b31660780c136f6c)) ([#170](https://github.com/FuelLabs/sway-vscode-plugin/pull/170))
+
+## [0.3.0](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.0) - 2024-02-27 23:35:46
 
 ## [0.2.16](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.2.16) - 2023-11-28 21:57:20
 
