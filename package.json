@@ -11,15 +11,17 @@
     "url": "https://github.com/FuelLabs/sway-vscode-plugin.git"
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -b",
-    "watch": "tsc -b -w",
-    "test": "sh ./scripts/e2e.sh",
-    "install-extension": "vsce package -o sway-vscode-plugin.vsix && code --install-extension sway-vscode-plugin.vsix --force",
+    "vscode:prepublish": "npm run esbuild-base -- --minify",
+    "esbuild-base": "esbuild ./client/src/main.ts --bundle --outfile=client/out/main.js --external:vscode --format=cjs --platform=node",
+    "esbuild": "npm run esbuild-base -- --sourcemap",
+    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch=forever &",
+    "pre:install-extension": "rm sway-vscode-plugin.vsix",
+    "install-extension": "npm run package && code --install-extension sway-vscode-plugin.vsix --force",
     "format:check": "prettier --check 'client/src' 'snippets' 'syntaxes'",
     "format:fix": "prettier --write 'client/src' 'snippets' 'syntaxes'",
     "fix-syntaxes": "vscode-tmgrammar-snap --updateSnapshot client/test/syntaxes/*sw",
-    "test-syntaxes": "vscode-tmgrammar-snap client/test/syntaxes/*sw"
+    "test-syntaxes": "vscode-tmgrammar-snap client/test/syntaxes/*sw",
+    "package": "vsce package -o sway-vscode-plugin-dev.vsix"
   },
   "engines": {
     "vscode": "^1.66.0"
@@ -303,7 +305,11 @@
             "description": "Array of locations.",
             "schema": {
               "type": "array",
-              "items": [ {"$ref": "#/definitions/Location"} ]
+              "items": [
+                {
+                  "$ref": "#/definitions/Location"
+                }
+              ]
             }
           }
         ]
@@ -322,14 +328,23 @@
         "path": "./syntaxes/sway.tmLanguage.json"
       }
     ],
-    "breakpoints": [{ "language": "sway" }],
+    "breakpoints": [
+      {
+        "language": "sway"
+      }
+    ],
     "debuggers": [
       {
         "type": "sway",
         "label": "Sway Debugger",
         "program": "/usr/bin/env",
-        "args": ["forc-debug", "--serve"],
-        "languages": ["sway"],
+        "args": [
+          "forc-debug",
+          "--serve"
+        ],
+        "languages": [
+          "sway"
+        ],
         "configurationAttributes": {
           "launch": {
             "required": [
@@ -373,6 +388,7 @@
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "@vscode/test-electron": "^1.6.1",
+    "esbuild": "^0.20.1",
     "eslint": "^7.32.0",
     "prettier": "^2.5.1",
     "prettier-plugin-organize-imports": "^3.2.2",

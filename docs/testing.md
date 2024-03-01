@@ -21,8 +21,7 @@ Firstly, uninstall the official release of the extension and reload VS Code if y
 cd sway-vscode-plugin
 npm i
 git checkout <branch>
-vsce package -o sway-vscode-plugin-dev.vsix
-code --install-extension sway-vscode-plugin-dev.vsix
+npm run install-extension
 ```
 
 ## Testing in Debug mode
