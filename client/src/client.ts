@@ -14,6 +14,7 @@ export const createClient = (
   if (client) {
     throw new Error('Client already exists!');
   }
+  console.log('somethingj')
   client = new LanguageClient(
     EXTENSION_ROOT,
     'Sway Language Server',

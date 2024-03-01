@@ -23,7 +23,7 @@
         "panel": "dedicated",
         "reveal": "never"
       },
-      "problemMatcher": ["$tsc-watch"]
+      "problemMatcher": ["$esbuild-watch"]
     }
   ]
 }
