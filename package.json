@@ -16,7 +16,7 @@
     "esbuild": "npm run esbuild-base -- --sourcemap",
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch=forever &",
     "pre:install-extension": "rm sway-vscode-plugin.vsix",
-    "install-extension": "npm run package && code --install-extension sway-vscode-plugin.vsix --force",
+    "install-extension": "npm run package && code --install-extension sway-vscode-plugin-dev.vsix --force",
     "format:check": "prettier --check 'client/src' 'snippets' 'syntaxes'",
     "format:fix": "prettier --write 'client/src' 'snippets' 'syntaxes'",
     "fix-syntaxes": "vscode-tmgrammar-snap --updateSnapshot client/test/syntaxes/*sw",
@@ -56,6 +56,11 @@
       "type": "object",
       "title": "sway-lsp",
       "properties": {
+        "sway-lsp.path": {
+          "description": "Select the path to the Sway language server.",
+          "type": "string",
+          "default": ""
+        },
         "sway-lsp.trace.server": {
           "scope": "window",
           "type": "string",
