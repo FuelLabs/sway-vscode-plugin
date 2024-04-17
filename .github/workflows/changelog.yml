@@ -2,6 +2,11 @@ name: Bump version and update changelog
 on:
   # Manually triggered
   workflow_dispatch:
+    inputs:
+      target_branch:
+        description: 'Target branch name'
+        required: true
+        default: 'master'
 
 jobs:
   bump-version:
@@ -9,19 +14,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: master
+          ref: ${{ inputs.target_branch }}
       - name: Bump version and push tag
         uses: phips28/gh-action-bump-version@master
         env:
           GITHUB_TOKEN: ${{ secrets.FUEL_BOT_PAT }}
         with:
-          target-branch: 'master'
+          target-branch: ${{ inputs.target_branch }}
 
   update-changelog:
+    needs: bump-version
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
+          ref: ${{ inputs.target_branch }}
           fetch-depth: 0
       - name: Generate changelog and push
         uses: BobAnkh/auto-generate-changelog@v1.2.5
@@ -30,3 +37,4 @@ jobs:
           COMMIT_MESSAGE: 'docs(CHANGELOG): Update release notes'
           PATH: 'CHANGELOG.md'
           TYPE: 'feat:Feature,fix:Bug Fixes,docs:Documentation,refactor:Refactor,perf:Performance Improvements,chore:Chores'
+          BRANCH: ${{ inputs.target_branch }}
