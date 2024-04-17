@@ -1,21 +1,15 @@
 # CHANGELOG
 
-## [0.3.1](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.1) - 2024-03-01 20:38:57
+## Unreleased
 
-## What's Changed
-* chore: ignore node_modules when using vsce for bundling by @bethatguyad in https://github.com/FuelLabs/sway-vscode-plugin/pull/170
-* chore: bump version to 0.3.1 by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/171
+*No description*
 
-## New Contributors
-* @bethatguyad made their first contribution in https://github.com/FuelLabs/sway-vscode-plugin/pull/170
-
-**Full Changelog**: https://github.com/FuelLabs/sway-vscode-plugin/compare/0.3.0...0.3.1
-
-### Chores
+### Bug Fixes
 
 - general:
-  - bump version to 0.3.1 (#171) ([eaadf28](https://github.com/FuelLabs/sway-vscode-plugin/commit/eaadf283cd49763722ef7b8c7d7e6ddfda7531f8)) ([#171](https://github.com/FuelLabs/sway-vscode-plugin/pull/171))
-  - ignore node_modules when using vsce for bundling (#170) ([f6e7598](https://github.com/FuelLabs/sway-vscode-plugin/commit/f6e759891b2692e7689cbbc2b31660780c136f6c)) ([#170](https://github.com/FuelLabs/sway-vscode-plugin/pull/170))
+  - fix yml ([4335a6a](https://github.com/FuelLabs/sway-vscode-plugin/commit/4335a6adcf5d409c12b043622aa505c0bbe74c17)) ([#177](https://github.com/FuelLabs/sway-vscode-plugin/pull/177))
+
+## [0.3.1](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.1) - 2024-03-01 20:38:57
 
 ## [0.3.0](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.0) - 2024-02-27 23:35:46
 
