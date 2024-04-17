@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## [0.3.2](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.2) - 2024-04-17 20:04:11
+
+## What's Changed
+* Allow overriding the path to forc-lsp executable by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/174
+* chore: bump version to 0.3.2 by @JoshuaBatty in https://github.com/FuelLabs/sway-vscode-plugin/pull/175
+
+
+**Full Changelog**: https://github.com/FuelLabs/sway-vscode-plugin/compare/0.3.1...0.3.2
+
+### Chores
+
+- general:
+  - bump version to 0.3.2 (#175) ([92f93fc](https://github.com/FuelLabs/sway-vscode-plugin/commit/92f93fc56e1a8046c820847d350ef5d199a7210c)) ([#175](https://github.com/FuelLabs/sway-vscode-plugin/pull/175))
+
 ## [0.3.1](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.1) - 2024-03-01 20:38:57
 
 ## [0.3.0](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.0) - 2024-02-27 23:35:46
