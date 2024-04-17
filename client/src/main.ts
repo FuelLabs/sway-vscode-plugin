@@ -72,7 +72,8 @@ async function getServerOptions(config: Config): Promise<lc.ServerOptions> {
     log.info(`Server executable version: ${version.stdout.trim()}`);
   } catch (error) {
     if (!!settingsExecutable) {
-      const updateMessage = 'Update the setting "sway-lsp.diagnostic.binPath" either to a valid path to a forc-lsp executable, or leave it empty to use the executable to which your $PATH resolves.';
+      const updateMessage =
+        'Update the setting "sway-lsp.diagnostic.binPath" either to a valid path to a forc-lsp executable, or leave it empty to use the executable to which your $PATH resolves.';
       window
         .showErrorMessage(
           'The Sway Language Server is not installed at the path defined in your Extension Settings.',
