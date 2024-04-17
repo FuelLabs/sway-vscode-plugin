@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  update-changelog:
+  bump-version:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -14,6 +14,10 @@ jobs:
         uses:  'phips28/gh-action-bump-version@master'
         env:
           GITHUB_TOKEN: ${{ secrets.FUEL_BOT_PAT }}
+        with:
+          target-branch: 'master'
+
+  update-changelog:
       - name: Generate changelog and push
         uses: BobAnkh/auto-generate-changelog@v1.2.5
         with:
