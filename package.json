@@ -16,12 +16,12 @@
     "esbuild": "npm run esbuild-base -- --sourcemap",
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch=forever &",
     "pre:install-extension": "rm sway-vscode-plugin.vsix",
-    "install-extension": "npm run package && code --install-extension sway-vscode-plugin-dev.vsix --force",
+    "install-extension": "npm run package && code --install-extension sway-vscode-plugin.vsix --force",
     "format:check": "prettier --check 'client/src' 'snippets' 'syntaxes'",
     "format:fix": "prettier --write 'client/src' 'snippets' 'syntaxes'",
     "fix-syntaxes": "vscode-tmgrammar-snap --updateSnapshot client/test/syntaxes/*sw",
     "test-syntaxes": "vscode-tmgrammar-snap client/test/syntaxes/*sw",
-    "package": "vsce package -o sway-vscode-plugin-dev.vsix"
+    "package": "vsce package -o sway-vscode-plugin.vsix"
   },
   "engines": {
     "vscode": "^1.66.0"
@@ -56,11 +56,6 @@
       "type": "object",
       "title": "sway-lsp",
       "properties": {
-        "sway-lsp.path": {
-          "description": "Select the path to the Sway language server.",
-          "type": "string",
-          "default": ""
-        },
         "sway-lsp.trace.server": {
           "scope": "window",
           "type": "string",
@@ -108,6 +103,13 @@
           "type": "boolean",
           "default": true
         },
+        "sway-lsp.diagnostic.binPath": {
+          "description": "Optionally override the path to the Sway language server executable. If empty, the extension will use the forc-lsp executable to which your $PATH resolves (recommended for most users).",
+          "type": "string",
+          "default": "",
+          "pattern": "(^\/(.+\/)*forc-lsp$)|^$",
+          "patternErrorMessage": "Must be an absolute path to the `forc-lsp` executable, or left empty."
+        },        
         "sway-lsp.logging.level": {
           "scope": "window",
           "type": "string",

@@ -8,7 +8,7 @@ export const getExtensionPath = () =>
   vscode.extensions.getExtension(EXTENSION_ID)!.extensionPath;
 
 export class Config {
-  private readonly requiresReloadOpts = ['debug', 'path'].map(
+  private readonly requiresReloadOpts = ['debug', 'binPath'].map(
     opt => `${EXTENSION_ROOT}.${opt}`
   );
 
@@ -85,6 +85,10 @@ export class Config {
    */
   private get<T>(path: string): T {
     return this.cfg.get<T>(path)!;
+  }
+
+  get binPath() {
+    return this.get<string>('diagnostic.binPath');
   }
 
   get traceExtension() {
