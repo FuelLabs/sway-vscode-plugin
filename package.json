@@ -21,7 +21,7 @@
     "format:fix": "prettier --write 'client/src' 'snippets' 'syntaxes'",
     "fix-syntaxes": "vscode-tmgrammar-snap --updateSnapshot client/test/syntaxes/*sw",
     "test-syntaxes": "vscode-tmgrammar-snap client/test/syntaxes/*sw",
-    "package": "vsce package -o sway-vscode-plugin-dev.vsix"
+    "package": "vsce package -o sway-vscode-plugin.vsix"
   },
   "engines": {
     "vscode": "^1.66.0"
@@ -103,6 +103,13 @@
           "type": "boolean",
           "default": true
         },
+        "sway-lsp.diagnostic.binPath": {
+          "description": "Optionally override the path to the Sway language server executable. If empty, the extension will use the forc-lsp executable to which your $PATH resolves (recommended for most users).",
+          "type": "string",
+          "default": "",
+          "pattern": "(^\/(.+\/)*forc-lsp$)|^$",
+          "patternErrorMessage": "Must be an absolute path to the `forc-lsp` executable, or left empty."
+        },        
         "sway-lsp.logging.level": {
           "scope": "window",
           "type": "string",
