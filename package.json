@@ -3,7 +3,7 @@
   "displayName": "Sway",
   "description": "Sway language extension for Visual Studio Code",
   "icon": "images/logo.png",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "publisher": "FuelLabs",
   "license": "Apache-2.0",
   "repository": {
