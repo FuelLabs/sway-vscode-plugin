@@ -21,5 +21,5 @@ jobs:
           github-token: ${{ secrets.FUEL_BOT_PAT }}
           tag-prefix: ''
           release-count: '0'
-          config-file-path: '.github/conventional-changelog.js'
+          config-file-path: '.github/conventional-changelog.json'
           git-branch: ${{ inputs.target_branch }}
