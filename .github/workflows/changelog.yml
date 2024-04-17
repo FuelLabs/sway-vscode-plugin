@@ -9,15 +9,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
-      - name:  'Automated Version Bump'
-        uses:  'phips28/gh-action-bump-version@master'
+          ref: master
+      - name: Bump version and push tag
+        uses: phips28/gh-action-bump-version@master
         env:
           GITHUB_TOKEN: ${{ secrets.FUEL_BOT_PAT }}
         with:
           target-branch: 'master'
 
   update-changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Generate changelog and push
         uses: BobAnkh/auto-generate-changelog@v1.2.5
         with:
