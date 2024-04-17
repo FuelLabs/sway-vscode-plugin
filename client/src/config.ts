@@ -8,7 +8,7 @@ export const getExtensionPath = () =>
   vscode.extensions.getExtension(EXTENSION_ID)!.extensionPath;
 
 export class Config {
-  private readonly requiresReloadOpts = ['debug', 'diagnostics'].map(
+  private readonly requiresReloadOpts = ['debug', 'diagnostic'].map(
     opt => `${EXTENSION_ROOT}.${opt}`
   );
 
