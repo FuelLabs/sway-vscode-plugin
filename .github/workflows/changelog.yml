@@ -21,4 +21,5 @@ jobs:
           github-token: ${{ secrets.FUEL_BOT_PAT }}
           tag-prefix: ''
           release-count: '0'
+          version-file: 'package.json,package-lock.json'
           git-branch: ${{ inputs.target_branch }}
