@@ -37,5 +37,4 @@ jobs:
           COMMIT_MESSAGE: 'docs(CHANGELOG): Update release notes'
           PATH: 'CHANGELOG.md'
           TYPE: 'feat:Feature,fix:Bug Fixes,docs:Documentation,refactor:Refactor,perf:Performance Improvements,chore:Chores'
-          UNRELEASED_COMMITS: true
           BRANCH: ${{ inputs.target_branch }}
