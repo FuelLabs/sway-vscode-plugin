@@ -1,4 +1,4 @@
-name: Update Changelog
+name: Bump version and update changelog
 on:
   # Manually triggered
   workflow_dispatch:
@@ -10,6 +10,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - name:  'Automated Version Bump'
+        uses:  'phips28/gh-action-bump-version@master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.FUEL_BOT_PAT }}
       - name: Generate changelog and push
         uses: BobAnkh/auto-generate-changelog@v1.2.5
         with:
