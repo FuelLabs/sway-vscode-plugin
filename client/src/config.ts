@@ -91,6 +91,10 @@ export class Config {
     return this.get<string>('diagnostic.binPath');
   }
 
+  get disableLsp() {
+    return this.get<string>('diagnostic.disableLsp');
+  }
+
   get traceExtension() {
     return this.get<boolean>('trace.extension');
   }

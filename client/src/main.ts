@@ -25,6 +25,11 @@ export async function activate(context: ExtensionContext) {
   // Start a recurring task to keep fuel-core status updated
   setInterval(updateFuelCoreStatus, 1000);
 
+  if (config.disableLsp) {
+    log.info('Sway Language Server is disabled. Exiting...');
+    return;
+  }
+
   // Listen for did_change events for on_enter capabilities.
   workspace.onDidChangeTextDocument(
     async changeEvent => await onEnter(changeEvent)
