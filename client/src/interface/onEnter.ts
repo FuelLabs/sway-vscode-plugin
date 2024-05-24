@@ -22,6 +22,7 @@ const request = new RequestType<OnEnterParams, WorkspaceEdit | null, void>(
 export const onEnter = async (changeEvent: TextDocumentChangeEvent) => {
   if (
     changeEvent.document.uri.scheme === 'file' &&
+    changeEvent.document.languageId === 'sway' &&
     changeEvent.contentChanges.length === 1 &&
     changeEvent.contentChanges[0].text.includes('\n')
   ) {
