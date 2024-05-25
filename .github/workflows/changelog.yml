@@ -13,7 +13,7 @@ jobs:
       - name: Generate changelog and push
         uses: BobAnkh/auto-generate-changelog@v1.2.5
         with:
-          ACCESS_TOKEN: ${{secrets.FUEL_BOT_PAT}}
+          ACCESS_TOKEN: ${{secrets.REPO_TOKEN}}
           COMMIT_MESSAGE: 'docs(CHANGELOG): Update release notes'
           PATH: 'CHANGELOG.md'
           TYPE: 'feat:Feature,fix:Bug Fixes,docs:Documentation,refactor:Refactor,perf:Performance Improvements,chore:Chores'
