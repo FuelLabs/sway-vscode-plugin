@@ -1,18 +1,23 @@
 # CHANGELOG
 
-## [0.3.2](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.2) - 2024-04-17 20:04:11
+## [0.3.3](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.3) - 2024-04-18 23:43:25
 
 ## What's Changed
-* Allow overriding the path to forc-lsp executable by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/174
-* chore: bump version to 0.3.2 by @JoshuaBatty in https://github.com/FuelLabs/sway-vscode-plugin/pull/175
+* chore: Enforce conventional commit messages by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/179
+* chore: Add option to disable LSP by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/180
+* chore: bump version to 0.3.3 by @JoshuaBatty in https://github.com/FuelLabs/sway-vscode-plugin/pull/181
 
 
-**Full Changelog**: https://github.com/FuelLabs/sway-vscode-plugin/compare/0.3.1...0.3.2
+**Full Changelog**: https://github.com/FuelLabs/sway-vscode-plugin/compare/0.3.2...0.3.3
 
 ### Chores
 
 - general:
-  - bump version to 0.3.2 (#175) ([92f93fc](https://github.com/FuelLabs/sway-vscode-plugin/commit/92f93fc56e1a8046c820847d350ef5d199a7210c)) ([#175](https://github.com/FuelLabs/sway-vscode-plugin/pull/175))
+  - bump version to 0.3.3 (#181) ([7fe9318](https://github.com/FuelLabs/sway-vscode-plugin/commit/7fe9318739e58e9700de2f8330e25002224b26a5)) ([#181](https://github.com/FuelLabs/sway-vscode-plugin/pull/181))
+  - Add option to disable LSP (#180) ([942a832](https://github.com/FuelLabs/sway-vscode-plugin/commit/942a832feca4626969c8e0da9ecd19c91d93e5a2)) ([#180](https://github.com/FuelLabs/sway-vscode-plugin/pull/180))
+  - Enforce conventional commit messages (#179) ([fd80f1d](https://github.com/FuelLabs/sway-vscode-plugin/commit/fd80f1d0a724fbfa46534789e0eff3ffa3450036)) ([#179](https://github.com/FuelLabs/sway-vscode-plugin/pull/179))
+
+## [0.3.2](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.2) - 2024-04-17 20:04:11
 
 ## [0.3.1](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.1) - 2024-03-01 20:38:57
 
