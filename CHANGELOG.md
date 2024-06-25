@@ -1,21 +1,39 @@
 # CHANGELOG
 
-## [0.3.3](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.3) - 2024-04-18 23:43:25
+## [0.3.5](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.5) - 2024-06-25 05:32:50
 
 ## What's Changed
-* chore: Enforce conventional commit messages by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/179
-* chore: Add option to disable LSP by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/180
-* chore: bump version to 0.3.3 by @JoshuaBatty in https://github.com/FuelLabs/sway-vscode-plugin/pull/181
+* chore: send client name with initialization request by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/187
 
 
-**Full Changelog**: https://github.com/FuelLabs/sway-vscode-plugin/compare/0.3.2...0.3.3
+**Full Changelog**: https://github.com/FuelLabs/sway-vscode-plugin/compare/0.3.4...0.3.5
 
 ### Chores
 
 - general:
-  - bump version to 0.3.3 (#181) ([7fe9318](https://github.com/FuelLabs/sway-vscode-plugin/commit/7fe9318739e58e9700de2f8330e25002224b26a5)) ([#181](https://github.com/FuelLabs/sway-vscode-plugin/pull/181))
-  - Add option to disable LSP (#180) ([942a832](https://github.com/FuelLabs/sway-vscode-plugin/commit/942a832feca4626969c8e0da9ecd19c91d93e5a2)) ([#180](https://github.com/FuelLabs/sway-vscode-plugin/pull/180))
-  - Enforce conventional commit messages (#179) ([fd80f1d](https://github.com/FuelLabs/sway-vscode-plugin/commit/fd80f1d0a724fbfa46534789e0eff3ffa3450036)) ([#179](https://github.com/FuelLabs/sway-vscode-plugin/pull/179))
+  - send client name with initialization request (#187) ([b4b622d](https://github.com/FuelLabs/sway-vscode-plugin/commit/b4b622d0daa0a54edd5e5c46e6c6d91cf5d9b97a)) ([#187](https://github.com/FuelLabs/sway-vscode-plugin/pull/187))
+
+## [0.3.4](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.4) - 2024-05-26 23:46:40
+
+## What's Changed
+* ci: Use fuel service user token by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/184
+* fix: Only send OnEnter for sway files by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/183
+* chore: bump to 0.3.4 by @sdankel in https://github.com/FuelLabs/sway-vscode-plugin/pull/185
+
+
+**Full Changelog**: https://github.com/FuelLabs/sway-vscode-plugin/compare/0.3.3...0.3.4
+
+### Bug Fixes
+
+- general:
+  - Only send OnEnter for sway files (#183) ([983aee6](https://github.com/FuelLabs/sway-vscode-plugin/commit/983aee6d83ac1a5e4701ff312b8e0b5b8446ec33)) ([#183](https://github.com/FuelLabs/sway-vscode-plugin/pull/183))
+
+### Chores
+
+- general:
+  - bump to 0.3.4 (#185) ([6de0cd6](https://github.com/FuelLabs/sway-vscode-plugin/commit/6de0cd6a8df1b103276c8caf1ceffaf860f8c88b)) ([#185](https://github.com/FuelLabs/sway-vscode-plugin/pull/185))
+
+## [0.3.3](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.3) - 2024-04-18 23:43:25
 
 ## [0.3.2](https://github.com/FuelLabs/sway-vscode-plugin/releases/tag/0.3.2) - 2024-04-17 20:04:11
 
