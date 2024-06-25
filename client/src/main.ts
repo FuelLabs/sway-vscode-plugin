@@ -155,7 +155,10 @@ function getClientOptions(): lc.LanguageClientOptions {
         workspace.createFileSystemWatcher('**/*.sw'),
       ],
     },
-    initializationOptions: workspace.getConfiguration(EXTENSION_ROOT),
+    initializationOptions: {
+      ...workspace.getConfiguration(EXTENSION_ROOT),
+      client: 'vscode',
+    },
     markdown: {
       isTrusted: true,
       supportHtml: true,
