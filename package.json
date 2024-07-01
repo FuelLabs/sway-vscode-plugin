@@ -4,6 +4,7 @@
   "description": "Sway language extension for Visual Studio Code",
   "icon": "images/logo.png",
   "version": "0.3.5",
+  "latestForcVersion": "0.60.0",
   "publisher": "FuelLabs",
   "license": "Apache-2.0",
   "repository": {
@@ -107,7 +108,7 @@
           "description": "Optionally override the path to the Sway language server executable. If empty, the extension will use the forc-lsp executable to which your $PATH resolves (recommended for most users).",
           "type": "string",
           "default": "",
-          "pattern": "(^\/(.+\/)*forc-lsp$)|^$",
+          "pattern": "(^/(.+/)*forc-lsp$)|^$",
           "patternErrorMessage": "Must be an absolute path to the `forc-lsp` executable, or left empty."
         },
         "sway-lsp.diagnostic.disableLsp": {
@@ -391,6 +392,7 @@
     "child_process": "^1.0.2",
     "d3": "^7.8.5",
     "d3-graphviz": "^5.0.2",
+    "semver": "^7.6.2",
     "util": "^0.12.5",
     "vscode-languageclient": "^8.0.0-next.14"
   },
