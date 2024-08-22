@@ -4,7 +4,7 @@
   "description": "Sway language extension for Visual Studio Code",
   "icon": "images/logo.png",
   "version": "0.3.5",
-  "latestForcVersion": "0.60.0",
+  "latestForcVersion": "0.63.1",
   "publisher": "FuelLabs",
   "license": "Apache-2.0",
   "repository": {
