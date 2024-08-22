@@ -1,13 +1,18 @@
 import { exec } from 'child_process';
+import { lt } from 'semver';
 import { promisify } from 'util';
 import { commands, ExtensionContext, window, workspace } from 'vscode';
 import * as lc from 'vscode-languageclient/node';
 import { createClient, getClient } from './client';
-import { Config, EXTENSION_ROOT as EXTENSION_ROOT } from './config';
+import {
+  Config,
+  EXTENSION_ROOT as EXTENSION_ROOT,
+  getExtensionManifest,
+} from './config';
 import { onEnter } from './interface/onEnter';
 import { CommandPalettes } from './palettes';
 import updateFuelCoreStatus from './status_bar/fuelCoreStatus';
-import { log } from './util/util';
+import { log, Terminal } from './util/util';
 
 const LSP_EXECUTABLE_NAME = 'forc-lsp';
 
@@ -73,8 +78,27 @@ async function getServerOptions(config: Config): Promise<lc.ServerOptions> {
 
   // Check if the executable exists.
   try {
-    let version = await promisify(exec)(`${executable} --version`);
-    log.info(`Server executable version: ${version.stdout.trim()}`);
+    let versionRes = await promisify(exec)(`${executable} --version`);
+    let versionStr = versionRes.stdout.trim();
+    log.info(`Server executable version: ${versionStr}`);
+
+    let version = versionStr.split(' ')[1];
+    let latestForcVersion = getExtensionManifest().latestForcVersion;
+    log.info(`Latest forc version: ${latestForcVersion}`);
+
+    if (lt(version, latestForcVersion)) {
+      window
+        .showInformationMessage(
+          'A new version of the Sway Language Server is available.',
+          'Update',
+          'Later'
+        )
+        .then(async selection => {
+          if (selection === 'Update') {
+            Terminal.Sway.execute('fuelup update');
+          }
+        });
+    }
   } catch (error) {
     if (!!settingsExecutable) {
       const updateMessage =
