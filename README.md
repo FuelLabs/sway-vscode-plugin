@@ -12,6 +12,7 @@ This extension provides LSP support for the Sway smart contract programming lang
 ## Features
 
 - goto type definition 
+- find all references
 - types and documentation on hover
 - inlay hints for types and parameter names
 - semantic syntax highlighting
@@ -23,7 +24,7 @@ _Coming Soon_
 
 - code completion
 - apply suggestions from errors
-- find all references, workspace symbol search
+- workspace symbol search
 - ... and many more
 
 
