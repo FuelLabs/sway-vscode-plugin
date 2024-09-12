@@ -151,7 +151,7 @@ async function getServerOptions(config: Config): Promise<lc.ServerOptions> {
   log.info(`Using server executable: ${command}`);
 
   const serverExecutable: lc.Executable = {
-    command,
+    command: `RUST_BACKTRACE=FULL ${command}`,
     options: {
       shell: true,
     },
