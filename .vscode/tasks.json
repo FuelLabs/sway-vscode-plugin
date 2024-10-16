@@ -1,29 +1,49 @@
+// {
+//   "version": "2.0.0",
+//   "tasks": [
+//     {
+//       "type": "npm",
+//       "script": "compile",
+//       "group": "build",
+//       "presentation": {
+//         "panel": "dedicated",
+//         "reveal": "never"
+//       },
+//       "problemMatcher": ["$tsc"]
+//     },
+//     {
+//       "type": "npm",
+//       "script": "watch",
+//       "isBackground": true,
+//       "group": {
+//         "kind": "build",
+//         "isDefault": true
+//       },
+//       "presentation": {
+//         "panel": "dedicated",
+//         "reveal": "never"
+//       },
+//       "problemMatcher": ["$esbuild-watch"]
+//     }
+//   ]
+// }
+
 {
   "version": "2.0.0",
   "tasks": [
     {
-      "type": "npm",
-      "script": "compile",
-      "group": "build",
-      "presentation": {
-        "panel": "dedicated",
-        "reveal": "never"
-      },
-      "problemMatcher": ["$tsc"]
+      "label": "cargo build",
+      "type": "shell",
+      "command": "cargo build",
+      "problemMatcher": ["$rustc"],
+      "group": "build"
     },
     {
+      "label": "npm: watch",
       "type": "npm",
       "script": "watch",
       "isBackground": true,
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "panel": "dedicated",
-        "reveal": "never"
-      },
-      "problemMatcher": ["$esbuild-watch"]
+      "problemMatcher": []
     }
   ]
 }
