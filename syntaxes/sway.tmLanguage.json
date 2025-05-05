@@ -660,22 +660,22 @@
         },
         {
           "comment": "type keyword",
-          "name": "keyword.declaration.type.sway storage.type.sway",
+          "name": "keyword.declaration.type.sway",
           "match": "\\b(type)\\b"
         },
         {
           "comment": "enum keyword",
-          "name": "keyword.declaration.enum.sway storage.type.sway",
+          "name": "keyword.declaration.enum.sway",
           "match": "\\b(enum)\\b"
         },
         {
           "comment": "trait keyword",
-          "name": "keyword.declaration.trait.sway storage.type.sway",
+          "name": "keyword.declaration.trait.sway",
           "match": "\\b(trait)\\b"
         },
         {
           "comment": "abi keyword",
-          "name": "keyword.declaration.abi.sway storage.type.sway",
+          "name": "keyword.declaration.abi.sway",
           "match": "\\b(abi)\\b"
         },
         {
@@ -700,7 +700,7 @@
         },
         {
           "comment": "asm",
-          "name": "meta.attribute.asm.sway",
+          "name": "keyword.other.asm.sway",
           "match": "\\basm\\b"
         },
         {
@@ -968,7 +968,7 @@
           "match": "\\b(trait)\\s+([A-Z][A-Za-z0-9]*)\\b",
           "captures": {
             "1": {
-              "name": "keyword.declaration.trait.sway storage.type.sway"
+              "name": "keyword.declaration.trait.sway"
             },
             "2": {
               "name": "entity.name.type.trait.sway"
@@ -980,7 +980,7 @@
           "match": "\\b(abi)\\s+([A-Z][A-Za-z0-9]*)\\b",
           "captures": {
             "1": {
-              "name": "keyword.declaration.abi.sway storage.type.sway"
+              "name": "keyword.declaration.abi.sway"
             },
             "2": {
               "name": "entity.name.type.abi.sway"
@@ -1016,7 +1016,7 @@
           "match": "\\b(type)\\s+([A-Z][A-Za-z0-9_]*)\\b",
           "captures": {
             "1": {
-              "name": "keyword.declaration.type.sway storage.type.sway"
+              "name": "keyword.declaration.type.sway"
             },
             "2": {
               "name": "entity.name.type.declaration.sway"
