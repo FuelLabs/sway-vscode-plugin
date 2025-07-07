@@ -15,3 +15,4 @@ jobs:
         with:
           task_types: '["feat","fix","docs","test","ci","refactor","perf","chore","revert"]'
           token: ${{ secrets.GITHUB_TOKEN }}
+          add_label: 'false'
